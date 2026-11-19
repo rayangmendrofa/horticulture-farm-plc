@@ -605,7 +605,7 @@ Alarms latch. RESET sets `alm_latch := alm_act` (per word), so an alarm resets o
 | Red flashing 1 Hz | Condition gone, RESET required |
 
 ## 13. Communication failure, PLC stop and power loss
-- **Remote I/O lost**: OpenPLC zeroes the PLANT inputs (*Set to zero* on every read group). `ESTOP_OK` = 0 trips with A00, all outputs off. The I/O coupler's own watchdog de-energises its outputs after 1 s without a write, so the field is safe even if the PLC can't write. The virtual plant implements this watchdog.
+- **Remote I/O lost**: OpenPLC zeroes the PLANT inputs (*Set to zero* on every read group). `ESTOP_OK` = 0 trips with A00, all outputs off. *Verified on Runtime v4.3.2 (FAT OPL-08): trip 0.06 s after the plant went down.* The I/O coupler's own watchdog de-energises its outputs after 1 s without a write, so the field is safe even if the PLC can't write. The virtual plant implements this watchdog.
 - **HMI lost**: the process continues. Commands are one-shot, so nothing stays latched. Panel buttons and E-stop still work.
 - **PLC stopped or powered off**: outputs de-energise: zone, refill and return valves close (NC solenoids), all pumps and fans stop, the vent and the net stay where they are. Dosing stops with the pumps.
 - **Power return**: cold start, both subsystems AUTO, irrigation program enabled, setpoints at defaults (§14-3, §14-7). The safety relay needs a manual reset, then RESET clears A00.
@@ -613,13 +613,13 @@ Alarms latch. RESET sets `alm_latch := alm_act` (per word), so an alarm resets o
 ## 14. Open design items
 | # | Item | Proposal |
 |---|---|---|
-| 1 | The HMI map uses `%MW0–139`; the template's OpenPLC project backs only 64 words. | Set the Modbus server's `%MW` count to 256 in `make_openplc_project.py`; verify in phase 4 (image check must not report *unbacked*). |
+| 1 | ~~The HMI map uses `%MW0–139`; the template's OpenPLC project backs only 64 words.~~ | **Closed in phase 4**: `make_openplc_project.py` sets the `%MW` count to 256; the image check reports no issues and `%MW139` reads on Runtime v4.3.2 (OPL-02). |
 | 2 | Time of day comes from an I/O clock register. | On real hardware: NTP-synchronised clock in the I/O coupler or a gateway writing the register. |
 | 3 | Restart after power return needs an operator to reset the safety relay, so an unattended farm is not watered after a night-time power cut. | Discuss with the grower: keep manual reset (personnel safety first), add a remote alarm (SMS gateway) in a later phase. |
 | 4 | Zone valves have no position feedback. | Accepted: the flow deviation check (§6.3) detects a valve that does not open. |
 | 5 | One vent group, no wind direction. | Accepted for v1; windward/leeward vents need a wind-direction sensor and a second actuator. |
 | 6 | The 1 s tick counts scans, which ties the program to the 50 ms task. | Accepted: constants `SCANS_PER_S` and `DT_SCAN` are next to the task configuration with a comment. |
-| 7 | Setpoints return to defaults after a PLC restart. | Declare the setpoint block `RETAIN` on a production PLC; check OpenPLC v4 retain support in phase 4. |
+| 7 | Setpoints return to defaults after a PLC restart. | Declare the setpoint block `RETAIN` on a production PLC. OpenPLC v4 retain support not tried yet (phase 4 covered OPL-01…08 only). |
 | 8 | Drain is measured in Z1 only. | Accepted (one measuring gutter per crop is common practice). |
 
 ## 15. Constants (`VAR CONSTANT`)

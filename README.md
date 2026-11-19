@@ -7,11 +7,11 @@ A PLC project for a 1 000 m² tropical lowland greenhouse:
 - **fertigation**: inline A/B nutrient and acid dosing on EC and pH;
 - **climate control**: roof vents, shade net, fogging, and pad-and-fan cooling with weather overrides.
 
-The program is **IEC 61131-3 Structured Text** for **OpenPLC v4**, integrated over **Modbus TCP**. A virtual plant replaces the hardware, so the whole system runs and is tested on a laptop. The plant models the weather, greenhouse air, crop, hydraulics and water chemistry. An **ISA-101 style web HMI** shows it running. **99 automated tests** cover the project: 80 factory-acceptance tests check every functional, safety, diagnostic and HMI requirement, and 19 more test the Structured Text interpreter.
+The program is **IEC 61131-3 Structured Text** for **OpenPLC v4**, integrated over **Modbus TCP**. A virtual plant replaces the hardware, so the whole system runs and is tested on a laptop. The plant models the weather, greenhouse air, crop, hydraulics and water chemistry. An **ISA-101 style web HMI** shows it running. **102 automated tests** cover the project: 83 factory-acceptance tests check every functional, safety, diagnostic and HMI requirement, and 19 more test the Structured Text interpreter. The program also runs on **OpenPLC Runtime v4**, where FAT part B passes 7/7.
 
 ![Web HMI overview at 12:53 on a clear day: zone 1 watering at EC 2.50 / pH 5.80, pad-and-fan cooling at stage 2, shade net deployed](docs/img/hmi-overview.png)
 
-> **Status: phase 3 of 5 done.** In place: the PLC program, plant model, soft-PLC with fast-forward, web HMI and automated FAT. The program compiles clean with STruC++ (the OpenPLC v4 compiler). Next is running it on OpenPLC Runtime v4 (phase 4). See [docs/SCOPE.md](docs/SCOPE.md).
+> **Status: phase 4 of 5 done.** In place: the PLC program, plant model, soft-PLC with fast-forward, web HMI and automated FAT. The program compiles clean with STruC++ (the OpenPLC v4 compiler) and runs on OpenPLC Runtime v4, where FAT part B passes 7/7 ([docs/openplc.md](docs/openplc.md)). Next, phase 5 adds electrical drawings, I/O checkout, a commissioning procedure, a troubleshooting trainer and a report. See [docs/SCOPE.md](docs/SCOPE.md).
 
 ## What it does
 - **Irrigation**: cycles start on accumulated solar radiation, or after a maximum interval, inside a day window. Each cycle first pre-mixes the nutrient solution through a return loop until EC and pH are in band. It then waters the zones one by one, metered by a flow transmitter, with open-before-close changeover.
@@ -93,6 +93,17 @@ The soft-PLC runs the **same** `.st` file that OpenPLC compiles, with OpenPLC's 
 python -m farmsim hmi --plc <ip>:502 --plant none
 ```
 
+**On OpenPLC Runtime v4** (Docker on WSL2), the program has passed FAT part B, 7/7. The tests drive the runtime only through its Modbus server, with the plant as its remote I/O:
+- **E-stop:** field outputs off 98 ms after the input opened.
+- **Plant loss:** a lost plant link trips the PLC in 0.06 s.
+- **Irrigation:** a full cycle with EC and pH in band while watering.
+- **Vent:** positioned to within 0.4 %.
+
+[docs/openplc.md](docs/openplc.md) has the build and upload route and the results:
+- `tools/make_openplc_project.py` generates the Editor project;
+- `tools/openplc_runtime.ps1` uploads it (you type the login);
+- `tools/fat_openplc.py` runs the tests.
+
 In fast-forward the PLC VM and the plant advance together in virtual time (50 ms scans). Every timer, PI loop and timeout therefore behaves exactly as at 1×.
 
 ## Repository
@@ -106,7 +117,7 @@ In fast-forward the PLC VM and the plant advance together in virtual time (50 ms
 | `farmsim/tags.py` | The PLC ↔ HMI register map, single source of truth |
 | `farmsim/stvm.py`, `modbus.py` | IEC 61131-3 Structured Text interpreter (strict and lean modes), and Modbus TCP server and client (standard library) |
 | `farmsim/bench.py`, `tests/` | Test bench and the automated FAT |
-| `tools/` | STruC++ compile check, day simulation, dosing-loop tuning sweep |
+| `tools/` | STruC++ compile check, OpenPLC Editor project generator, upload script, FAT part B runner, day simulation, dosing-loop tuning sweep |
 
 ## Documentation
 | Document | For |
@@ -114,6 +125,7 @@ In fast-forward the PLC VM and the plant advance together in virtual time (50 ms
 | [Scope](docs/SCOPE.md) | What was agreed, and what is out of scope |
 | [PRD](docs/PRD.md) | Requirements, each traced to an automated test |
 | [FDS](docs/FDS.md) | I/O list, sequences, control loops, cause & effect, alarms, register map, HMI |
+| [OpenPLC](docs/openplc.md) | Running on OpenPLC Runtime v4: build, upload, Modbus configuration, FAT part B results |
 | [Credits](CREDITS.md) | Software, standards and references this project builds on |
 
 ## Licence

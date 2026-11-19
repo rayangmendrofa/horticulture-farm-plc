@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-19 19:35",
+  "host": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "python": "3.14.4",
+  "runtime": "127.0.0.1:502",
+  "results": [
+    {
+      "id": "OPL-02",
+      "title": "Load on Runtime v4, comms, heartbeat, %MW map",
+      "result": "PASS",
+      "detail": "IDLE, no alarms after RESET; heartbeat 20.0/s; clock 10:00 = plant; %MW139 readable (0); coupler watchdog quiet",
+      "seconds": 18.8
+    },
+    {
+      "id": "OPL-03",
+      "title": "Irrigation cycle at 1x (IRR-07, FE)",
+      "result": "PASS",
+      "detail": "steps 0→10→20→40→0, zones 1-4, 168 s, in band after 43 s; while watering |EC-SP| ≤ 0.14, |pH-SP| ≤ 0.12; 45 L; no alarms",
+      "seconds": 167.9
+    },
+    {
+      "id": "OPL-04",
+      "title": "E-stop during SHOT (SAF-01)",
+      "result": "PASS",
+      "detail": "field outputs off 98 ms after the E-stop opened; step 99, A00; RESET refused while pressed; no restart 3 s after release; RESET → IDLE, no alarms",
+      "seconds": 53.5
+    },
+    {
+      "id": "OPL-05",
+      "title": "EC analyser wire break during SHOT (SAF-14b)",
+      "result": "PASS",
+      "detail": "AIT-301 broken during SHOT → A23 and step 99 after 1.11 s; P-311 off, dosing interlock names the EC fault; RESET after repair → IDLE",
+      "seconds": 57.3
+    },
+    {
+      "id": "OPL-06",
+      "title": "Vent positioner over remote I/O (CLI-03)",
+      "result": "PASS",
+      "detail": "MANUAL 37 % → settled in 57 s at 36.6 % (plant), error 0.4 % (3-point step over the 50 ms remote I/O); 0 % → closed limit in 43 s; AUTO → VENT",
+      "seconds": 104.5
+    },
+    {
+      "id": "OPL-07",
+      "title": "Setpoint clamp and read-back (IRR-15)",
+      "result": "PASS",
+      "detail": "SP_EC 9.00 → clamped to 4.00; SP_COOL_T 25.0 → 29.0 (= SP_VENT_T + 1.0); defaults restored",
+      "seconds": 1.2
+    },
+    {
+      "id": "OPL-08",
+      "title": "Plant (remote I/O) lost during SHOT (COM-01)",
+      "result": "PASS",
+      "detail": "plant killed during SHOT → step 99 with A00 after 0.06 s, all field outputs off; latched A00; plant restarted + RESET → IDLE, no alarms",
+      "seconds": 60.1
+    }
+  ]
+}

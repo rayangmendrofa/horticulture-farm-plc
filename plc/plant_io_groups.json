@@ -1,0 +1,10 @@
+{
+  "format": "openplc-modbus-io-groups",
+  "version": 1,
+  "ioGroups": [
+    { "name": "PLANT_DI", "functionCode": 2, "cycleTime": 50, "offset": 0, "length": 32, "errorHandling": "set-to-zero" },
+    { "name": "PLANT_AI", "functionCode": 4, "cycleTime": 50, "offset": 0, "length": 16, "errorHandling": "set-to-zero" },
+    { "name": "PLANT_DO", "functionCode": 15, "cycleTime": 50, "offset": 0, "length": 24, "errorHandling": "keep-last-value" },
+    { "name": "PLANT_AO", "functionCode": 16, "cycleTime": 50, "offset": 0, "length": 3, "errorHandling": "keep-last-value" }
+  ]
+}

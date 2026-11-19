@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Document** | PRD-GH1, revision A |
-| **Status** | Phase 3 done: every requirement in §6 has an automated test in `tests/`, named after the IDs below, and the web HMI is in place. OpenPLC part B (phase 4) to follow |
+| **Status** | Phase 4 done: every requirement in §6 has an automated test in `tests/`, named after the IDs below; the web HMI is in place; the program runs on OpenPLC Runtime v4 with FAT part B passing ([openplc.md](openplc.md)) |
 | **Related** | [Scope](SCOPE.md) · [Functional Design Specification](FDS.md) |
 | **Template** | Built on the `plc-batch-station` project (T-101): same toolchain, address conventions, device blocks and verification approach |
 
@@ -230,7 +230,7 @@ v1 is accepted when:
 1. `pytest` passes locally and in GitHub Actions.
 2. The fast-forward demo runs a default clear day from 05:00 to 19:00 with all cycles completed, EC/pH in band at every shot, and no alarms.
 3. Every FR, FE, CL, SR and DR in §6 has a passing test, recorded in the FAT.
-4. `plc/greenhouse.st` compiles with STruC++ (CI) and runs on OpenPLC Runtime v4 in WSL2 Docker, with FAT part B passing.
+4. `plc/greenhouse.st` compiles with STruC++ (CI) and runs on OpenPLC Runtime v4 in WSL2 Docker, with FAT part B passing. *Met 19 Nov 2026 (7/7, [openplc.md](openplc.md)).*
 
 ## 11. Assumptions, risks and limitations
 
@@ -250,7 +250,7 @@ v1 is accepted when:
 | P1 PRD + FDS (this document set) | Done |
 | P2 Plant model, ST program, soft-PLC fast-forward, automated FAT | Done: automated FAT and full-day run pass; STruC++ compile clean |
 | P3 Web HMI, README, CI (pytest + STruC++) | Done: eight pages, HMI tests HMI-01…08, CI runs the FAT on the lean and the strict VM |
-| P4 OpenPLC Runtime v4 FAT part B | — |
+| P4 OpenPLC Runtime v4 FAT part B | Done 19 Nov 2026: OPL-01…08 pass on Runtime v4.3.2 ([openplc.md](openplc.md)) |
 | P5 Drawings, I/O checkout, commissioning, troubleshooting trainer, report | Later |
 
 ## 13. Future work
