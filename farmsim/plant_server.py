@@ -14,9 +14,10 @@ Simulation-only registers (field-simulation panel / test bench, not part of the 
   HR 103       momentary push-buttons: b0 START, b1 STOP, b2 RESET (self-clearing)
   HR 104       weather scenario (0 clear, 1 cloudy, 2 rain, 3 storm)
   HR 105       set the clock: minutes since midnight + 1 (self-clearing, 0 = no change)
-  IR 32..43    true values: greenhouse temp x10, RH x10, vent x10, net x10, EC x100,
+  HR 106       fast-forward speed request, x real time (self-clearing; fast mode only)
+  IR 32..45    true values: greenhouse temp x10, RH x10, vent x10, net x10, EC x100,
                pH x100, pump flow L/h, pressure x100, tank level x10, CO2 ppm,
-               b0 coupler watchdog tripped, day number
+               b0 coupler watchdog tripped, day number, speed (x real time), b0 fast-forward
 """
 from __future__ import annotations
 
@@ -28,9 +29,10 @@ from .plant import BUTTONS, Plant
 from .weather import SCENARIOS
 
 N_DI, N_IR, N_COILS, N_HR = 32, 16, 24, 3
-HR_FAULTS, HR_BUTTONS, HR_SCENARIO, HR_CLOCK = 100, 103, 104, 105
+HR_FAULTS, HR_BUTTONS, HR_SCENARIO, HR_CLOCK, HR_SPEED = 100, 103, 104, 105, 106
 IR_TRUTH = 32
 WATCHDOG_S = 1.0
+SPEEDS = (1, 5, 20, 40)               # offered by the HMI; 40x is near the limit of one CPU core
 
 
 class PlantServer:
@@ -47,6 +49,8 @@ class PlantServer:
         self.dt = dt
         self.passive = passive
         self.watchdog_tripped = False
+        self.speed = 1                       # set by the fast-forward runner
+        self.speed_request = 0
         self._stop = threading.Event()
         self._thread = None
         self.publish()
@@ -95,6 +99,7 @@ class PlantServer:
             p.set_fault_words(img.hr[HR_FAULTS:HR_FAULTS + 3])
             buttons, img.hr[HR_BUTTONS] = img.hr[HR_BUTTONS], 0
             clock, img.hr[HR_CLOCK] = img.hr[HR_CLOCK], 0
+            req, img.hr[HR_SPEED] = img.hr[HR_SPEED], 0
             scen = img.hr[HR_SCENARIO]
         for i, name in enumerate(BUTTONS):
             if buttons >> i & 1:
@@ -102,6 +107,8 @@ class PlantServer:
         if clock:
             m = (clock - 1) % 1440
             p.set_clock(f"{m // 60}:{m % 60}")
+        if req and self.passive:
+            self.speed_request = req
         if scen < len(SCENARIOS):
             p.weather.scenario = SCENARIOS[scen]
         self.publish()
@@ -113,7 +120,7 @@ class PlantServer:
             img.ir[:N_IR] = p.input_registers()
             truth = [p.t_in * 10, p.rh_in * 10, p.vent_pos * 10, p.net_pos * 10, p.ec_true * 100,
                      p.ph_true * 100, p.q_pump * 1000, p.press * 100, p.level_pct * 10, p.co2,
-                     self.watchdog_tripped, p.day]
+                     self.watchdog_tripped, p.day, self.speed, self.passive]
             img.ir[IR_TRUTH:IR_TRUTH + len(truth)] = [max(0, min(65535, round(v))) for v in truth]
 
 

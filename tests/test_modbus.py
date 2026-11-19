@@ -152,3 +152,28 @@ def test_fast_forward_runs_in_virtual_time():
         c.close()
         plc.stop()
         plant.stop()
+
+
+def test_fast_forward_keeps_hmi_writes_made_during_the_scans():
+    """The fast-forward runner releases the image lock while it scans. An HMI write that
+    lands meanwhile must not be overwritten by the PLC's old value: it reaches the PLC
+    on the next cycle."""
+    ps = PlantServer("127.0.0.1", 0, Plant(clock="05:00"), passive=True)
+    plc = FastPLC(ps, listen=("127.0.0.1", 0), speed=5)
+    plc._to_image(all_areas=True)
+    sp_ec = tags.MW_BASE + tags.SP["SP_EC"][0]
+    tick, n = plc.bench.tick, [0]
+
+    def tick_with_hmi_write():
+        n[0] += 1
+        if n[0] == 3:
+            plc.image.hr[sp_ec] = 300                   # the HMI writes mid-cycle
+        tick()
+
+    plc.bench.tick = tick_with_hmi_write
+    plc.cycle()
+    assert plc.image.hr[sp_ec] == 300 and plc.vm["SP_EC"] == 250
+    plc.cycle()
+    assert plc.vm["SP_EC"] == 300 and plc.image.hr[sp_ec] == 300
+    plc.server.stop()
+    ps.server.stop()

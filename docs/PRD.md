@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Document** | PRD-GH1, revision A |
-| **Status** | Phase 2 done: every requirement in §6 has an automated test in `tests/`, named after the IDs below. HMI (phase 3) and OpenPLC part B (phase 4) to follow |
+| **Status** | Phase 3 done: every requirement in §6 has an automated test in `tests/`, named after the IDs below, and the web HMI is in place. OpenPLC part B (phase 4) to follow |
 | **Related** | [Scope](SCOPE.md) · [Functional Design Specification](FDS.md) |
 | **Template** | Built on the `plc-batch-station` project (T-101): same toolchain, address conventions, device blocks and verification approach |
 
@@ -163,19 +163,21 @@ Each requirement lists the automated test that verifies it. Test IDs: IRR irriga
 | DR-06 | A stack light on the irrigation panel shows running (green), attention (amber) and trip (red, flashing when RESET is needed). | DEV-08 |
 
 ### 6.6 HMI
-| ID | Requirement |
-|---|---|
-| HR-01 | Overview mimic: tank, pump, dosing skid, zones, greenhouse with vent, shade net, fans, pads and fog, live values and states. |
-| HR-02 | Irrigation page: program state, step, active zone and volume, radiation sum, time since last cycle, daily and previous-day water, cycles and drain %, zone diagnostics. |
-| HR-03 | Fertigation page: EC, pH A/B/used, setpoints and bands, dosing outputs, stock tank states. |
-| HR-04 | Climate page: climate state, vent demand and position, weather, inside temperature/RH/VPD/CO2, active overrides (rain, wind, storm, fallback). |
-| HR-05 | Controls enabled only when the PLC would accept them: START, STOP, RESET, IRRIGATE NOW, ABORT, AUTO/MANUAL per subsystem. |
-| HR-06 | Settings pages with limits shown, download to the PLC, and read-back of the value in force. |
-| HR-07 | Alarm list (active vs cleared-but-not-reset), header banner, and the device's interlock reasons. |
-| HR-08 | Trends: 24 h of temperature, RH, vent position and radiation; 10 min of EC, pH and flow. |
-| HR-09 | Communications watchdog from the PLC heartbeat. |
-| HR-10 | ISA-101 palette: grey for normal, colour only for abnormal. |
-| HR-11 | A separate *field simulation* panel (demo only): weather scenario, time of day, fast-forward speed, fault injection. Not part of the operator HMI. |
+The HMI tests (`tests/test_hmi.py`) drive the JSON API against the fast-forward soft-PLC over real Modbus TCP. Layout and colour (HR-01…04, HR-10) are checked by review of the running page.
+
+| ID | Requirement | Test |
+|---|---|---|
+| HR-01 | Overview mimic: tank, pump, dosing skid, zones, greenhouse with vent, shade net, fans, pads and fog, live values and states. | HMI-01, review |
+| HR-02 | Irrigation page: program state, step, active zone and volume, radiation sum, time since last cycle, daily and previous-day water, cycles and drain %, zone diagnostics. | HMI-01, review |
+| HR-03 | Fertigation page: EC, pH A/B/used, setpoints and bands, dosing outputs, stock tank states. | HMI-01, review |
+| HR-04 | Climate page: climate state, vent demand and position, weather, inside temperature/RH/VPD/CO2, active overrides (rain, wind, storm, fallback). | HMI-01, review |
+| HR-05 | Controls enabled only when the PLC would accept them: START, STOP, RESET, IRRIGATE NOW, ABORT, AUTO/MANUAL per subsystem. | HMI-02, HMI-04 |
+| HR-06 | Settings pages with limits shown, download to the PLC, and read-back of the value in force. | HMI-03 |
+| HR-07 | Alarm list (active vs cleared-but-not-reset), header banner, and the device's interlock reasons. | HMI-05, HMI-04 |
+| HR-08 | Trends: 24 h of temperature, RH, vent position and radiation; 10 min of EC, pH and flow. | HMI-06 |
+| HR-09 | Communications watchdog from the PLC heartbeat. | HMI-07 |
+| HR-10 | ISA-101 palette: grey for normal, colour only for abnormal. | review |
+| HR-11 | A separate *field simulation* panel (demo only): weather scenario, time of day, fast-forward speed, fault injection. Not part of the operator HMI. | HMI-08 |
 
 ## 7. Non-functional requirements
 
@@ -206,10 +208,10 @@ Three run modes, one program:
 | Mode | PLC | Plant link | Time | Use |
 |---|---|---|---|---|
 | Live | soft-PLC or OpenPLC Runtime v4 | Modbus TCP | real time, 1× | OpenPLC FAT, realism |
-| Fast-forward demo | soft-PLC VM, in-process with the plant | direct (same wiring as the bench) | virtual, 1–30× (default 20×) | watching a full day |
+| Fast-forward demo | soft-PLC VM, in-process with the plant | direct (same wiring as the bench) | virtual, 1–40× (default 20×; 40× is near the limit of one CPU core, so the HMI shows the speed achieved) | watching a full day |
 | Test bench | VM, in-process | direct | virtual, as fast as possible | automated FAT |
 
-| Component | File (planned) | Role |
+| Component | File | Role |
 |---|---|---|
 | PLC program | `plc/greenhouse.st` | Irrigation sequence, fertigation loops, climate state machine, interlocks, alarms, HMI interface |
 | ST VM, Modbus, soft-PLC, bench | `farmsim/stvm.py`, `modbus.py`, `softplc.py`, `bench.py` | Copied from `plc-batch-station`; soft-PLC gains the fast-forward mode |
@@ -247,7 +249,7 @@ v1 is accepted when:
 |---|---|
 | P1 PRD + FDS (this document set) | Done |
 | P2 Plant model, ST program, soft-PLC fast-forward, automated FAT | Done: automated FAT and full-day run pass; STruC++ compile clean |
-| P3 Web HMI, README, CI (pytest + STruC++) | — |
+| P3 Web HMI, README, CI (pytest + STruC++) | Done: eight pages, HMI tests HMI-01…08, CI runs the FAT on the lean and the strict VM |
 | P4 OpenPLC Runtime v4 FAT part B | — |
 | P5 Drawings, I/O checkout, commissioning, troubleshooting trainer, report | Later |
 

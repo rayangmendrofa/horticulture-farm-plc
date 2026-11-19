@@ -414,6 +414,47 @@ OpenPLC maps `%MWn` to holding register **1024 + n**. All values are 16-bit unsi
 | `%MW134–137` | 1158–1161 | `ST_XV401_CYC` … `ST_XV404_CYC` | Zone valve cycles |
 | `%MW138–139` | 1162–1163 | `ST_M511_REV`, `ST_M521_CYC` | Vent reversals, net strokes |
 
+### 9.3 Web HMI (`farmsim/hmi.py`, `farmsim/web/index.html`)
+The HMI is a Modbus TCP client of the PLC. It polls every 250 ms: `%MW40–139` in one read, setpoints `%MW10–37`, and manual words `%MW1–6`. It serves a single page that refreshes every 500 ms. It uses only the registers above, so it runs unchanged against OpenPLC (`python -m farmsim hmi --plc <ip>:502 --plant none`).
+
+| Page | Content (PRD HR-xx) |
+|---|---|
+| Overview | Mimic of the water system and greenhouse, weather strip, today's counters (HR-01) |
+| Irrigation | Step chain, zone volume, radiation sum and interval, flags, zone table with diagnostics, daily totals, manual irrigation (HR-02) |
+| Fertigation | EC and pH against the band, pH A/B, dosing outputs, stock tanks, dosing interlocks, 10 min trend, manual dosing (HR-03) |
+| Climate | State chain, inside climate, weather, override flags, vent positioner, manual climate (HR-04) |
+| Trends | Temperature/RH and vent/radiation over 2, 8 or 24 h; EC/pH over 10 min (HR-08) |
+| Alarms | Active and cleared-not-reset alarms with class, RESET (HR-07) |
+| Devices & I/O | Device state, interlock reasons, maintenance counters; DI/DO LEDs, scaled analog values (HR-07) |
+| Settings | Every setpoint with limits, download per group, read-back "In PLC" (HR-06) |
+
+**Control enables (HR-05).** A button is enabled only when the PLC would act on it (§5.1, §5.2). The PLC still checks every command.
+
+| Control | Enabled when |
+|---|---|
+| START | Irrigation AUTO, and IDLE with the program disabled, or PAUSED; STOP circuit healthy |
+| STOP | Irrigation AUTO, and steps 10–40, or IDLE with the program enabled |
+| IRRIGATE NOW | Irrigation AUTO, IDLE, at least one zone enabled |
+| ABORT | Irrigation AUTO, PAUSED |
+| IRR MANUAL / AUTO | MANUAL in IDLE or FAULT; AUTO from MANUAL |
+| CLIM MANUAL / AUTO | MANUAL at any time; AUTO from MANUAL |
+| Manual devices | Their subsystem in MANUAL. The PLC clears the manual words while in AUTO, so no stale request survives a mode change |
+
+**Time base.** The heartbeat `%MW40` counts 50 ms scans. The HMI turns its increase into process time, so trends are sampled every 1 s (EC, pH, flow; 10 min kept) and every 60 s (climate; 24 h kept) of process time. They therefore stay correct in fast-forward. The HMI does not need to know the speed. It shows the achieved speed (process s per wall s) next to the clock. A counter jump larger than 900 s (PLC restart) is not added.
+
+**Comms watchdog (HR-09).** Comms are healthy while the heartbeat changes within 2 s of wall time. Otherwise the header shows the fault and the pages are dimmed, even if Modbus still answers (a stopped PLC).
+
+**Field simulation registers (HR-11).** The demo panel talks to the plant server, not the PLC. It is a test-bench tool and not part of the operator HMI.
+
+| Register | Content |
+|---|---|
+| HR 100–102 | Fault injection bits, `plant.FAULTS` order |
+| HR 103 | Panel push-buttons: b0 START, b1 STOP, b2 RESET (self-clearing) |
+| HR 104 | Weather scenario: 0 clear, 1 cloudy, 2 rain, 3 storm |
+| HR 105 | Set the clock: minutes since midnight + 1 (self-clearing) |
+| HR 106 | Fast-forward speed request, 1/5/20/40 × (self-clearing, fast mode only) |
+| IR 32–45 | Plant truth: temperature, RH, vent, net, EC, pH, flow, pressure, level, CO₂, coupler watchdog, day, speed, fast-forward flag |
+
 ## 10. Device blocks
 `FB_Motor` and `FB_Valve` are reused from the template unchanged in interface: auto request, manual mode and request, interlock word, and (motors) feedback with 2 s discrepancy lockout. Status word: b0 requested, b1 commanded, b2 running (feedback), b3 blocked, b4 discrepancy, b5 manual.
 

@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GH-1 Greenhouse HMI</title>
+<style>
+  /* ISA-101 style: grey, low-contrast normal states; colour is reserved for abnormal conditions */
+  :root {
+    --bg: #d9dcdf; --panel: #eceef0; --panel-2: #f6f7f8; --ink: #1d252c; --muted: #5d6871;
+    --line: #a3abb2; --equip: #46505a; --run: #1d252c; --liquid: #9cc0e0; --liquid-edge: #6f9cc6;
+    --alarm: #c62828; --alarm-bg: #fde7e7; --warn: #b7791f; --warn-bg: #fdf3dc;
+    --ok: #2f6b3a; --sp: #6b55b0; --focus: #2563eb; --c2: #8a5a2b; --c3: #2f7d7a;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 14px/1.35 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .num { font-variant-numeric: tabular-nums; }
+  header { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; padding: 10px 16px;
+           background: #c9cdd1; border-bottom: 1px solid var(--line); }
+  header h1 { font-size: 16px; margin: 0; font-weight: 650; letter-spacing: .2px; }
+  header .spacer { flex: 1; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 4px;
+           border: 1px solid var(--line); background: var(--panel-2); font-weight: 600; font-size: 12.5px; }
+  .badge.alarm { background: var(--alarm); color: #fff; border-color: var(--alarm); }
+  .badge.warn { background: var(--warn-bg); color: #6b4510; border-color: var(--warn); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+  .dot.ok { background: var(--ok); } .dot.bad { background: var(--alarm); }
+  .stack { display: inline-flex; gap: 3px; padding: 3px 5px; border-radius: 4px; background: #b9bec3; }
+  .stack i { width: 10px; height: 10px; border-radius: 50%; background: #d0d4d8; border: 1px solid var(--equip); }
+
+  nav { display: flex; gap: 2px; padding: 0 16px; background: #c9cdd1; border-bottom: 1px solid var(--line);
+        overflow-x: auto; }
+  nav button { border: 0; border-bottom: 3px solid transparent; background: none; border-radius: 0;
+               padding: 8px 12px; min-height: 0; font-weight: 600; color: var(--muted); white-space: nowrap; }
+  nav button:hover:not(:disabled) { background: #d4d8dc; }
+  nav button[aria-selected=true] { color: var(--ink); border-bottom-color: var(--ink); }
+  nav .count { display: inline-block; min-width: 18px; padding: 0 5px; margin-left: 4px; border-radius: 9px;
+               background: var(--alarm); color: #fff; font-size: 11px; }
+
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 12px;
+         padding: 12px 16px; max-width: 1560px; margin: 0 auto; }
+  body.stale #content, body.stale aside { opacity: .55; }
+  .col { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  section { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; min-width: 0; }
+  section h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted);
+               margin: 0 0 8px; font-weight: 650; display: flex; justify-content: space-between; gap: 8px;
+               align-items: center; flex-wrap: wrap; }
+  h2 .sub { text-transform: none; letter-spacing: 0; font-weight: 500; }
+  svg { display: block; width: 100%; height: auto; }
+
+  button { font: inherit; font-weight: 600; padding: 7px 11px; border-radius: 4px; cursor: pointer;
+           border: 1px solid var(--equip); background: var(--panel-2); color: var(--ink); min-height: 36px; }
+  button:hover:not(:disabled) { background: #fff; }
+  button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+  button:disabled { opacity: .42; cursor: not-allowed; }
+  button.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+  button.primary:hover:not(:disabled) { background: #36414b; }
+  button.on { background: var(--run); color: #fff; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .btns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .seg { display: inline-flex; border: 1px solid var(--equip); border-radius: 4px; overflow: hidden; }
+  .seg button { border: 0; border-radius: 0; min-width: 70px; min-height: 30px; padding: 4px 10px; font-size: 12.5px; }
+  .seg button + button { border-left: 1px solid var(--equip); }
+
+  .steps { display: flex; gap: 3px; margin: 8px 0; flex-wrap: wrap; }
+  .steps div { flex: 1 1 0; text-align: center; font-size: 10.5px; font-weight: 650; padding: 4px 2px;
+               border-radius: 3px; background: var(--panel-2); color: var(--muted); border: 1px solid #c8cdd2;
+               white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 52px; }
+  aside .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .steps div.cur { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .steps div.cur.bad { background: var(--alarm); border-color: var(--alarm); }
+  .steps div.cur.hold { background: var(--warn); border-color: var(--warn); }
+  .kv { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 6px; }
+  .kv div { background: var(--panel-2); border: 1px solid #c8cdd2; border-radius: 4px; padding: 5px 8px; min-width: 0; }
+  .kv span { display: block; font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .kv b { font-size: 16px; font-variant-numeric: tabular-nums; }
+  .kv div.bad { background: var(--alarm-bg); border-color: var(--alarm); } .kv div.bad b { color: #7f1414; }
+  .kv div.warn { background: var(--warn-bg); border-color: var(--warn); }
+  .bar { height: 6px; background: #d3d7db; border-radius: 3px; overflow: hidden; margin-top: 4px; position: relative; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--ink); transition: width .3s; }
+  .flags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .flag { font-size: 11.5px; padding: 2px 7px; border-radius: 3px; border: 1px solid #c8cdd2; color: var(--muted); background: var(--panel-2); }
+  .flag.on { color: var(--ink); border-color: var(--equip); background: #e1e4e7; font-weight: 650; }
+  .flag.warn { color: #6b4510; border-color: var(--warn); background: var(--warn-bg); font-weight: 650; }
+  .info { font-size: 12.5px; color: var(--muted); margin: 6px 0 0; }
+  .hint { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+
+  /* band gauge: setpoint band and measured value on a scale */
+  .gauge { position: relative; height: 22px; background: #dfe2e5; border-radius: 3px; margin: 6px 0 2px; }
+  .gauge .band { position: absolute; top: 0; bottom: 0; background: #c7ccd1; border-left: 2px solid var(--sp); border-right: 2px solid var(--sp); }
+  .gauge .val { position: absolute; top: -3px; bottom: -3px; width: 4px; margin-left: -2px; background: var(--ink); border-radius: 2px; }
+  .gauge.bad .val { background: var(--alarm); }
+  .scale { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted); }
+  .big { font-size: 30px; font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .big small { font-size: 13px; color: var(--muted); font-weight: 500; }
+
+  label.f { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: var(--muted); }
+  input[type=number], input[type=time], select { font: inherit; padding: 5px 7px; border: 1px solid var(--line); border-radius: 4px;
+                       background: #fff; width: 100%; min-width: 0; color: var(--ink); }
+  input.dirty { border-color: var(--sp); box-shadow: 0 0 0 1px var(--sp); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  td, th { text-align: left; padding: 5px 6px; border-bottom: 1px solid #d0d4d8; vertical-align: top; }
+  th { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; font-weight: 650; }
+  td.r, th.r { text-align: right; }
+  tr.a-act td { background: var(--alarm-bg); color: #7f1414; font-weight: 600; }
+  tr.a-warn td { background: var(--warn-bg); color: #6b4510; font-weight: 600; }
+  tr.a-clr td { color: var(--muted); }
+  .empty { color: var(--muted); font-size: 13px; padding: 4px 0; }
+  .tablewrap { overflow-x: auto; }
+
+  canvas { width: 100%; height: 200px; display: block; }
+  canvas.short { height: 130px; }
+  .legend { display: flex; gap: 12px; font-size: 12px; color: var(--muted); flex-wrap: wrap; text-transform: none; letter-spacing: 0; font-weight: 500; }
+  .legend i { display: inline-block; width: 14px; height: 3px; vertical-align: middle; margin-right: 4px; }
+
+  /* settings */
+  .sp td { vertical-align: middle; }
+  .sp td:nth-child(2) { width: 120px; }
+  .sp .lim, .sp .force { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .sp .force.diff { color: var(--sp); font-weight: 650; }
+  .zones-en { display: flex; gap: 10px; flex-wrap: wrap; }
+  .zones-en label { display: flex; gap: 4px; align-items: center; }
+
+  /* devices + I/O */
+  .dev td:first-child { white-space: nowrap; font-weight: 600; }
+  .why { color: #6b4510; font-size: 12px; }
+  .why.bad { color: #7f1414; }
+  .maint { color: var(--muted); font-size: 12px; white-space: nowrap; font-weight: 400; }
+  .io { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 16px; font-size: 12.5px; }
+  .io h3 { font-size: 11px; color: var(--muted); margin: 0 0 2px; font-weight: 650; text-transform: uppercase; letter-spacing: .6px; }
+  .io ul { list-style: none; margin: 0; padding: 0; }
+  .io li { display: flex; gap: 6px; align-items: center; padding: 1px 0; font-variant-numeric: tabular-nums; }
+  .led { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--equip); background: #d3d7db; flex: none; }
+  .led.on { background: #3fa34d; border-color: #2f6b3a; }
+  .io code { color: var(--muted); font-size: 11.5px; min-width: 62px; }
+  .io .ai { justify-content: space-between; } .io .ai b { font-weight: 600; }
+
+  /* field simulation */
+  #sim { margin: 0 16px 16px; max-width: 1528px; border-style: dashed; background: #e4e6e9; }
+  @media (min-width: 1561px) { #sim { margin: 0 auto 16px; } }
+  #sim h2 { color: #5a4a2a; }
+  .simgrid { display: grid; grid-template-columns: auto minmax(0, 1.2fr) minmax(0, 2fr); gap: 18px; align-items: start; }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+  .chip { font-size: 12px; padding: 4px 9px; min-height: 28px; font-weight: 550; }
+  .chip.on { background: var(--warn-bg); border-color: var(--warn); color: #6b4510; }
+  .estop { border-radius: 50%; width: 70px; height: 70px; background: #d32f2f; color: #fff; border: 4px solid #f2c200;
+           font-size: 11px; font-weight: 800; line-height: 1.05; padding: 0; }
+  .estop.on { background: #7f1414; box-shadow: inset 0 3px 8px rgba(0,0,0,.5); }
+  .estop:hover:not(:disabled) { background: #b71c1c; }
+  .truth { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+  .simctl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 10px; align-items: center; font-size: 12.5px; }
+  .simctl select, .simctl input { width: auto; }
+  .simctl > * { justify-self: start; } .simctl select { min-width: 140px; }
+
+  /* mimic */
+  .pipe { fill: none; stroke: var(--equip); stroke-width: 6; stroke-linecap: square; stroke-linejoin: round; }
+  .pipe.thin { stroke-width: 4; }
+  .pipe-in { fill: none; stroke: #fff; stroke-width: 2.2; opacity: .9; stroke-linejoin: round; }
+  .flow .pipe-in { stroke: var(--liquid-edge); stroke-dasharray: 6 6; animation: flow .6s linear infinite; }
+  @keyframes flow { to { stroke-dashoffset: -12; } }
+  .tank { fill: #f4f5f6; stroke: var(--equip); stroke-width: 3; }
+  .tank.small { stroke-width: 2; }
+  .tank.bad { stroke: var(--alarm); }
+  .valve path { fill: #fff; stroke: var(--equip); stroke-width: 2; }
+  .valve.on path { fill: var(--run); }
+  .equip-c { fill: #fff; stroke: var(--equip); stroke-width: 2; }
+  .on .equip-c { fill: var(--run); }
+  .on .pump-tri { fill: #fff; }
+  .blocked path:first-child, .blocked .equip-c, .blocked.equip-c { stroke: var(--warn); stroke-width: 3.5; }
+  .fault .equip-c, .fault path:first-child { stroke: var(--alarm); stroke-width: 3.5; }
+  .tag { font: 600 10.5px system-ui, sans-serif; fill: var(--muted); text-anchor: middle; }
+  .tag.l { text-anchor: start; } .tag.r { text-anchor: end; }
+  .tag.ink { fill: var(--ink); }
+  .bubble { fill: #fff; stroke: var(--equip); stroke-width: 1.5; }
+  .bubble-t { font: 600 9px system-ui, sans-serif; fill: var(--ink); text-anchor: middle; }
+  .readout { fill: #fff; stroke: var(--line); }
+  .readout-t { font: 700 12px system-ui, sans-serif; fill: var(--ink); text-anchor: middle; dominant-baseline: central; font-variant-numeric: tabular-nums; }
+  .bad .bubble { fill: var(--alarm); stroke: var(--alarm); } .bad .bubble-t { fill: #fff; }
+  .readout.bad { stroke: var(--alarm); stroke-width: 2; fill: var(--alarm-bg); }
+  .house { fill: #eef0f2; stroke: var(--equip); stroke-width: 2.5; stroke-linejoin: round; }
+  .flap { stroke: var(--equip); stroke-width: 6; stroke-linecap: round; }
+  .net { fill: none; stroke: var(--equip); stroke-width: 3; stroke-dasharray: 2 3; }
+  .bed { fill: #d8dcd5; stroke: var(--equip); stroke-width: 1.5; }
+  .bed.on { fill: var(--liquid); }
+  .nozzle { fill: #fff; stroke: var(--equip); stroke-width: 1.2; }
+  .fog-on .nozzle { fill: var(--liquid-edge); }
+  .mist { fill: var(--liquid); opacity: 0; }
+  .fog-on .mist { opacity: .55; }
+  .pad { fill: url(#hatch); stroke: var(--equip); stroke-width: 1.5; }
+  .pad.on { fill: var(--liquid); }
+  .blade { transform-box: fill-box; transform-origin: center; }
+  .on .blade { animation: spin .5s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .air { stroke: var(--liquid-edge); stroke-width: 2; fill: none; opacity: 0; marker-end: url(#arrow); }
+  .air.on { opacity: .9; }
+  .wx { fill: var(--panel-2); stroke: var(--line); }
+  .wx-t { font: 600 11.5px system-ui, sans-serif; fill: var(--ink); font-variant-numeric: tabular-nums; }
+  .wx-t tspan.m { fill: var(--muted); font-weight: 500; }
+  .wx-t tspan.w { fill: #8a5a00; font-weight: 700; }
+
+  @media (max-width: 1180px) { main { grid-template-columns: 1fr; } aside { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; } }
+  @media (max-width: 900px) { .two { grid-template-columns: 1fr; } .simgrid { grid-template-columns: 1fr; } .io { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { main { padding: 10px; } #sim { margin: 0 10px 10px; } .io { grid-template-columns: 1fr; }
+                             header { padding: 8px 10px; } nav { padding: 0 10px; } .btns { grid-template-columns: repeat(2, 1fr); } }
+  @media (prefers-reduced-motion: reduce) { .flow .pipe-in, .on .blade { animation: none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>GH-1 Tropical Greenhouse</h1>
+  <span class="badge" id="b-irr">IRR —</span>
+  <span class="badge" id="b-clim">CLIM —</span>
+  <span class="badge" id="b-alarm" hidden></span>
+  <span class="spacer"></span>
+  <span class="stack" title="Stack light (irrigation panel)"><i id="lamp-r"></i><i id="lamp-a"></i><i id="lamp-g"></i></span>
+  <span class="badge"><span class="dot" id="comms-dot"></span><span id="comms">connecting…</span></span>
+  <span class="badge num" id="clock" title="PLC time of day">--:--</span>
+</header>
+<nav role="tablist" aria-label="Pages">
+  <button role="tab" data-tab="overview" aria-selected="true">Overview</button>
+  <button role="tab" data-tab="irrigation">Irrigation</button>
+  <button role="tab" data-tab="fertigation">Fertigation</button>
+  <button role="tab" data-tab="climate">Climate</button>
+  <button role="tab" data-tab="trends">Trends</button>
+  <button role="tab" data-tab="alarms">Alarms<span class="count" id="tab-alarm-count" hidden></span></button>
+  <button role="tab" data-tab="devices">Devices &amp; I/O</button>
+  <button role="tab" data-tab="settings">Settings</button>
+</nav>
+
+<main>
+  <div id="content" class="col">
+
+    <!-- ============================== OVERVIEW ============================== -->
+    <div class="col" data-page="overview">
+      <section>
+        <h2><span>Process overview</span><span class="sub num" id="ov-sub"></span></h2>
+        <svg viewBox="0 0 960 470" role="img" aria-label="Process mimic: water tank, pump, dosing skid, zones and greenhouse">
+          <defs>
+            <clipPath id="tank-clip"><path d="M62,102 H188 V280 Q188,298 170,298 H80 Q62,298 62,280 Z"/></clipPath>
+            <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect width="6" height="6" fill="#f4f5f6"/><line x1="0" y1="0" x2="0" y2="6" stroke="#9aa3ab" stroke-width="2"/></pattern>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="var(--liquid-edge)"/></marker>
+          </defs>
+
+          <!-- supply, refill XV-201, clean water to fog -->
+          <text class="tag l ink" x="14" y="38">Well / mains</text>
+          <g id="g-sup"><path class="pipe" d="M14,50 H125 V100"/><path class="pipe-in" d="M14,50 H125 V100"/></g>
+          <g id="g-clean"><path class="pipe thin" d="M125,50 H600 V123"/><path class="pipe-in" d="M125,50 H600 V123"/></g>
+          <text class="tag" x="360" y="42">clean water → fog P-541 / pad sump</text>
+          <g class="valve" id="v-xv201" transform="translate(80,50)">
+            <path d="M-12,-9 L0,0 L-12,9 Z M12,-9 L0,0 L12,9 Z"/><path d="M0,0 V-14 M-6,-14 H6" style="fill:none"/></g>
+          <text class="tag" x="80" y="74">XV-201</text>
+
+          <!-- T-201 -->
+          <path class="tank" d="M60,100 H190 V280 Q190,300 170,300 H80 Q60,300 60,280 Z"/>
+          <g clip-path="url(#tank-clip)">
+            <rect id="liquid" x="60" y="300" width="130" height="0" fill="var(--liquid)"/>
+            <line id="liquid-top" x1="60" x2="190" y1="300" y2="300" stroke="var(--liquid-edge)" stroke-width="2"/>
+          </g>
+          <text class="tag l ink" x="70" y="120">T-201</text><text class="tag l" x="70" y="133">5 m³</text>
+          <line x1="50" y1="165" x2="60" y2="165" stroke="var(--line)" stroke-dasharray="3 3"/>
+          <g id="i-lt201"><circle class="bubble" cx="32" cy="165" r="17"/><line x1="15" x2="49" y1="165" y2="165" stroke="var(--equip)"/>
+            <text class="bubble-t" x="32" y="161">LT</text><text class="bubble-t" x="32" y="175">201</text></g>
+          <rect class="readout" x="4" y="188" width="54" height="22" rx="3" id="ro-level"/><text class="readout-t" x="31" y="199" id="r-level">-- %</text>
+          <line x1="50" y1="268" x2="60" y2="268" stroke="var(--line)" stroke-dasharray="3 3"/>
+          <g id="i-lsl201"><circle class="bubble" cx="32" cy="268" r="17"/><line x1="15" x2="49" y1="268" y2="268" stroke="var(--equip)"/>
+            <text class="bubble-t" x="32" y="264">LSL</text><text class="bubble-t" x="32" y="278">201</text></g>
+
+          <!-- main line: T-201 -> P-201 -> FT-201 -> injection -> mixer -> sensors -> header -->
+          <g id="g-main"><path class="pipe" d="M125,300 V380 H620 V412 H895"/><path class="pipe-in" d="M125,300 V380 H620 V412 H895"/></g>
+          <g id="m-p201"><circle class="equip-c" cx="180" cy="380" r="17"/><path class="pump-tri" d="M172,370 L191,380 L172,390 Z" fill="var(--equip)"/></g>
+          <text class="tag" x="180" y="412">P-201</text>
+          <line x1="240" y1="380" x2="240" y2="405" stroke="var(--line)" stroke-dasharray="3 3"/>
+          <g id="i-ft201"><circle class="bubble" cx="240" cy="420" r="15"/><line x1="225" x2="255" y1="420" y2="420" stroke="var(--equip)"/>
+            <text class="bubble-t" x="240" y="416">FT</text><text class="bubble-t" x="240" y="430">201</text></g>
+          <rect class="readout" x="205" y="440" width="70" height="22" rx="3"/><text class="readout-t" x="240" y="451" id="r-flow">-- L/h</text>
+
+          <!-- dosing skid -->
+          <g id="dose-a"><rect class="tank small" id="tk-a" x="286" y="252" width="28" height="38" rx="3"/>
+            <text class="tag ink" x="300" y="275">A</text>
+            <path class="pipe thin" d="M300,290 V313"/><path class="pipe thin" d="M300,337 V380"/>
+            <g id="m-p311"><circle class="equip-c" cx="300" cy="325" r="11"/><path class="pump-tri" d="M295,319 L307,325 L295,331 Z" fill="var(--equip)"/></g>
+            <text class="tag" x="300" y="232">P-311</text><text class="tag ink" x="300" y="245" id="r-dose-a">0 %</text></g>
+          <g id="dose-b"><rect class="tank small" id="tk-b" x="331" y="252" width="28" height="38" rx="3"/>
+            <text class="tag ink" x="345" y="275">B</text>
+            <path class="pipe thin" d="M345,290 V313"/><path class="pipe thin" d="M345,337 V380"/>
+            <g id="m-p312"><circle class="equip-c" cx="345" cy="325" r="11"/><path class="pump-tri" d="M340,319 L352,325 L340,331 Z" fill="var(--equip)"/></g>
+            <text class="tag" x="345" y="232">P-312</text><text class="tag ink" x="345" y="245" id="r-dose-b">0 %</text></g>
+          <g id="dose-acid"><rect class="tank small" id="tk-acid" x="376" y="252" width="28" height="38" rx="3"/>
+            <text class="tag ink" x="390" y="275" style="font-size:9px">acid</text>
+            <path class="pipe thin" d="M390,290 V313"/><path class="pipe thin" d="M390,337 V380"/>
+            <g id="m-p313"><circle class="equip-c" cx="390" cy="325" r="11"/><path class="pump-tri" d="M385,319 L397,325 L385,331 Z" fill="var(--equip)"/></g>
+            <text class="tag" x="390" y="232">P-313</text><text class="tag ink" x="390" y="245" id="r-dose-acid">0 %</text></g>
+                    <rect x="425" y="369" width="34" height="22" rx="3" fill="#fff" stroke="var(--equip)" stroke-width="2"/>
+          <path d="M430,374 L436,386 L442,374 L448,386 L454,374" fill="none" stroke="var(--equip)" stroke-width="1.5"/>
+          <text class="tag" x="442" y="404">mixer</text>
+
+          <!-- analysers + pressure -->
+          <line x1="490" y1="380" x2="490" y2="405" stroke="var(--line)" stroke-dasharray="3 3"/>
+          <g id="i-ait301"><circle class="bubble" cx="490" cy="420" r="15"/><line x1="475" x2="505" y1="420" y2="420" stroke="var(--equip)"/>
+            <text class="bubble-t" x="490" y="416">AIT</text><text class="bubble-t" x="490" y="430">301</text></g>
+          <rect class="readout" x="458" y="440" width="64" height="22" rx="3" id="ro-ec"/><text class="readout-t" x="490" y="451" id="r-ec">--</text>
+          <line x1="560" y1="380" x2="560" y2="405" stroke="var(--line)" stroke-dasharray="3 3"/>
+          <g id="i-ait302"><circle class="bubble" cx="545" cy="420" r="15"/><line x1="530" x2="560" y1="420" y2="420" stroke="var(--equip)"/>
+            <text class="bubble-t" x="545" y="416">AIT</text><text class="bubble-t" x="545" y="430">302</text></g>
+          <g id="i-ait303"><circle class="bubble" cx="577" cy="420" r="15"/><line x1="562" x2="592" y1="420" y2="420" stroke="var(--equip)"/>
+            <text class="bubble-t" x="577" y="416">AIT</text><text class="bubble-t" x="577" y="430">303</text></g>
+          <rect class="readout" x="530" y="440" width="62" height="22" rx="3" id="ro-ph"/><text class="readout-t" x="561" y="451" id="r-ph">--</text>
+          <line x1="530" y1="380" x2="530" y2="352" stroke="var(--line)" stroke-dasharray="3 3"/>
+          <g id="i-pt201"><circle class="bubble" cx="530" cy="337" r="15"/><line x1="515" x2="545" y1="337" y2="337" stroke="var(--equip)"/>
+            <text class="bubble-t" x="530" y="333">PT</text><text class="bubble-t" x="530" y="347">201</text></g>
+          <rect class="readout" x="466" y="295" width="64" height="22" rx="3" id="ro-press"/><text class="readout-t" x="498" y="306" id="r-press">-- bar</text>
+
+          <!-- return XV-301 -->
+          <g id="g-ret"><path class="pipe thin" d="M600,380 V210 H240 V80 H170 V100"/><path class="pipe-in" d="M600,380 V210 H240 V80 H170 V100"/></g>
+          <g class="valve" id="v-xv301" transform="translate(430,210)">
+            <path d="M-12,-9 L0,0 L-12,9 Z M12,-9 L0,0 L12,9 Z"/><path d="M0,0 V-14 M-6,-14 H6" style="fill:none"/></g>
+          <text class="tag l" x="448" y="204">XV-301 return</text>
+
+          <!-- greenhouse -->
+          <rect class="wx" x="640" y="10" width="312" height="62" rx="4"/>
+          <text class="wx-t" x="650" y="28"><tspan class="m">Weather</tspan>  <tspan id="wx-rad">-- W/m²</tspan>  <tspan class="m">·</tspan>  <tspan id="wx-t">-- °C</tspan>  <tspan class="m">·</tspan>  <tspan id="wx-rh">-- %RH</tspan></text>
+          <text class="wx-t" x="650" y="46"><tspan class="m">Wind</tspan> <tspan id="wx-wind">-- m/s</tspan>  <tspan class="m">· Rain</tspan> <tspan id="wx-rain">--</tspan></text>
+          <text class="wx-t" x="650" y="63" id="wx-ovr"><tspan class="m">No weather limits active</tspan></text>
+
+          <path class="house" d="M640,350 V190 L785,120 L930,190 V350 Z"/>
+          <line x1="632" y1="350" x2="938" y2="350" stroke="var(--equip)" stroke-width="3"/>
+          <g id="net"><path class="net" id="net-path" d="M776,112 L794,112"/></g>
+          <text class="tag l" x="845" y="104" id="net-t">M-521 net</text>
+          <g id="vent" transform="rotate(0 785 120)"><line class="flap" x1="785" y1="120" x2="842" y2="147"/></g>
+          <text class="tag l" x="845" y="90" id="vent-t">M-511 vent --%</text>
+
+          <!-- fog -->
+          <g id="m-p541"><circle class="equip-c" cx="600" cy="135" r="11"/><path class="pump-tri" d="M595,129 L607,135 L595,141 Z" fill="var(--equip)"/></g>
+          <text class="tag r" x="586" y="139">P-541</text>
+          <g id="fog"><path class="pipe thin" d="M600,146 V205 H920"/>
+            <g id="nozzles"></g></g>
+          <!-- pad -->
+          <rect class="pad" id="pad" x="634" y="218" width="12" height="118"/>
+          <g id="m-p531"><circle class="equip-c" cx="664" cy="312" r="10"/><path class="pump-tri" d="M659,306 L671,312 L659,318 Z" fill="var(--equip)"/></g>
+          <text class="tag l" x="652" y="231">pad</text><text class="tag l" x="678" y="316">P-531</text>
+          <!-- fans -->
+          <g id="m-f601"><circle class="equip-c" cx="930" cy="236" r="13"/><g class="blade"><path d="M930,226 L933,236 L930,246 L927,236 Z M920,236 L930,233 L940,236 L930,239 Z" fill="var(--equip)"/></g></g>
+          <g id="m-f602"><circle class="equip-c" cx="930" cy="273" r="13"/><g class="blade"><path d="M930,263 L933,273 L930,283 L927,273 Z M920,273 L930,270 L940,273 L930,276 Z" fill="var(--equip)"/></g></g>
+          <g id="m-f603"><circle class="equip-c" cx="930" cy="310" r="13"/><g class="blade"><path d="M930,300 L933,310 L930,320 L927,310 Z M920,310 L930,307 L940,310 L930,313 Z" fill="var(--equip)"/></g></g>
+          <text class="tag r" x="912" y="240">F-601</text><text class="tag r" x="912" y="277">F-602</text><text class="tag r" x="912" y="314">F-603</text>
+          <path class="air" id="air1" d="M700,324 H760"/><path class="air" id="air2" d="M810,324 H870"/>
+
+          <!-- inside climate -->
+          <rect class="readout" x="700" y="222" width="80" height="22" rx="3" id="ro-tin"/><text class="readout-t" x="740" y="233" id="r-tin">-- °C</text>
+          <rect class="readout" x="790" y="222" width="80" height="22" rx="3" id="ro-rhin"/><text class="readout-t" x="830" y="233" id="r-rhin">-- %</text>
+          <rect class="readout" x="700" y="276" width="80" height="22" rx="3" id="ro-vpd"/><text class="readout-t" x="740" y="287" id="r-vpd">-- kPa</text>
+          <rect class="readout" x="790" y="276" width="80" height="22" rx="3" id="ro-co2"/><text class="readout-t" x="830" y="287" id="r-co2">-- ppm</text>
+          <text class="tag" x="740" y="258">TT-501</text><text class="tag" x="830" y="258">MT-501</text>
+          <text class="tag" x="740" y="312">VPD</text><text class="tag" x="830" y="312">AT-502 CO₂</text>
+
+          <!-- zones -->
+          <g id="zones"></g>
+          <text class="tag l" x="636" y="458" id="r-drain">FT-402 drain -- L/h</text>
+        </svg>
+      </section>
+      <section>
+        <h2><span>Today</span><span class="sub" id="ov-prev"></span></h2>
+        <div class="kv" id="ov-kv"></div>
+      </section>
+    </div>
+
+    <!-- ============================== IRRIGATION ============================== -->
+    <div class="col" data-page="irrigation" hidden>
+      <section>
+        <h2><span>Irrigation program</span><span class="sub" id="irr-mode-t"></span></h2>
+        <div class="steps" id="irr-steps"></div>
+        <div class="kv" id="irr-kv"></div>
+        <div class="flags" id="irr-flags"></div>
+      </section>
+      <section>
+        <h2><span>Zones</span><span class="sub">diagnostics clear with RESET</span></h2>
+        <div class="tablewrap"><table id="zone-table"></table></div>
+      </section>
+      <div class="two">
+        <section>
+          <h2><span>Daily totals</span></h2>
+          <table id="daily"></table>
+          <p class="hint">Drain % is FT-402 on zone 1 against the zone 1 supply. A28 if outside 10–50 % after 5 cycles.</p>
+        </section>
+        <section id="man-irr">
+          <h2><span>Manual irrigation</span><span class="sub">IRR MANUAL only · interlocks stay active</span></h2>
+          <div class="row" id="man-irr-btns"></div>
+          <p class="hint">Dosing speeds are on the Fertigation page.</p>
+        </section>
+      </div>
+    </div>
+
+    <!-- ============================== FERTIGATION ============================== -->
+    <div class="col" data-page="fertigation" hidden>
+      <div class="two">
+        <section>
+          <h2><span>EC · AIT-301</span><span class="sub" id="ec-sp-t"></span></h2>
+          <div class="big" id="ec-big">--</div>
+          <div class="gauge" id="ec-gauge"><div class="band"></div><div class="val"></div></div>
+          <div class="scale"><span>0</span><span>1</span><span>2</span><span>3</span><span>4 mS/cm</span></div>
+        </section>
+        <section>
+          <h2><span>pH · used value</span><span class="sub" id="ph-sp-t"></span></h2>
+          <div class="big" id="ph-big">--</div>
+          <div class="gauge" id="ph-gauge"><div class="band"></div><div class="val"></div></div>
+          <div class="scale"><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+        </section>
+      </div>
+      <section>
+        <h2><span>Dosing</span><span class="sub">ratio control: feed-forward on FT-201 flow + PI trim</span></h2>
+        <div class="kv" id="dose-kv"></div>
+        <div class="flags" id="dose-ilk"></div>
+      </section>
+      <section>
+        <h2><span>EC and pH — last 10 min</span>
+          <span class="legend"><span><i style="background:var(--ink)"></i>EC</span><span><i style="background:var(--sp)"></i>EC SP</span>
+            <span><i style="background:var(--c3)"></i>pH</span><span><i style="background:#9c8fd0"></i>pH SP</span></span></h2>
+        <canvas id="ch-ecph"></canvas>
+        <h2 style="margin-top:8px"><span>FT-201 flow</span><span class="legend"><span><i style="background:var(--liquid-edge)"></i>L/h</span></span></h2>
+        <canvas id="ch-flow" class="short"></canvas>
+      </section>
+      <section id="man-dose">
+        <h2><span>Manual dosing</span><span class="sub">IRR MANUAL only · needs P-201 running and flow ≥ 500 L/h</span></h2>
+        <div class="row">
+          <label class="f" style="flex:1">P-311 A %<input type="number" id="md-a" min="0" max="100" step="1"></label>
+          <label class="f" style="flex:1">P-312 B %<input type="number" id="md-b" min="0" max="100" step="1"></label>
+          <label class="f" style="flex:1">P-313 acid %<input type="number" id="md-acid" min="0" max="100" step="1"></label>
+          <button id="md-apply" style="align-self:flex-end">Apply</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================== CLIMATE ============================== -->
+    <div class="col" data-page="climate" hidden>
+      <section>
+        <h2><span>Climate state</span><span class="sub" id="clim-mode-t"></span></h2>
+        <div class="steps" id="clim-steps"></div>
+        <div class="kv" id="clim-kv"></div>
+        <div class="flags" id="clim-flags"></div>
+      </section>
+      <div class="two">
+        <section>
+          <h2><span>Roof vent M-511</span><span class="sub" id="vent-sub"></span></h2>
+          <div class="kv" id="vent-kv"></div>
+          <p class="info" id="vent-why"></p>
+        </section>
+        <section>
+          <h2><span>Weather station</span></h2>
+          <div class="kv" id="wx-kv"></div>
+        </section>
+      </div>
+      <section id="man-clim">
+        <h2><span>Manual climate</span><span class="sub">CLIM MANUAL only · weather limits still cap the vent</span></h2>
+        <div class="row">
+          <label class="f" style="width:140px">Vent position %<input type="number" id="mc-vent" min="0" max="100" step="5"></label>
+          <button id="mc-vent-apply" style="align-self:flex-end">Apply</button>
+          <span style="flex:1"></span>
+        </div>
+        <div class="row" style="margin-top:8px" id="man-clim-btns"></div>
+      </section>
+    </div>
+
+    <!-- ============================== TRENDS ============================== -->
+    <div class="col" data-page="trends" hidden>
+      <div class="row" style="justify-content:flex-end"><span class="hint" style="margin:0">Climate range</span>
+        <span class="seg" role="group" aria-label="Trend range"><button data-range="7200">2 h</button><button data-range="28800">8 h</button><button data-range="86400">24 h</button></span></div>
+      <section>
+        <h2><span>Temperature and humidity</span>
+          <span class="legend"><span><i style="background:var(--ink)"></i>TT-501 °C</span><span><i style="background:var(--c2)"></i>TT-101 outside °C</span>
+            <span><i style="background:var(--liquid-edge)"></i>MT-501 %RH</span></span></h2>
+        <canvas id="ch-temp"></canvas>
+      </section>
+      <section>
+        <h2><span>Vent and radiation</span>
+          <span class="legend"><span><i style="background:var(--ink)"></i>Vent %</span><span><i style="background:var(--c2)"></i>RT-101 W/m²</span></span></h2>
+        <canvas id="ch-vent"></canvas>
+      </section>
+      <section>
+        <h2><span>EC and pH — last 10 min</span>
+          <span class="legend"><span><i style="background:var(--ink)"></i>EC</span><span><i style="background:var(--sp)"></i>EC SP</span>
+            <span><i style="background:var(--c3)"></i>pH</span><span><i style="background:#9c8fd0"></i>pH SP</span></span></h2>
+        <canvas id="ch-ecph2"></canvas>
+        <p class="hint">Trends run on process time (PLC scans × 50 ms), so they stay correct in fast-forward. They are kept by the HMI, not the PLC, and start empty when the HMI starts.</p>
+      </section>
+    </div>
+
+    <!-- ============================== ALARMS ============================== -->
+    <div class="col" data-page="alarms" hidden>
+      <section>
+        <h2><span>Alarm list</span><span class="row"><span class="sub" id="alarm-summary"></span><button data-cmd="reset">RESET</button></span></h2>
+        <div class="tablewrap" id="alarms"></div>
+        <p class="hint"><b>trip</b> stops irrigation (step 99) · <b>lock-out</b> blocks one device until RESET · <b>alarm</b> needs attention · <b>warning</b> informs. A cleared alarm stays in the list until RESET.</p>
+      </section>
+    </div>
+
+    <!-- ============================== DEVICES & I/O ============================== -->
+    <div class="col" data-page="devices" hidden>
+      <section>
+        <h2><span>Devices and interlocks</span><span class="sub">why a device is not running</span></h2>
+        <div class="tablewrap" id="devices"></div>
+      </section>
+      <section>
+        <h2><span>I/O status</span><span class="sub">remote I/O PLANT via Modbus TCP</span></h2>
+        <div class="io" id="io"></div>
+      </section>
+    </div>
+
+    <!-- ============================== SETTINGS ============================== -->
+    <div class="col" data-page="settings" hidden>
+      <div id="settings" class="col"></div>
+      <p class="hint" style="margin:0 4px">The PLC checks every setpoint each scan, clamps it to its limits and writes the value back; “In PLC” is that read-back. Shot volume and reference flow take effect at the next zone start.</p>
+    </div>
+  </div>
+
+  <!-- ============================== SIDEBAR ============================== -->
+  <aside class="col">
+    <section>
+      <h2><span>Irrigation</span><span class="seg" role="group" aria-label="Irrigation mode">
+        <button id="irr-auto" data-cmd="irr_auto">AUTO</button><button id="irr-man" data-cmd="irr_manual">MANUAL</button></span></h2>
+      <div class="steps" id="side-irr-steps"></div>
+      <div class="btns">
+        <button class="primary" data-cmd="start" id="c-start">START</button>
+        <button data-cmd="stop" id="c-stop">STOP</button>
+        <button data-cmd="reset" id="c-reset">RESET</button>
+        <button data-cmd="irrigate_now" id="c-now" style="grid-column: span 2">IRRIGATE NOW</button>
+        <button data-cmd="abort" id="c-abort">ABORT</button>
+      </div>
+      <p class="info" id="side-irr-info"></p>
+    </section>
+    <section>
+      <h2><span>Climate</span><span class="seg" role="group" aria-label="Climate mode">
+        <button id="clim-auto" data-cmd="clim_auto">AUTO</button><button id="clim-man" data-cmd="clim_manual">MANUAL</button></span></h2>
+      <div class="steps" id="side-clim-steps"></div>
+      <p class="info" id="side-clim-info"></p>
+    </section>
+    <section>
+      <h2><span>Alarms</span><span class="sub" id="side-alarm-n"></span></h2>
+      <div id="side-alarms"></div>
+    </section>
+  </aside>
+</main>
+
+<!-- ============================== FIELD SIMULATION ============================== -->
+<section id="sim" hidden>
+  <h2><span>Field simulation — demo test bench, not part of the operator HMI</span><span class="sub num" id="sim-state"></span></h2>
+  <div class="simgrid">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+      <button class="estop" id="sim-estop" aria-pressed="false">E-STOP</button>
+      <div class="row" style="justify-content:center"><button class="chip" data-btn="start">START</button><button class="chip" data-btn="stop">STOP</button>
+        <button class="chip" data-btn="reset">RESET</button></div>
+      <span class="hint" style="margin:0">panel push-buttons</span>
+    </div>
+    <div>
+      <div class="simctl">
+        <span>Weather</span><select id="sim-scen" aria-label="Weather scenario"></select>
+        <span>Time of day</span><span class="row"><input type="time" id="sim-clock" aria-label="Set time of day"><button class="chip" id="sim-clock-set">Set</button></span>
+        <span id="sim-speed-l">Speed</span><span class="seg" id="sim-speed" role="group" aria-label="Fast-forward speed"></span>
+      </div>
+      <div class="truth num" id="truth"></div>
+    </div>
+    <div>
+      <div id="faults"></div>
+      <button class="chip" id="sim-clear">Clear all faults</button>
+    </div>
+  </div>
+</section>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fx = (v, d = 1) => (v == null || isNaN(v)) ? '--' : Number(v).toFixed(d);
+const hhmm = m => `${String(Math.floor(m / 60) % 24).padStart(2, '0')}:${String(Math.round(m) % 60).padStart(2, '0')}`;
+const setClass = (el, cls, on) => el && el.classList.toggle(cls, !!on);
+const UNIT = {degC: '°C', 'J/cm2': 'J/cm²', 'W/m2': 'W/m²', bits: ''};
+const IRR_SEQ = [[0, 'IDLE'], [10, 'PRE-MIX'], [20, 'SHOT'], [25, 'HOLD'], [40, 'RUN-DOWN'], [80, 'PAUSED'], [99, 'FAULT']];
+const CLIM_SEQ = [[10, 'VENT'], [20, 'COOL-START'], [25, 'PRE-WET'], [30, 'COOL'], [40, 'PAD-DRY'], [90, 'MANUAL']];
+const MAN_IRR_LABEL = {XV201: 'XV-201 refill', P201: 'P-201 pump', XV301: 'XV-301 return', XV401: 'XV-401 Z1', XV402: 'XV-402 Z2', XV403: 'XV-403 Z3', XV404: 'XV-404 Z4'};
+const MAN_CLIM_LABEL = {NET_DEPLOY: 'Net deploy', NET_RETRACT: 'Net retract', F601: 'F-601', F602: 'F-602', F603: 'F-603', P531: 'P-531 pad', P541: 'P-541 fog'};
+const SP_LABEL = {
+  SP_EC: 'EC setpoint', SP_PH: 'pH setpoint', SP_EC_BAND: 'EC band ±', SP_PH_BAND: 'pH band ±',
+  SP_DAY_START: 'Day window start', SP_DAY_END: 'Day window end', SP_RAD_SUM: 'Radiation sum to start',
+  SP_MIN_INT: 'Minimum interval', SP_MAX_INT: 'Maximum interval', SP_MAX_CYCLES: 'Maximum cycles per day',
+  SP_SHOT_Z1: 'Shot Z1', SP_SHOT_Z2: 'Shot Z2', SP_SHOT_Z3: 'Shot Z3', SP_SHOT_Z4: 'Shot Z4',
+  SP_FLOW_Z1: 'Reference flow Z1', SP_FLOW_Z2: 'Reference flow Z2', SP_FLOW_Z3: 'Reference flow Z3', SP_FLOW_Z4: 'Reference flow Z4',
+  SP_ZONE_EN: 'Zones enabled', SP_VENT_T: 'Vent temperature', SP_COOL_T: 'Pad-and-fan temperature',
+  SP_RH_MAX: 'Humidity venting above', SP_VPD_FOG: 'Fog above VPD', SP_SCREEN_RAD: 'Shade net above',
+  SP_WIND_LIM: 'Wind limit', SP_STORM: 'Storm (vent and net closed)', SP_RAIN_POS: 'Vent limit in rain'};
+const SP_GROUPS = [
+  ['Fertigation', ['SP_EC', 'SP_EC_BAND', 'SP_PH', 'SP_PH_BAND']],
+  ['Irrigation program', ['SP_DAY_START', 'SP_DAY_END', 'SP_RAD_SUM', 'SP_MIN_INT', 'SP_MAX_INT', 'SP_MAX_CYCLES']],
+  ['Zones', ['SP_ZONE_EN', 'SP_SHOT_Z1', 'SP_SHOT_Z2', 'SP_SHOT_Z3', 'SP_SHOT_Z4', 'SP_FLOW_Z1', 'SP_FLOW_Z2', 'SP_FLOW_Z3', 'SP_FLOW_Z4']],
+  ['Climate', ['SP_VENT_T', 'SP_COOL_T', 'SP_RH_MAX', 'SP_VPD_FOG', 'SP_SCREEN_RAD', 'SP_WIND_LIM', 'SP_STORM', 'SP_RAIN_POS']]];
+const ZX = [685, 755, 825, 895];
+let META = null, S = null, TAB = 'overview', RANGE = null;   // null: smallest range that holds the data
+const dirty = {};          // setpoint name -> true while the operator edits
+
+async function post(path, body) {
+  try {
+    const r = await fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+    const j = await r.json(); if (!j.ok) throw new Error(j.error || r.status); return true;
+  } catch (e) { $('comms').textContent = 'command failed: ' + e.message; return false; }
+}
+
+// ---------------------------------------------------------------- static UI
+function stepChips(el, seq) { el.innerHTML = seq.map(([n, t]) => `<div data-n="${n}">${t}</div>`).join(''); }
+stepChips($('irr-steps'), IRR_SEQ); stepChips($('side-irr-steps'), IRR_SEQ.filter(([n]) => n !== 25));
+stepChips($('clim-steps'), CLIM_SEQ); stepChips($('side-clim-steps'), CLIM_SEQ.filter(([n]) => n !== 90));
+document.querySelectorAll('[data-cmd]').forEach(b => b.onclick = () => post('/api/cmd', {cmd: b.dataset.cmd}));
+document.querySelectorAll('[data-btn]').forEach(b => b.onclick = () => post('/api/sim', {button: b.dataset.btn}));
+document.querySelectorAll('nav [data-tab]').forEach(b => b.onclick = () => showTab(b.dataset.tab));
+document.querySelectorAll('[data-range]').forEach(b => b.onclick = () => { RANGE = +b.dataset.range; if (S) render(S); });
+function showTab(t) {
+  TAB = t;
+  document.querySelectorAll('nav [data-tab]').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === t));
+  document.querySelectorAll('[data-page]').forEach(p => p.hidden = p.dataset.page !== t);
+  try { localStorage.setItem('gh1-tab', t); history.replaceState(null, '', '#' + t); } catch (e) {}
+  if (S) render(S);
+}
+{ // #page in the URL wins over the remembered page
+  let t = location.hash.slice(1);
+  try { t = t || localStorage.getItem('gh1-tab'); } catch (e) {}
+  if (t && document.querySelector(`[data-page="${t}"]`)) showTab(t);
+}
+window.addEventListener('hashchange', () => {
+  const t = location.hash.slice(1);
+  if (t !== TAB && document.querySelector(`[data-page="${t}"]`)) showTab(t);
+});
+
+// mimic: zones and fog nozzles
+$('zones').innerHTML = ZX.map((x, i) => `
+  <rect class="bed" id="bed${i + 1}" x="${x - 30}" y="335" width="60" height="15" rx="2"/>
+  <text class="tag ink" x="${x}" y="346">Z${i + 1}</text>
+  <g id="g-z${i + 1}"><path class="pipe thin" d="M${x},412 V350"/><path class="pipe-in" d="M${x},412 V350"/></g>
+  <g class="valve" id="v-xv40${i + 1}" transform="translate(${x},385) rotate(90)">
+    <path d="M-10,-8 L0,0 L-10,8 Z M10,-8 L0,0 L10,8 Z"/></g>
+  <text class="tag" x="${x}" y="432">XV-40${i + 1}</text>`).join('');
+$('nozzles').innerHTML = Array.from({length: 9}, (_, i) => {
+  const x = 660 + i * 30;
+  return `<circle class="nozzle" cx="${x}" cy="205" r="3.5"/><ellipse class="mist" cx="${x}" cy="214" rx="9" ry="6"/>`;
+}).join('');
+
+const manBtns = (el, keys, labels, kind) => {
+  el.innerHTML = keys.map(k => `<button data-${kind}="${k}" aria-pressed="false">${labels[k] || k}</button>`).join('');
+  el.querySelectorAll('button').forEach(b => b.onclick = () => {
+    const cur = new Set(S?.manual?.[kind] || []), k = b.dataset[kind];
+    cur.has(k) ? cur.delete(k) : cur.add(k);
+    if (kind === 'clim' && cur.has(k) && k.startsWith('NET_')) cur.delete(k === 'NET_DEPLOY' ? 'NET_RETRACT' : 'NET_DEPLOY');
+    post('/api/manual', {[kind]: [...cur]});
+  });
+};
+$('md-apply').onclick = () => post('/api/manual', {dose: {a: +$('md-a').value || 0, b: +$('md-b').value || 0, acid: +$('md-acid').value || 0}});
+$('mc-vent-apply').onclick = () => post('/api/manual', {vent: +$('mc-vent').value || 0});
+['md-a', 'md-b', 'md-acid', 'mc-vent'].forEach(id => $(id).addEventListener('input', () => $(id).classList.add('dirty')));
+
+// settings page, built from /api/meta
+function buildSettings() {
+  const sp = Object.fromEntries(META.setpoints.map(s => [s.name, s]));
+  $('settings').innerHTML = SP_GROUPS.map(([g, names], gi) => `
+    <section><h2><span>${g}</span><span class="row"><span class="sub" id="spmsg${gi}"></span>
+      <button data-spgroup="${gi}">Download to PLC</button></span></h2>
+    <div class="tablewrap"><table class="sp"><tr><th>Setting</th><th>New value</th><th>Unit</th><th>Limits</th><th class="r">In PLC</th></tr>
+    ${names.map(n => { const s = sp[n];
+      const input = n === 'SP_ZONE_EN'
+        ? `<span class="zones-en">${[1, 2, 3, 4].map(z => `<label><input type="checkbox" data-zen="${z}">Z${z}</label>`).join('')}</span>`
+        : (s.unit === 'min' && n.startsWith('SP_DAY'))
+          ? `<input type="time" data-sp="${n}" step="60">`
+          : `<input type="number" data-sp="${n}" step="${1 / s.scale}" min="${s.lo}" max="${s.hi}">`;
+      const lim = n === 'SP_ZONE_EN' ? '' : n.startsWith('SP_DAY') ? `${hhmm(s.lo)}–${hhmm(s.hi)}` : `${s.lo}–${s.hi}`;
+      return `<tr><td>${SP_LABEL[n] || n}<div class="maint">${n} · %MW${s.mw}</div></td><td>${input}</td>
+        <td>${UNIT[s.unit] ?? s.unit}</td><td class="lim">${lim}</td><td class="r force num" id="force-${n}">--</td></tr>`; }).join('')}
+    </table></div></section>`).join('');
+  document.querySelectorAll('[data-sp]').forEach(i => i.addEventListener('input', () => { dirty[i.dataset.sp] = true; i.classList.add('dirty'); }));
+  document.querySelectorAll('[data-zen]').forEach(i => i.addEventListener('change', () => {
+    dirty.SP_ZONE_EN = true; document.querySelectorAll('[data-zen]').forEach(c => c.parentElement.style.fontWeight = 700); }));
+  document.querySelectorAll('[data-spgroup]').forEach(b => b.onclick = async () => {
+    const gi = +b.dataset.spgroup, values = {};
+    for (const n of SP_GROUPS[gi][1]) {
+      if (!dirty[n]) continue;
+      if (n === 'SP_ZONE_EN') values[n] = [...document.querySelectorAll('[data-zen]')].reduce((w, c, i) => w | (c.checked ? 1 << i : 0), 0);
+      else { const el = document.querySelector(`[data-sp="${n}"]`);
+        values[n] = el.type === 'time' ? (([h, m]) => h * 60 + m)(el.value.split(':').map(Number)) : +el.value; }
+    }
+    if (!Object.keys(values).length) { $('spmsg' + gi).textContent = 'Nothing changed.'; return; }
+    if (await post('/api/setpoints', {values})) {
+      for (const n of Object.keys(values)) delete dirty[n];
+      document.querySelectorAll('.sp .dirty').forEach(i => SP_GROUPS[gi][1].includes(i.dataset.sp) && i.classList.remove('dirty'));
+      document.querySelectorAll('[data-zen]').forEach(c => c.parentElement.style.fontWeight = '');
+      $('spmsg' + gi).textContent = `Downloaded ${Object.keys(values).length} value(s) — check “In PLC”.`;
+    }
+  });
+}
+
+function buildSim() {
+  $('sim-scen').innerHTML = META.scenarios.map(s => `<option value="${s}">${s}</option>`).join('');
+  $('sim-scen').onchange = () => post('/api/sim', {scenario: $('sim-scen').value});
+  $('sim-speed').innerHTML = META.speeds.map(v => `<button data-speed="${v}">${v}×</button>`).join('');
+  document.querySelectorAll('[data-speed]').forEach(b => b.onclick = () => post('/api/sim', {speed: +b.dataset.speed}));
+  $('sim-clock-set').onclick = () => $('sim-clock').value && post('/api/sim', {clock: $('sim-clock').value});
+  $('faults').innerHTML = META.faults.map(g => `<div class="hint" style="margin:0 0 4px">${esc(g.group)}</div><div class="chips">${
+    g.faults.map(f => `<button class="chip" data-fault="${f.id}" aria-pressed="false">${esc(f.title)}</button>`).join('')}</div>`).join('');
+  document.querySelectorAll('[data-fault]').forEach(b => b.onclick = () =>
+    post('/api/sim', {fault: b.dataset.fault, active: b.getAttribute('aria-pressed') !== 'true'}));
+  $('sim-estop').onclick = () => post('/api/sim', {fault: 'estop', active: $('sim-estop').getAttribute('aria-pressed') !== 'true'});
+  $('sim-clear').onclick = () => post('/api/sim', {clear_faults: true});
+}
+
+// ---------------------------------------------------------------- live render
+const kv = (label, value, cls = '', extra = '') => `<div class="${cls}"><span>${label}</span><b>${value}</b>${extra}</div>`;
+const bar = pct => `<div class="bar"><i style="width:${Math.max(0, Math.min(100, pct))}%"></i></div>`;
+const dev = (p, key) => p.devices.find(d => d.key === key);
+const isAct = (p, n) => p.alarm_list.some(a => a.tag === `A${String(n).padStart(2, '0')}` && a.active);
+
+function steps(el, cur, bad, hold) {
+  el.querySelectorAll('[data-n]').forEach(d => {
+    const n = +d.dataset.n; d.className = n === cur ? 'cur' + (bad ? ' bad' : hold ? ' hold' : '') : '';
+  });
+}
+
+function render(s) {
+  S = s;
+  setClass($('comms-dot'), 'ok', s.ok); setClass($('comms-dot'), 'bad', !s.ok);
+  $('comms').textContent = s.ok ? 'PLC comms OK' : (s.error || 'PLC comms lost');
+  setClass(document.body, 'stale', !s.ok);
+  const p = s.plc;
+  renderSim(s);
+  if (!p) return;
+  const sp = s.setpoints, out = p.outputs, inp = p.inputs, f = p.irr_flags, cf = p.clim_flags;
+  const irrMan = f.manual, climMan = cf.manual, step = p.irr_step;
+  const spd = s.speed && s.speed > 1.5 ? ` · ×${Math.round(s.speed)}` : '';
+  $('clock').textContent = p.clock_text + spd;
+
+  // header
+  const zoneT = p.zone ? ` Z${p.zone}` : '';
+  $('b-irr').textContent = `IRR ${irrMan ? 'MANUAL' : 'AUTO'} · ${p.irr_step_name}${[20, 25, 80].includes(step) ? zoneT : ''}`;
+  setClass($('b-irr'), 'alarm', step === 99); setClass($('b-irr'), 'warn', irrMan || step === 80 || !f.enabled);
+  $('b-clim').textContent = `CLIM ${climMan ? 'MANUAL' : 'AUTO'} · ${p.clim_state_name}`;
+  setClass($('b-clim'), 'warn', climMan || cf.storm || cf.rain || cf.wind_limit);
+  const act = p.alarm_list.filter(a => a.active), red = act.filter(a => a.class !== 'warning');
+  $('b-alarm').hidden = !p.alarm_list.length;
+  $('b-alarm').className = 'badge ' + (red.length ? 'alarm' : 'warn');
+  $('b-alarm').textContent = red.length ? `ALARM ${red.map(a => a.tag).join(' ')}`
+    : act.length ? `WARNING ${act.map(a => a.tag).join(' ')}` : `${p.alarm_list.length} cleared — RESET`;
+  $('tab-alarm-count').hidden = !act.length; $('tab-alarm-count').textContent = act.length;
+  $('lamp-r').style.background = out.LAMP_RED ? '#e53935' : ''; $('lamp-a').style.background = out.LAMP_AMBER ? '#f6b400' : '';
+  $('lamp-g').style.background = out.LAMP_GREEN ? '#43a047' : '';
+
+  renderSide(s, p);
+  ({overview: renderOverview, irrigation: renderIrrigation, fertigation: renderFert, climate: renderClimate,
+    trends: renderTrends, alarms: renderAlarms, devices: renderDevices, settings: renderSettings})[TAB](s, p);
+}
+
+function renderSide(s, p) {
+  const f = p.irr_flags, step = p.irr_step, man = f.manual, cf = p.clim_flags;
+  steps($('side-irr-steps'), step, step === 99, step === 80 || step === 25);
+  setClass($('irr-auto'), 'on', !man); setClass($('irr-man'), 'on', man);
+  $('irr-auto').disabled = !man; $('irr-man').disabled = man || !(step === 0 || step === 99);
+  // enabled only when the PLC would accept the command (FDS 5.2, PRD HR-05)
+  $('c-start').disabled = man || !((step === 0 && !f.enabled) || step === 80) || !p.inputs.PB_STOP_OK;
+  $('c-stop').disabled = man || !((step >= 10 && step <= 40) || (step === 0 && f.enabled));
+  $('c-now').disabled = man || step !== 0 || !(s.setpoints.SP_ZONE_EN > 0);
+  $('c-abort').disabled = man || step !== 80;
+  const z = p.zone ? `zone ${p.zone}: ${fx(p.zone_vol, 1)} / ${fx(s.setpoints['SP_SHOT_Z' + p.zone], 0)} L` : '';
+  $('side-irr-info').textContent = man ? 'Manual: devices from the Irrigation page.'
+    : step === 0 ? (f.enabled ? (f.in_window ? `Waiting: ${fx(p.rad_sum, 0)} / ${s.setpoints.SP_RAD_SUM} J/cm², ${p.min_since} min since last`
+                                             : `Program enabled, outside the day window (${hhmm(s.setpoints.SP_DAY_START)}–${hhmm(s.setpoints.SP_DAY_END)}).`)
+                               : 'Program disabled — START to enable.')
+    : step === 80 ? `Paused at ${z} — START resumes, ABORT cancels.`
+    : step === 99 ? 'Irrigation trip — clear the cause, then RESET.'
+    : `${p.irr_step_name} · ${p.step_time} s${z ? ' · ' + z : ''}`;
+  steps($('side-clim-steps'), p.clim_state, false, cf.storm || cf.rain);
+  setClass($('clim-auto'), 'on', !cf.manual); setClass($('clim-man'), 'on', cf.manual);
+  $('clim-auto').disabled = !cf.manual; $('clim-man').disabled = cf.manual;
+  $('side-clim-info').textContent = `${fx(p.t_in, 1)} °C · ${fx(p.rh_in, 0)} %RH · vent ${fx(p.vent_pos, 0)} %` +
+    (p.fan_stage ? ` · fans stage ${p.fan_stage}` : '') + (cf.manual ? ' · manual' : '');
+  const al = p.alarm_list;
+  $('side-alarm-n').textContent = al.length ? `${al.filter(a => a.active).length} active · ${al.length} listed` : '';
+  $('side-alarms').innerHTML = al.length ? `<table>${al.slice(0, 6).map(a => `<tr class="${rowCls(a)}"><td>${a.tag}</td><td>${esc(a.text)}</td></tr>`).join('')}</table>`
+    + (al.length > 6 ? `<p class="hint">+${al.length - 6} more on the Alarms page</p>` : '') : '<div class="empty">No alarms.</div>';
+}
+const rowCls = a => !a.active ? 'a-clr' : a.class === 'warning' ? 'a-warn' : 'a-act';
+
+function renderOverview(s, p) {
+  const out = p.outputs, inp = p.inputs, sp = s.setpoints, cf = p.clim_flags;
+  const flowing = p.flow > 50;
+  // tank
+  const h = 198 * Math.max(0, Math.min(100, p.level)) / 100;
+  $('liquid').setAttribute('y', 300 - h); $('liquid').setAttribute('height', h);
+  $('liquid-top').setAttribute('y1', 300 - h); $('liquid-top').setAttribute('y2', 300 - h);
+  $('r-level').textContent = fx(p.level, 1) + ' %';
+  setClass($('i-lt201'), 'bad', isAct(p, 20)); setClass($('i-lsl201'), 'bad', !inp.LSL201_OK);
+  // valves, pumps
+  const dv = Object.fromEntries(p.devices.map(d => [d.key, d]));
+  for (const k of ['xv201', 'xv301', 'xv401', 'xv402', 'xv403', 'xv404']) {
+    const d = dv[k], el = $('v-' + k); setClass(el, 'on', d.cmd); setClass(el, 'blocked', d.blocked);
+  }
+  for (const k of ['p201', 'p311', 'p312', 'p313', 'p531', 'p541', 'f601', 'f602', 'f603']) {
+    const d = dv[k], el = $('m-' + k); setClass(el, 'on', d.running); setClass(el, 'blocked', d.blocked && !d.discrepancy);
+    setClass(el, 'fault', d.discrepancy);
+  }
+  setClass($('g-sup'), 'flow', out.XV201); setClass($('g-main'), 'flow', flowing);
+  setClass($('g-ret'), 'flow', out.XV301 && flowing); setClass($('g-clean'), 'flow', dv.p541.running || dv.p531.running);
+  for (let z = 1; z <= 4; z++) { setClass($('g-z' + z), 'flow', out['XV40' + z] && flowing); setClass($('bed' + z), 'on', out['XV40' + z] && flowing); }
+  $('r-flow').textContent = fx(p.flow, 0) + ' L/h'; $('r-press').textContent = fx(p.press, 2) + ' bar';
+  $('r-ec').textContent = fx(p.ec, 2) + ' mS'; $('r-ph').textContent = 'pH ' + fx(p.ph, 2);
+  const ecOut = Math.abs(p.ec - sp.SP_EC) > sp.SP_EC_BAND, phOut = Math.abs(p.ph - sp.SP_PH) > sp.SP_PH_BAND;
+  setClass($('ro-ec'), 'bad', flowing && ecOut || isAct(p, 7) || isAct(p, 23));
+  setClass($('ro-ph'), 'bad', flowing && phOut || isAct(p, 8) || isAct(p, 26));
+  setClass($('i-ait301'), 'bad', isAct(p, 23)); setClass($('i-ait302'), 'bad', isAct(p, 24) || isAct(p, 9));
+  setClass($('i-ait303'), 'bad', isAct(p, 25) || isAct(p, 9)); setClass($('i-pt201'), 'bad', isAct(p, 22) || isAct(p, 5) || isAct(p, 6));
+  setClass($('i-ft201'), 'bad', isAct(p, 21));
+  $('r-dose-a').textContent = fx(p.dose_a, 0) + ' %'; $('r-dose-b').textContent = fx(p.dose_b, 0) + ' %';
+  $('r-dose-acid').textContent = fx(p.dose_acid, 0) + ' %';
+  setClass($('tk-a'), 'bad', !inp.LSL311_OK); setClass($('tk-b'), 'bad', !inp.LSL312_OK); setClass($('tk-acid'), 'bad', !inp.LSL313_OK);
+  $('r-drain').textContent = `FT-402 drain ${fx(p.drain_flow, 1)} L/h`;
+  // greenhouse
+  $('vent').setAttribute('transform', `rotate(${-35 * Math.max(0, Math.min(100, p.vent_pos)) / 100} 785 120)`);
+  const vd = dv.m511;
+  $('vent-t').textContent = `M-511 vent ${fx(p.vent_pos, 0)} %` + (vd.opening ? ' ▲' : vd.closing ? ' ▼' : '');
+  const nd = dv.m521, deployed = nd.at_closed, retracted = nd.at_open;
+  $('net-path').setAttribute('d', deployed ? 'M636,182 L785,110 L934,182' : retracted ? 'M776,110 L794,110' : 'M710,146 L785,110 L860,146');
+  $('net-t').textContent = 'M-521 net ' + (deployed ? 'deployed' : retracted ? 'retracted' : nd.opening ? 'retracting' : nd.closing ? 'deploying' : 'mid');
+  setClass($('fog'), 'fog-on', dv.p541.running); setClass($('pad'), 'on', dv.p531.running);
+  const fans = dv.f601.running || dv.f602.running || dv.f603.running;
+  setClass($('air1'), 'on', fans); setClass($('air2'), 'on', fans);
+  $('r-tin').textContent = fx(p.t_in, 1) + ' °C'; $('r-rhin').textContent = fx(p.rh_in, 0) + ' %RH';
+  $('r-vpd').textContent = fx(p.vpd, 2) + ' kPa'; $('r-co2').textContent = fx(p.co2, 0) + ' ppm';
+  setClass($('ro-tin'), 'bad', isAct(p, 46) || isAct(p, 47) || isAct(p, 32)); setClass($('ro-rhin'), 'bad', isAct(p, 33));
+  setClass($('ro-co2'), 'bad', isAct(p, 48) || isAct(p, 34));
+  $('wx-rad').textContent = fx(p.rad, 0) + ' W/m²'; $('wx-t').textContent = fx(p.t_out, 1) + ' °C';
+  $('wx-rh').textContent = fx(p.rh_out, 0) + ' %RH'; $('wx-wind').textContent = fx(p.wind, 1) + ' m/s';
+  $('wx-rain').textContent = cf.rain ? 'RAIN' : 'dry';
+  const ovr = [cf.storm && 'STORM: vent and net closed', !cf.storm && cf.wind_limit && 'Wind limit on vent', cf.rain && 'Rain limit on vent'].filter(Boolean);
+  $('wx-ovr').innerHTML = ovr.length ? `<tspan class="w">${esc(ovr.join(' · '))}</tspan>` : '<tspan class="m">No weather limits active</tspan>';
+  $('ov-sub').textContent = `${p.irr_step_name}${p.zone ? ' · zone ' + p.zone : ''} · ${p.clim_state_name}`;
+  $('ov-kv').innerHTML = kv('Cycles', `${p.cycles_day} / ${sp.SP_MAX_CYCLES}`) + kv('Water', `${p.water_day} L`)
+    + kv('Drain', `${fx(p.drain_day, 1)} %`, isAct(p, 28) ? 'warn' : '')
+    + kv('Radiation sum', `${fx(p.rad_sum, 0)} / ${sp.SP_RAD_SUM}`, '', bar(100 * p.rad_sum / sp.SP_RAD_SUM))
+    + kv('Since last cycle', `${p.min_since} min`, '', bar(100 * p.min_since / sp.SP_MAX_INT))
+    + kv('T-201 level', `${fx(p.level, 0)} %`, isAct(p, 2) ? 'bad' : '');
+  $('ov-prev').textContent = `yesterday: ${p.cycles_prev} cycles · ${p.water_prev} L · drain ${fx(p.drain_prev, 1)} %`;
+}
+
+function renderIrrigation(s, p) {
+  const f = p.irr_flags, sp = s.setpoints, step = p.irr_step;
+  steps($('irr-steps'), step, step === 99, step === 80 || step === 25);
+  $('irr-mode-t').textContent = f.manual ? 'MANUAL' : `AUTO · program ${f.enabled ? 'enabled' : 'disabled'}`;
+  const shot = p.zone ? sp['SP_SHOT_Z' + p.zone] : 0;
+  $('irr-kv').innerHTML = kv('Active zone', p.zone ? 'Z' + p.zone : '—')
+    + kv('Zone volume', p.zone ? `${fx(p.zone_vol, 1)} / ${shot} L` : '—', '', p.zone ? bar(100 * p.zone_vol / shot) : '')
+    + kv('Time in step', `${p.step_time} s`)
+    + kv('Radiation sum, J/cm²', `${fx(p.rad_sum, 1)} / ${sp.SP_RAD_SUM}`, '', bar(100 * p.rad_sum / sp.SP_RAD_SUM))
+    + kv('Since last cycle', `${p.min_since} min`, '', bar(100 * p.min_since / sp.SP_MAX_INT))
+    + kv('Day window', `${hhmm(sp.SP_DAY_START)}–${hhmm(sp.SP_DAY_END)}`)
+    + kv('Flow · pressure', `${fx(p.flow, 0)} L/h · ${fx(p.press, 2)} bar`)
+    + kv('T-201', `${fx(p.level, 1)} %`, isAct(p, 2) ? 'bad' : isAct(p, 3) ? 'warn' : '');
+  const fl = [['auto', 'AUTO'], ['enabled', 'Program enabled'], ['in_window', 'In day window'], ['max_cycles', 'Max cycles reached', 1],
+              ['daylight_fallback', 'Clock fault: daylight window', 1], ['resume_pending', 'Paused zone pending', 1]];
+  $('irr-flags').innerHTML = fl.map(([k, t, w]) => `<span class="flag ${f[k] ? (w ? 'warn' : 'on') : ''}">${t}</span>`).join('');
+  const out = p.outputs;
+  $('zone-table').innerHTML = `<tr><th>Zone</th><th>Enabled</th><th class="r">Shot</th><th class="r">Ref. flow</th><th>Valve</th><th>Diagnostics</th><th class="r">Valve cycles</th></tr>` +
+    [1, 2, 3, 4].map(z => { const d = p.zone_diag['Z' + z], dv = dev(p, 'xv40' + z);
+      const diag = [d.flow_high && 'flow high (A17)', d.flow_low && 'flow low (A18)', d.timeout && 'shot timeout (A19)'].filter(Boolean);
+      return `<tr><td><b>Z${z}</b>${p.zone === z ? ' ◀' : ''}</td>
+        <td>${s.setpoints.SP_ZONE_EN >> (z - 1) & 1 ? 'yes' : '<span class="why">no</span>'}</td>
+        <td class="r num">${sp['SP_SHOT_Z' + z]} L</td><td class="r num">${sp['SP_FLOW_Z' + z]} L/h</td>
+        <td>${out['XV40' + z] ? 'OPEN' : 'closed'}</td><td>${diag.length ? `<span class="why">${diag.join(', ')}</span>` : '<span class="maint">ok</span>'}</td>
+        <td class="r num">${dv.cycles}</td></tr>`; }).join('');
+  $('daily').innerHTML = `<tr><th></th><th class="r">Today</th><th class="r">Yesterday</th></tr>
+    <tr><td>Cycles</td><td class="r num">${p.cycles_day}</td><td class="r num">${p.cycles_prev}</td></tr>
+    <tr><td>Water to zones</td><td class="r num">${p.water_day} L</td><td class="r num">${p.water_prev} L</td></tr>
+    <tr><td>Drain (zone 1)</td><td class="r num">${fx(p.drain_day, 1)} %</td><td class="r num">${fx(p.drain_prev, 1)} %</td></tr>`;
+  if (!$('man-irr-btns').children.length) manBtns($('man-irr-btns'), META.man_irr, MAN_IRR_LABEL, 'irr');
+  $('man-irr-btns').querySelectorAll('button').forEach(b => {
+    const on = (s.manual.irr || []).includes(b.dataset.irr); setClass(b, 'on', on); b.setAttribute('aria-pressed', on); b.disabled = !f.manual; });
+}
+
+function gauge(el, v, sp, band, lo, hi, bad) {
+  const pc = x => 100 * (x - lo) / (hi - lo);
+  const b = el.querySelector('.band'), m = el.querySelector('.val');
+  b.style.left = pc(sp - band) + '%'; b.style.width = (pc(sp + band) - pc(sp - band)) + '%';
+  m.style.left = Math.max(0, Math.min(100, pc(v))) + '%'; setClass(el, 'bad', bad);
+}
+
+function renderFert(s, p) {
+  const sp = s.setpoints, inp = p.inputs, flowing = p.flow > 50, ilk = p.interlocks;
+  $('ec-big').innerHTML = `${fx(p.ec, 2)} <small>mS/cm</small>`;
+  $('ph-big').innerHTML = `${fx(p.ph, 2)} <small>A ${fx(p.ph_a, 2)} · B ${fx(p.ph_b, 2)} · Δ ${fx(Math.abs(p.ph_a - p.ph_b), 2)}</small>`;
+  $('ec-sp-t').textContent = `SP ${fx(sp.SP_EC, 2)} ± ${fx(sp.SP_EC_BAND, 2)}`;
+  $('ph-sp-t').textContent = `SP ${fx(sp.SP_PH, 2)} ± ${fx(sp.SP_PH_BAND, 2)}`;
+  gauge($('ec-gauge'), p.ec, sp.SP_EC, sp.SP_EC_BAND, 0, 4, flowing && Math.abs(p.ec - sp.SP_EC) > sp.SP_EC_BAND);
+  gauge($('ph-gauge'), p.ph, sp.SP_PH, sp.SP_PH_BAND, 4, 8, flowing && Math.abs(p.ph - sp.SP_PH) > sp.SP_PH_BAND);
+  const tank = (ok, n) => ok ? 'ok' : `<span style="color:#7f1414">LOW (A${n})</span>`;
+  $('dose-kv').innerHTML = kv('P-311 stock A', `${fx(p.dose_a, 1)} %`, '', bar(p.dose_a)) + kv('P-312 stock B', `${fx(p.dose_b, 1)} %`, '', bar(p.dose_b))
+    + kv('P-313 acid', `${fx(p.dose_acid, 1)} %`, '', bar(p.dose_acid)) + kv('FT-201 flow', `${fx(p.flow, 0)} L/h`)
+    + kv('Stock A', tank(inp.LSL311_OK, 11), inp.LSL311_OK ? '' : 'warn') + kv('Stock B', tank(inp.LSL312_OK, 12), inp.LSL312_OK ? '' : 'warn')
+    + kv('Acid', tank(inp.LSL313_OK, 13), inp.LSL313_OK ? '' : 'warn');
+  const why = [...ilk.dose_ab.map(t => 'A/B: ' + t), ...ilk.acid.map(t => 'acid: ' + t)];
+  $('dose-ilk').innerHTML = why.length ? why.map(t => `<span class="flag warn">${esc(t)}</span>`).join('')
+    : '<span class="flag on">Dosing permitted</span>';
+  drawEcPh($('ch-ecph'), s.trends.fast); drawFlow($('ch-flow'), s.trends.fast);
+  const man = p.irr_flags.manual;
+  ['md-a', 'md-b', 'md-acid', 'md-apply'].forEach(id => $(id).disabled = !man);
+  for (const [id, k] of [['md-a', 'a'], ['md-b', 'b'], ['md-acid', 'acid']])
+    if (!$(id).classList.contains('dirty') && document.activeElement !== $(id)) $(id).value = s.manual.dose[k];
+  if (document.activeElement === $('md-apply')) ['md-a', 'md-b', 'md-acid'].forEach(id => $(id).classList.remove('dirty'));
+}
+
+function renderClimate(s, p) {
+  const cf = p.clim_flags, sp = s.setpoints, dv = Object.fromEntries(p.devices.map(d => [d.key, d]));
+  steps($('clim-steps'), p.clim_state, false, cf.storm || cf.rain);
+  $('clim-mode-t').textContent = cf.manual ? 'MANUAL' : 'AUTO';
+  const tCls = isAct(p, 47) ? 'bad' : isAct(p, 46) ? 'warn' : '';
+  $('clim-kv').innerHTML = kv('TT-501 temperature', `${fx(p.t_in, 1)} °C`, tCls) + kv('MT-501 humidity', `${fx(p.rh_in, 1)} %`)
+    + kv('VPD', `${fx(p.vpd, 2)} kPa`) + kv('AT-502 CO₂', `${fx(p.co2, 0)} ppm`, isAct(p, 48) ? 'warn' : '')
+    + kv('Vent / cool SP', `${fx(sp.SP_VENT_T, 1)} / ${fx(sp.SP_COOL_T, 1)} °C`)
+    + kv('Fan stage', `${p.fan_stage} / 3`)
+    + kv('Shade net', dv.m521.at_closed ? 'deployed' : dv.m521.at_open ? 'retracted' : 'moving')
+    + kv('Fog P-541', dv.p541.running ? 'spraying' : cf.fog_demand ? 'demand (pulsing)' : 'off')
+    + kv('Pad P-531', dv.p531.running ? 'wet' : 'off');
+  const fl = [['rain', 'Rain', 1], ['wind_limit', 'Wind limit', 1], ['storm', 'Storm', 1], ['humidity_venting', 'Humidity venting'],
+              ['net_demand', 'Net demand'], ['fog_demand', 'Fog demand'], ['temp_fallback', 'TT-501 fault: fallback', 1], ['cool_timing', 'Cooling condition timing']];
+  $('clim-flags').innerHTML = fl.map(([k, t, w]) => `<span class="flag ${cf[k] ? (w ? 'warn' : 'on') : ''}">${t}</span>`).join('');
+  const vd = dv.m511;
+  $('vent-sub').textContent = vd.travel_fault ? 'TRAVEL FAULT (A36)' : vd.motor_trip ? 'MOTOR TRIPPED (A38)' : vd.opening ? 'opening' : vd.closing ? 'closing' : 'at rest';
+  $('vent-kv').innerHTML = kv('Position ZT-511', `${fx(p.vent_pos, 1)} %`, '', bar(p.vent_pos)) + kv('Setpoint', `${fx(p.vent_sp, 1)} %`, '', bar(p.vent_sp))
+    + kv('Limit switches', vd.at_open ? 'OPEN' : vd.at_closed ? 'CLOSED' : '—') + kv('Reversals', p.m511_rev);
+  $('vent-why').textContent = vd.interlocks.length ? 'Interlocks: ' + vd.interlocks.join('; ') : '';
+  $('wx-kv').innerHTML = kv('RT-101 radiation', `${fx(p.rad, 0)} W/m²`) + kv('TT-101 outside', `${fx(p.t_out, 1)} °C`)
+    + kv('MT-101 outside RH', `${fx(p.rh_out, 0)} %`) + kv('ST-101 wind', `${fx(p.wind, 1)} m/s`, cf.storm ? 'bad' : cf.wind_limit ? 'warn' : '')
+    + kv('Rain sensor', cf.rain ? 'RAIN' : 'dry', cf.rain ? 'warn' : '');
+  if (!$('man-clim-btns').children.length) manBtns($('man-clim-btns'), META.man_clim, MAN_CLIM_LABEL, 'clim');
+  $('man-clim-btns').querySelectorAll('button').forEach(b => {
+    const on = (s.manual.clim || []).includes(b.dataset.clim); setClass(b, 'on', on); b.setAttribute('aria-pressed', on); b.disabled = !cf.manual; });
+  $('mc-vent').disabled = $('mc-vent-apply').disabled = !cf.manual;
+  if (!$('mc-vent').classList.contains('dirty') && document.activeElement !== $('mc-vent')) $('mc-vent').value = s.manual.vent;
+  if (document.activeElement === $('mc-vent-apply')) $('mc-vent').classList.remove('dirty');
+}
+
+function renderTrends(s) {
+  const sl = s.trends.slow, have = sl.t.length ? sl.t[sl.t.length - 1] - sl.t[0] : 0;
+  const span = RANGE || [7200, 28800, 86400].find(r => r >= have) || 86400;
+  drawChart($('ch-temp'), sl, [{k: 'rh_in', c: '#6f9cc6', ax: 1}, {k: 't_out', c: '#8a5a2b'}, {k: 't_in', c: '#1d252c'}],
+    {span, l: [15, 45, '°C'], r: [0, 100, '%'], clockAxis: true});
+  drawChart($('ch-vent'), sl, [{k: 'rad', c: '#8a5a2b', ax: 1}, {k: 'vent_pos', c: '#1d252c'}],
+    {span, l: [0, 100, '%'], r: [0, 1200, 'W/m²'], clockAxis: true});
+  drawEcPh($('ch-ecph2'), s.trends.fast);
+  document.querySelectorAll('[data-range]').forEach(b => setClass(b, 'on', +b.dataset.range === span));
+}
+
+function renderAlarms(s, p) {
+  const al = p.alarm_list;
+  $('alarm-summary').textContent = `${al.filter(a => a.active).length} active · ${al.filter(a => !a.active).length} cleared, not reset`;
+  const cls = {trip: 'trip', lockout: 'lock-out', alarm: 'alarm', warning: 'warning'};
+  $('alarms').innerHTML = al.length ? `<table><tr><th>Tag</th><th>Alarm</th><th>Class</th><th>State</th></tr>${
+    al.map(a => `<tr class="${rowCls(a)}"><td>${a.tag}</td><td>${esc(a.text)}</td><td>${cls[a.class]}</td>
+      <td>${a.active ? 'ACTIVE' : 'cleared — press RESET'}</td></tr>`).join('')}</table>` : '<div class="empty">No alarms.</div>';
+}
+
+function renderDevices(s, p) {
+  const state = d => d.kind === 'actuator'
+    ? (d.travel_fault ? 'TRAVEL FAULT' : d.motor_trip ? 'MOTOR TRIP' : d.opening ? 'OPENING' : d.closing ? 'CLOSING' : d.at_open ? 'OPEN' : d.at_closed ? 'CLOSED' : 'MID')
+    : d.discrepancy ? 'DISCREPANCY' : d.kind === 'valve' ? (d.cmd ? 'OPEN' : 'CLOSED') : d.running ? 'RUNNING' : d.cmd ? 'STARTING' : 'STOPPED';
+  const why = d => {
+    if (!d.interlocks.length) return '';
+    const cls = d.blocked ? 'why bad' : 'why';
+    return `<span class="${cls}">${d.blocked ? 'Blocked' : 'Not permitted'}: ${d.interlocks.map(esc).join('; ')}</span>`;
+  };
+  const maint = d => d.starts != null ? `${d.starts} starts · ${d.run_min} min` : d.cycles != null ? `${d.cycles} cycles`
+    : d.key === 'm511' ? `${p.m511_rev} reversals` : d.key === 'm521' ? `${p.m521_cyc} strokes` : '';
+  $('devices').innerHTML = `<table class="dev"><tr><th>Device</th><th>State</th><th>Interlocks</th><th>Maintenance</th></tr>${
+    p.devices.map(d => `<tr><td>${d.tag}<div class="maint">${esc(d.desc)}${d.manual ? ' · MAN' : ''}</div></td><td>${state(d)}</td>
+      <td>${why(d)}</td><td class="maint">${maint(d)}</td></tr>`).join('')}</table>`;
+  const leds = (rows, img) => rows.map(r => `<li><span class="led ${img[r.tag] ? 'on' : ''}"></span><code>${r.addr}</code>${r.tag}</li>`).join('');
+  const AI = [['%IW100', 'LT-201', fx(p.level, 1) + ' %'], ['%IW101', 'FT-201', fx(p.flow, 0) + ' L/h'], ['%IW102', 'PT-201', fx(p.press, 2) + ' bar'],
+    ['%IW103', 'AIT-301', fx(p.ec, 2) + ' mS/cm'], ['%IW104', 'AIT-302', 'pH ' + fx(p.ph_a, 2)], ['%IW105', 'AIT-303', 'pH ' + fx(p.ph_b, 2)],
+    ['%IW106', 'FT-402', fx(p.drain_flow, 1) + ' L/h'], ['%IW107', 'RT-101', fx(p.rad, 0) + ' W/m²'], ['%IW108', 'TT-101', fx(p.t_out, 1) + ' °C'],
+    ['%IW109', 'MT-101', fx(p.rh_out, 0) + ' %'], ['%IW110', 'ST-101', fx(p.wind, 1) + ' m/s'], ['%IW111', 'TT-501', fx(p.t_in, 1) + ' °C'],
+    ['%IW112', 'MT-501', fx(p.rh_in, 0) + ' %'], ['%IW113', 'AT-502', fx(p.co2, 0) + ' ppm'], ['%IW114', 'ZT-511', fx(p.vent_pos, 1) + ' %'],
+    ['%IW115', 'CLOCK_MIN', p.clock_text]];
+  const AO = [['%QW100', 'P-311 ref', fx(p.dose_a, 1) + ' %'], ['%QW101', 'P-312 ref', fx(p.dose_b, 1) + ' %'], ['%QW102', 'P-313 ref', fx(p.dose_acid, 1) + ' %']];
+  const ai = rows => rows.map(([a, t, v]) => `<li class="ai"><span><code>${a}</code>${t}</span><b>${v}</b></li>`).join('');
+  $('io').innerHTML = `<div><h3>Digital inputs</h3><ul>${leds(META.di, p.inputs)}</ul></div>
+    <div><h3>Digital outputs</h3><ul>${leds(META.do, p.outputs)}</ul></div>
+    <div><h3>Analog inputs (scaled)</h3><ul>${ai(AI)}</ul><h3 style="margin-top:8px">Analog outputs</h3><ul>${ai(AO)}</ul></div>`;
+}
+
+function renderSettings(s) {
+  const sp = s.setpoints, meta = Object.fromEntries(META.setpoints.map(x => [x.name, x]));
+  for (const [n, v] of Object.entries(sp)) {
+    const m = meta[n], el = $('force-' + n); if (!el) continue;
+    const isDay = n.startsWith('SP_DAY');
+    el.textContent = n === 'SP_ZONE_EN' ? [1, 2, 3, 4].filter(z => v >> (z - 1) & 1).map(z => 'Z' + z).join(' ') || 'none'
+      : isDay ? hhmm(v) : `${+v.toFixed(2)}`;
+    setClass(el, 'diff', Math.abs(v - m.default) > 1e-9);
+    el.title = `default ${isDay ? hhmm(m.default) : m.default}`;
+    if (dirty[n]) continue;
+    if (n === 'SP_ZONE_EN') document.querySelectorAll('[data-zen]').forEach((c, i) => c.checked = !!(v >> i & 1));
+    else { const inp = document.querySelector(`[data-sp="${n}"]`);
+      if (inp && document.activeElement !== inp) inp.value = isDay ? hhmm(v) : +v.toFixed(2); }
+  }
+}
+
+function renderSim(s) {
+  const sim = s.sim || {};
+  $('sim').hidden = !sim.available;
+  if (!sim.available || !META) return;
+  const f = new Set(sim.faults), t = sim.truth;
+  document.querySelectorAll('[data-fault]').forEach(b => { setClass(b, 'on', f.has(b.dataset.fault)); b.setAttribute('aria-pressed', f.has(b.dataset.fault)); });
+  setClass($('sim-estop'), 'on', f.has('estop')); $('sim-estop').setAttribute('aria-pressed', f.has('estop'));
+  $('sim-estop').innerHTML = f.has('estop') ? 'PULL TO<br>RELEASE' : 'E-STOP';
+  if (document.activeElement !== $('sim-scen')) $('sim-scen').value = sim.scenario;
+  $('sim-speed-l').hidden = $('sim-speed').hidden = !t.fast;
+  document.querySelectorAll('[data-speed]').forEach(b => setClass(b, 'on', +b.dataset.speed === t.speed));
+  $('sim-state').textContent = `day ${t.day} · ${t.fast ? `fast-forward ${t.speed}×` : 'live 1×'}${f.size ? ` · ${f.size} fault(s) injected` : ''}`;
+  $('truth').innerHTML = `Plant truth: ${fx(t.t_in, 1)} °C · ${fx(t.rh_in, 0)} %RH · ${fx(t.co2, 0)} ppm · vent ${fx(t.vent, 0)} % · net ${fx(t.net, 0)} %<br>`
+    + `EC ${fx(t.ec, 2)} · pH ${fx(t.ph, 2)} · ${fx(t.flow, 0)} L/h · ${fx(t.press, 2)} bar · T-201 ${fx(t.level, 1)} %`
+    + (t.watchdog ? '<br><b style="color:#7f1414">I/O watchdog tripped: outputs dropped</b>' : '');
+}
+
+// ---------------------------------------------------------------- charts
+function drawEcPh(c, tr) {
+  drawChart(c, tr, [{k: 'sp_ph', c: '#9c8fd0', dash: [6, 4], ax: 1}, {k: 'ph', c: '#2f7d7a', ax: 1},
+                    {k: 'sp_ec', c: '#6b55b0', dash: [6, 4]}, {k: 'ec', c: '#1d252c'}],
+    {span: 600, l: [0, 4, 'mS/cm'], r: [4, 8, 'pH']});
+}
+function drawFlow(c, tr) { drawChart(c, tr, [{k: 'flow', c: '#6f9cc6'}], {span: 600, l: [0, 2000, 'L/h']}); }
+
+function drawChart(c, tr, series, o) {
+  if (!c.offsetParent) return;
+  const dpr = window.devicePixelRatio || 1, W = c.clientWidth, H = c.clientHeight;
+  const bw = Math.round(W * dpr), bh = Math.round(H * dpr);
+  if (c.width !== bw || c.height !== bh) { c.width = bw; c.height = bh; }
+  const g = c.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+  const L = 44, R = o.r ? 44 : 10, T = 8, B = 20, pw = W - L - R, ph = H - T - B;
+  const ts = tr.t || [], now = ts.length ? ts[ts.length - 1] : 0, span = o.span;
+  const X = t => L + pw * (1 - (now - t) / span);
+  const Y = (v, ax) => { const [lo, hi] = ax ? o.r : o.l; return T + ph * (1 - (v - lo) / (hi - lo)); };
+  g.font = '11px system-ui'; g.fillStyle = '#5d6871'; g.strokeStyle = '#c3c9ce'; g.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = T + ph * i / 4; g.beginPath(); g.moveTo(L, y); g.lineTo(L + pw, y); g.stroke();
+    const lv = o.l[1] - (o.l[1] - o.l[0]) * i / 4; g.textAlign = 'right'; g.fillText(+lv.toFixed(1), L - 6, y + 4);
+    if (o.r) { const rv = o.r[1] - (o.r[1] - o.r[0]) * i / 4; g.textAlign = 'left'; g.fillText(+rv.toFixed(1), L + pw + 6, y + 4); }
+  }
+  g.textAlign = 'center';
+  if (o.clockAxis) {
+    const ck = tr.clock || [], step = span > 30000 ? 180 : span > 10000 ? 60 : 30; let last = null;
+    ts.forEach((t, i) => { if (now - t > span) return; const b = Math.floor(ck[i] / step); if (last !== null && b !== last) {
+      const x = X(t); g.strokeStyle = '#d5d9dd'; g.beginPath(); g.moveTo(x, T); g.lineTo(x, T + ph); g.stroke();
+      g.fillText(hhmm(b * step), x, H - 5); } last = b; });
+    if (!ts.length) g.fillText('collecting — one sample per process minute', L + pw / 2, T + ph / 2);
+  } else {
+    for (let m = 0; m <= 10; m += 2) g.fillText(m ? `-${m} min` : 'now', L + pw * (1 - m / 10), H - 5);
+  }
+  for (const s of series) {
+    const vs = tr[s.k] || []; g.strokeStyle = s.c; g.lineWidth = 2; g.setLineDash(s.dash || []); g.beginPath(); let pen = false;
+    ts.forEach((t, i) => { const v = vs[i]; if (v == null || now - t > span) { pen = false; return; }
+      const x = X(t), y = Math.max(T, Math.min(T + ph, Y(v, s.ax))); pen ? g.lineTo(x, y) : g.moveTo(x, y); pen = true; });
+    g.stroke(); g.setLineDash([]);
+  }
+}
+
+// ---------------------------------------------------------------- loop
+// ?capture: stop polling after a few updates, so a headless browser can take a screenshot
+const CAPTURE = new URLSearchParams(location.search).has('capture');
+let renders = 0;
+async function tick() {
+  try {
+    if (!META) { META = await (await fetch('/api/meta')).json(); buildSettings(); buildSim(); }
+    render(await (await fetch('/api/state', {cache: 'no-store'})).json());
+    renders++;
+  } catch (e) { $('comms').textContent = 'HMI server unreachable'; setClass($('comms-dot'), 'bad', true); setClass(document.body, 'stale', true); console.error(e); }
+  if (!(CAPTURE && renders >= 3)) setTimeout(tick, 500);
+}
+window.addEventListener('resize', () => S && render(S));
+tick();
+</script>
+</body>
+</html>

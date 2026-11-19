@@ -23,7 +23,7 @@ from collections import deque
 from dataclasses import dataclass
 from pathlib import Path
 
-from .bench import ST_FILE, Bench
+from .bench import ST_FILE, STRICT, Bench
 from .modbus import ModbusClient, ModbusImage, ModbusServer
 from .plant_server import N_COILS, N_DI, N_HR, N_IR
 from .stvm import STMachine
@@ -60,7 +60,8 @@ class SlaveDevice:
 
 class SoftPLC:
     def __init__(self, st_file: Path | str = ST_FILE, listen=("0.0.0.0", 5502),
-                 device: SlaveDevice | None = None, strict: bool = False):
+                 device: SlaveDevice | None = None, strict: bool | None = None):
+        strict = STRICT if strict is None else strict          # FARMSIM_STRICT=1
         self.vm = STMachine(Path(st_file).read_text(encoding="utf-8"), strict=strict)
         self.image = ModbusImage()
         self.server = ModbusServer(self.image, *listen)
@@ -175,7 +176,7 @@ class FastPLC(SoftPLC):
         super().__init__(st_file, listen, SlaveDevice(port=0))
         self.plant_server = plant_server
         self.bench = Bench(vm=self.vm, plant=plant_server.plant)
-        self.speed = speed
+        self.speed = plant_server.speed = speed
         self.io_ok = True
 
     def stop(self):
@@ -185,12 +186,23 @@ class FastPLC(SoftPLC):
         self.server.stop()
 
     def cycle(self):
+        """The image lock is held only to copy words in and out, not during the scans, so
+        HMI requests are never queued behind a whole fast-forward cycle."""
         with self.image.lock:
             self._from_image()                      # HMI writes (commands, setpoints)
-            for _ in range(max(1, int(self.speed))):
-                self.bench.tick()                   # inputs -> scan -> outputs -> plant step
-            self._to_image()
-        self.plant_server.sync()
+            taken = {idx: self.image.hr[idx] for _n, _t, idx, area in self._map if area == "M"}
+        for _ in range(max(1, int(self.speed))):
+            self.bench.tick()                       # inputs -> scan -> outputs -> plant step
+        with self.image.lock:
+            for name, table, idx, area in self._map:
+                if area == "M" and self.image.hr[idx] != taken[idx]:
+                    continue                        # the HMI wrote it meanwhile: the PLC reads it next cycle
+                getattr(self.image, table)[idx] = self.vm[name]
+        ps = self.plant_server
+        ps.sync()
+        if ps.speed_request:                        # HMI field-simulation panel
+            self.speed = ps.speed = max(1, min(200, ps.speed_request))
+            ps.speed_request = 0
 
     def _from_image(self):
         """Only %MW (HMI) words: the I/O comes from the in-process plant."""
@@ -209,7 +221,7 @@ def main(argv=None):
     args = ap.parse_args(argv)
     lh, lp = args.listen.rsplit(":", 1)
     ih, ip = args.io.rsplit(":", 1)
-    plc = SoftPLC(args.st, (lh, int(lp)), SlaveDevice(ih, int(ip)), strict=args.strict).start()
+    plc = SoftPLC(args.st, (lh, int(lp)), SlaveDevice(ih, int(ip)), strict=args.strict or None).start()
     print(f"softplc: {Path(args.st).name}, cycle {plc.vm.cycle_ms} ms, "
           f"Modbus server :{plc.port}, remote I/O {args.io}  (Ctrl+C to stop)")
     try:
