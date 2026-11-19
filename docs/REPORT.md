@@ -218,7 +218,7 @@ The first scope draft accelerated only the plant. That idea was rejected: PLC ti
 | Full day | 1 | NFR-09 climate performance, all cycles in band (slow test) |
 | Interpreter | 19 | Language runtime, strictness, lean parity |
 
-On 19 Nov 2026 the lean interpreter passed 112 with 2 skipped by design: the full day, which needs `--runslow`, and the pymodbus interoperability test, because pymodbus is not installed locally. The strict interpreter with `--runslow` passed 113, including the full day, in 33 minutes; only the pymodbus test was skipped. The CI workflow runs everything on both interpreters. It has not run yet, because the repository is not published [4].
+On 19 Nov 2026 the lean interpreter passed 112 with 2 skipped by design: the full day, which needs `--runslow`, and the pymodbus interoperability test, because pymodbus is not installed locally. The strict interpreter with `--runslow` passed 113, including the full day, in 33 minutes; only the pymodbus test was skipped. In GitHub Actions the first run on 19 Nov 2026 passed all five jobs: the FAT on Ubuntu and Windows with Python 3.10 and 3.12, and the strict interpreter with the full day [4].
 
 ### 7.2 A simulated day
 
