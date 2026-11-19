@@ -1,0 +1,38 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  fat:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -e ".[dev]"
+      - run: pytest -v
+      # FAT OPL-01: compile with STruC++, the OpenPLC v4 compiler
+      - uses: Autonomy-Logic/setup-strucpp@v1
+        with:
+          version: "0.8.0"
+      - run: python tools/check_openplc_compile.py
+
+  strict-and-day:
+    # the whole FAT again on the strict VM (run-time IEC type checks), plus the full-day run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: pytest -v --runslow
+        env:
+          FARMSIM_STRICT: "1"
