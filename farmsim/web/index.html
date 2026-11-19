@@ -152,6 +152,17 @@
   .estop.on { background: #7f1414; box-shadow: inset 0 3px 8px rgba(0,0,0,.5); }
   .estop:hover:not(:disabled) { background: #b71c1c; }
   .truth { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+  .trainer { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--line);
+             display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+  .trainer select { width: auto; max-width: 100%; }
+  .result { flex-basis: 100%; background: var(--panel-2); border: 1px solid var(--line); border-radius: 4px;
+            padding: 8px 10px; font-size: 13px; }
+  .result.ok { border-color: var(--ok); } .result.bad { border-color: var(--alarm); }
+  .result b { display: block; margin-bottom: 4px; }
+  .result dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; margin: 6px 0 0; }
+  .result dt { color: var(--muted); } .result dd { margin: 0; }
+  .fieldwalk { font-size: 12.5px; margin: 6px 0 0; padding-left: 18px; }
+  .fieldwalk .bad { color: #7f1414; font-weight: 650; }
   .simctl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 10px; align-items: center; font-size: 12.5px; }
   .simctl select, .simctl input { width: auto; }
   .simctl > * { justify-self: start; } .simctl select { min-width: 140px; }
@@ -569,6 +580,16 @@
       <button class="chip" id="sim-clear">Clear all faults</button>
     </div>
   </div>
+  <div class="trainer" id="trainer">
+    <b>Troubleshooting challenge</b>
+    <span class="hint" id="tr-info" style="margin:0">A hidden field fault is injected. Run the plant, read the HMI, and diagnose it.</span>
+    <button id="tr-start">Start challenge</button>
+    <button id="tr-hint" hidden>Field check (walk the site)</button>
+    <select id="tr-pick" hidden aria-label="Diagnosis"></select>
+    <button id="tr-answer" class="primary" hidden>Submit diagnosis</button>
+    <button id="tr-quit" hidden>Give up</button>
+    <div id="tr-result" class="result" hidden></div>
+  </div>
 </section>
 
 <script>
@@ -708,6 +729,12 @@ function buildSim() {
     post('/api/sim', {fault: b.dataset.fault, active: b.getAttribute('aria-pressed') !== 'true'}));
   $('sim-estop').onclick = () => post('/api/sim', {fault: 'estop', active: $('sim-estop').getAttribute('aria-pressed') !== 'true'});
   $('sim-clear').onclick = () => post('/api/sim', {clear_faults: true});
+  $('tr-pick').innerHTML = '<option value="">Your diagnosis…</option>' +
+    META.catalog.map(f => `<option value="${f.id}">${esc(f.title)}</option>`).join('');
+  $('tr-start').onclick = () => post('/api/trainer', {action: 'start'});
+  $('tr-hint').onclick = () => post('/api/trainer', {action: 'hint'});
+  $('tr-quit').onclick = () => post('/api/trainer', {action: 'quit'});
+  $('tr-answer').onclick = () => { if ($('tr-pick').value) post('/api/trainer', {action: 'answer', fault: $('tr-pick').value}); };
 }
 
 // ---------------------------------------------------------------- live render
@@ -1018,9 +1045,29 @@ function renderSim(s) {
   $('sim-speed-l').hidden = $('sim-speed').hidden = !t.fast;
   document.querySelectorAll('[data-speed]').forEach(b => setClass(b, 'on', +b.dataset.speed === t.speed));
   $('sim-state').textContent = `day ${t.day} · ${t.fast ? `fast-forward ${t.speed}×` : 'live 1×'}${f.size ? ` · ${f.size} fault(s) injected` : ''}`;
-  $('truth').innerHTML = `Plant truth: ${fx(t.t_in, 1)} °C · ${fx(t.rh_in, 0)} %RH · ${fx(t.co2, 0)} ppm · vent ${fx(t.vent, 0)} % · net ${fx(t.net, 0)} %<br>`
+  const ch = sim.challenge;
+  document.querySelectorAll('[data-fault], #sim-clear').forEach(b => b.disabled = !!ch);
+  if (ch && !sim.field) $('truth').innerHTML = 'Plant truth hidden during the challenge.<br>Use the field check to walk the site.';
+  else if (ch) $('truth').innerHTML = `Reference instruments: thermometer ${fx(t.t_in, 1)} °C · hand-held EC ${fx(t.ec, 2)} · pH ${fx(t.ph, 2)}<br>`
+    + `clamp-on flowmeter ${fx(t.flow, 0)} L/h · gauge ${fx(t.press, 2)} bar · vent by eye ${fx(t.vent, 0)} % · net ${fx(t.net, 0)} %`
+    + '<ul class="fieldwalk">' + Object.entries(sim.field).map(([k, ok]) => `<li class="${ok ? '' : 'bad'}">${esc(k)}: ${ok ? 'yes' : 'NO'}</li>`).join('') + '</ul>';
+  else $('truth').innerHTML = `Plant truth: ${fx(t.t_in, 1)} °C · ${fx(t.rh_in, 0)} %RH · ${fx(t.co2, 0)} ppm · vent ${fx(t.vent, 0)} % · net ${fx(t.net, 0)} %<br>`
     + `EC ${fx(t.ec, 2)} · pH ${fx(t.ph, 2)} · ${fx(t.flow, 0)} L/h · ${fx(t.press, 2)} bar · T-201 ${fx(t.level, 1)} %`
     + (t.watchdog ? '<br><b style="color:#7f1414">I/O watchdog tripped: outputs dropped</b>' : '');
+  $('tr-start').hidden = !!ch;
+  ['tr-hint', 'tr-pick', 'tr-answer', 'tr-quit'].forEach(id => $(id).hidden = !ch);
+  $('tr-hint').disabled = !!(ch && ch.hints);
+  $('tr-info').textContent = ch ? `Challenge running · ${Math.floor(ch.elapsed / 60)}:${String(ch.elapsed % 60).padStart(2, '0')}`
+    + (ch.hints ? ' · field check used' : '') : 'A hidden field fault is injected. Run the plant, read the HMI, and diagnose it.';
+  const r = s.trainer && s.trainer.result;
+  $('tr-result').hidden = !r || !!ch;
+  if (r && !ch) {
+    $('tr-result').className = 'result ' + (r.correct ? 'ok' : 'bad');
+    $('tr-result').innerHTML = `<b>${r.correct ? '✔ Correct' : '✘ Not quite'}: the fault was ${esc(r.title)}</b>
+      ${r.correct ? '' : `You answered: ${esc(r.answered)}. `}Time ${Math.floor(r.seconds / 60)} min ${r.seconds % 60} s${r.hints ? ', field check used' : ''}.
+      <dl><dt>Symptoms</dt><dd>${esc(r.symptoms)}</dd><dt>How to confirm</dt><dd>${esc(r.checks)}</dd>
+      <dt>Root cause</dt><dd>${esc(r.cause)}</dd><dt>Fix</dt><dd>${esc(r.fix)}</dd></dl>`;
+  }
 }
 
 // ---------------------------------------------------------------- charts

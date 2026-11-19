@@ -1,0 +1,258 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 420 297">
+<title>GH1-E-12 Panel layout</title>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#000}</style>
+<rect x="0" y="0" width="420" height="297" fill="#fff"/>
+<g stroke-linecap="round" stroke-linejoin="round">
+<text x="24" y="21" font-size="2.81" font-weight="bold">MOUNTING PLATE (front view, door removed)</text>
+<text x="24" y="24.8" font-size="2.05">enclosure 1000 W x 1200 H x 300 D mm, IP55, steel, wall-mounted in the pump room</text>
+<rect x="24" y="30" width="166.67" height="200" rx="1.2" fill="none" stroke="#000" stroke-width="0.5"/>
+<rect x="29" y="40.33" width="156.67" height="2.67" fill="#ddd" stroke="#000" stroke-width="0.2"/>
+<text x="185" y="38.67" font-size="1.73" text-anchor="end" fill="#555">rail 1 - main and power</text>
+<rect x="30.67" y="34.17" width="12" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="36.67" y="42.27" font-size="1.46" text-anchor="middle">-Q0</text>
+<rect x="43" y="34.17" width="6" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="46" y="42.27" font-size="1.46" text-anchor="middle">-F1</text>
+<rect x="49.33" y="34.17" width="6" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="52.33" y="42.27" font-size="1.46" text-anchor="middle">-F2</text>
+<rect x="55.67" y="34.17" width="12" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="61.67" y="42.27" font-size="1.46" text-anchor="middle">-F3</text>
+<rect x="68" y="34.17" width="6" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="71" y="42.27" font-size="1.46" text-anchor="middle">-F4</text>
+<rect x="74.33" y="31.67" width="10.83" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="79.75" y="42.27" font-size="1.46" text-anchor="middle">-G1</text>
+<rect x="85.5" y="34.17" width="3" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="87" y="42.27" font-size="1.24" text-anchor="middle" transform="rotate(-90 87 42.27)">-F21</text>
+<rect x="88.83" y="34.17" width="3" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="90.33" y="42.27" font-size="1.24" text-anchor="middle" transform="rotate(-90 90.33 42.27)">-F22</text>
+<rect x="92.17" y="34.17" width="3" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="93.67" y="42.27" font-size="1.24" text-anchor="middle" transform="rotate(-90 93.67 42.27)">-F23</text>
+<rect x="95.5" y="34.17" width="3" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="97" y="42.27" font-size="1.24" text-anchor="middle" transform="rotate(-90 97 42.27)">-F24</text>
+<rect x="98.83" y="34.17" width="3" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="100.33" y="42.27" font-size="1.24" text-anchor="middle" transform="rotate(-90 100.33 42.27)">-F25</text>
+<rect x="102.17" y="34.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="105.92" y="42.27" font-size="1.46" text-anchor="middle">-K0</text>
+<rect x="29" y="53.33" width="156.67" height="10" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="1 0.8"/>
+<text x="107.33" y="58.67" font-size="1.4" text-anchor="middle" fill="#555">cable duct 60 x 60</text>
+<rect x="29" y="75.33" width="156.67" height="2.67" fill="#ddd" stroke="#000" stroke-width="0.2"/>
+<text x="185" y="73.67" font-size="1.73" text-anchor="end" fill="#555">rail 2 - pump feeders</text>
+<rect x="30.67" y="69.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="34.42" y="77.27" font-size="1.46" text-anchor="middle">-Q201</text>
+<rect x="38.5" y="69.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="42.25" y="77.27" font-size="1.46" text-anchor="middle">-K201</text>
+<rect x="46.33" y="69.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="50.08" y="77.27" font-size="1.46" text-anchor="middle">-Q531</text>
+<rect x="54.17" y="69.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="57.92" y="77.27" font-size="1.46" text-anchor="middle">-K531</text>
+<rect x="62" y="69.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="65.75" y="77.27" font-size="1.46" text-anchor="middle">-Q541</text>
+<rect x="69.83" y="69.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="73.58" y="77.27" font-size="1.46" text-anchor="middle">-K541</text>
+<rect x="77.67" y="69.17" width="6" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="80.67" y="77.27" font-size="1.46" text-anchor="middle">-F311</text>
+<rect x="84" y="69.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="87.75" y="77.27" font-size="1.46" text-anchor="middle">-K311</text>
+<rect x="91.83" y="69.17" width="6" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="94.83" y="77.27" font-size="1.46" text-anchor="middle">-F312</text>
+<rect x="98.17" y="69.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="101.92" y="77.27" font-size="1.46" text-anchor="middle">-K312</text>
+<rect x="106" y="69.17" width="6" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="109" y="77.27" font-size="1.46" text-anchor="middle">-F313</text>
+<rect x="112.33" y="69.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="116.08" y="77.27" font-size="1.46" text-anchor="middle">-K313</text>
+<rect x="29" y="88.33" width="156.67" height="10" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="1 0.8"/>
+<text x="107.33" y="93.67" font-size="1.4" text-anchor="middle" fill="#555">cable duct 60 x 60</text>
+<rect x="29" y="110.33" width="156.67" height="2.67" fill="#ddd" stroke="#000" stroke-width="0.2"/>
+<text x="185" y="108.67" font-size="1.73" text-anchor="end" fill="#555">rail 3 - climate feeders</text>
+<rect x="30.67" y="104.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="34.42" y="112.27" font-size="1.46" text-anchor="middle">-Q601</text>
+<rect x="38.5" y="104.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="42.25" y="112.27" font-size="1.46" text-anchor="middle">-K601</text>
+<rect x="46.33" y="104.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="50.08" y="112.27" font-size="1.46" text-anchor="middle">-Q602</text>
+<rect x="54.17" y="104.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="57.92" y="112.27" font-size="1.46" text-anchor="middle">-K602</text>
+<rect x="62" y="104.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="65.75" y="112.27" font-size="1.46" text-anchor="middle">-Q603</text>
+<rect x="69.83" y="104.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="73.58" y="112.27" font-size="1.46" text-anchor="middle">-K603</text>
+<rect x="77.67" y="104.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="81.42" y="112.27" font-size="1.46" text-anchor="middle">-Q511</text>
+<rect x="85.5" y="104.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="89.25" y="112.27" font-size="1.46" text-anchor="middle">-K511.1</text>
+<rect x="93.33" y="104.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="97.08" y="112.27" font-size="1.46" text-anchor="middle">-K511.2</text>
+<rect x="101.17" y="104.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="104.92" y="112.27" font-size="1.46" text-anchor="middle">-Q521</text>
+<rect x="109" y="104.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="112.75" y="112.27" font-size="1.46" text-anchor="middle">-K521.1</text>
+<rect x="116.83" y="104.17" width="7.5" height="15" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="120.58" y="112.27" font-size="1.46" text-anchor="middle">-K521.2</text>
+<rect x="29" y="123.33" width="156.67" height="10" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="1 0.8"/>
+<text x="107.33" y="128.67" font-size="1.4" text-anchor="middle" fill="#555">cable duct 60 x 60</text>
+<rect x="29" y="145.33" width="156.67" height="2.67" fill="#ddd" stroke="#000" stroke-width="0.2"/>
+<text x="185" y="143.67" font-size="1.73" text-anchor="end" fill="#555">rail 4 - control</text>
+<rect x="30.67" y="136.67" width="18.33" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="39.83" y="147.27" font-size="1.46" text-anchor="middle">-A10</text>
+<rect x="49.33" y="136.67" width="10" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="54.33" y="147.27" font-size="1.46" text-anchor="middle">-A11</text>
+<rect x="59.67" y="136.67" width="8.33" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="63.83" y="147.27" font-size="1.46" text-anchor="middle">-A1</text>
+<rect x="68.33" y="136.67" width="6" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="71.33" y="147.27" font-size="1.46" text-anchor="middle">-A1.1</text>
+<rect x="74.67" y="136.67" width="6" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="77.67" y="147.27" font-size="1.46" text-anchor="middle">-A1.2</text>
+<rect x="81" y="136.67" width="6" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="84" y="147.27" font-size="1.46" text-anchor="middle">-A1.3</text>
+<rect x="87.33" y="136.67" width="6" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="90.33" y="147.27" font-size="1.46" text-anchor="middle">-A1.4</text>
+<rect x="93.67" y="136.67" width="6" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="96.67" y="147.27" font-size="1.46" text-anchor="middle">-A1.5</text>
+<rect x="100" y="136.67" width="6" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="103" y="147.27" font-size="1.46" text-anchor="middle">-A1.6</text>
+<rect x="106.33" y="136.67" width="6" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="109.33" y="147.27" font-size="1.46" text-anchor="middle">-A1.7</text>
+<rect x="29" y="158.33" width="156.67" height="10" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="1 0.8"/>
+<text x="107.33" y="163.67" font-size="1.4" text-anchor="middle" fill="#555">cable duct 60 x 60</text>
+<rect x="29" y="188.67" width="156.67" height="2.67" fill="#ddd" stroke="#000" stroke-width="0.2"/>
+<text x="185" y="187" font-size="1.73" text-anchor="end" fill="#555">rail 5 - terminals</text>
+<rect x="30.67" y="185" width="11.67" height="10" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="36.5" y="190.6" font-size="1.46" text-anchor="middle">-X1</text>
+<rect x="42.67" y="185" width="33.33" height="10" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="59.33" y="190.6" font-size="1.46" text-anchor="middle">-X4</text>
+<rect x="76.33" y="185" width="55" height="10" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="103.83" y="190.6" font-size="1.46" text-anchor="middle">-X2</text>
+<rect x="131.67" y="185" width="26.67" height="10" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="145" y="190.6" font-size="1.46" text-anchor="middle">-X3</text>
+<rect x="158.67" y="185" width="10" height="10" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="163.67" y="190.6" font-size="1.46" text-anchor="middle">-X0</text>
+<rect x="29" y="213.33" width="156.67" height="10" fill="#eee" stroke="#000" stroke-width="0.2"/>
+<text x="107.33" y="219.17" font-size="1.62" text-anchor="middle">gland plate: cables enter from below (EMC glands for shielded cables)</text>
+<text x="220" y="21" font-size="2.81" font-weight="bold">DOOR (front view)</text>
+<rect x="220" y="30" width="166.67" height="200" rx="1.2" fill="none" stroke="#000" stroke-width="0.5"/>
+<rect x="297.5" y="49.17" width="11.67" height="11.67" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="303.33" y="64.43" font-size="1.62" text-anchor="middle">-Q0 main switch</text>
+<circle cx="303.33" cy="93.33" r="4.53" fill="#ffd400" stroke="#000" stroke-width="0.3"/>
+<circle cx="303.33" cy="93.33" r="3.33" fill="#d22" stroke="#000" stroke-width="0.3"/>
+<text x="303.33" y="100.27" font-size="1.62" text-anchor="middle">-S0.1 E-STOP</text>
+<circle cx="283.33" cy="93.33" r="3.03" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="283.33" y="98.77" font-size="1.62" text-anchor="middle">-S0R reset</text>
+<circle cx="270" cy="123.33" r="3.03" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="270" y="128.77" font-size="1.62" text-anchor="middle">-S1 START</text>
+<circle cx="303.33" cy="123.33" r="3.03" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="303.33" y="128.77" font-size="1.62" text-anchor="middle">-S2 STOP</text>
+<circle cx="336.67" cy="123.33" r="3.03" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="336.67" y="128.77" font-size="1.62" text-anchor="middle">-S3 RESET</text>
+<rect x="243.33" y="186.67" width="20" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="253.33" y="210.27" font-size="1.62" text-anchor="middle">-E1 filter fan</text>
+<rect x="343.33" y="186.67" width="20" height="20" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="353.33" y="210.27" font-size="1.62" text-anchor="middle">-E1 outlet filter</text>
+<text x="303.33" y="28.5" font-size="1.73" text-anchor="middle">-P1 stack light on the roof</text>
+<text x="220" y="235" font-size="1.94">Heat load ≈ 120 W (power supply, coupler, PLC, contactors). Filter fan -E1 switched by -B1 at 35 °C keeps the panel below 45 °C at 38 °C ambient. Spare space ≥ 20 % on every rail.</text>
+<rect x="10" y="10" width="400" height="277" fill="none" stroke="#000" stroke-width="0.5"/>
+<rect x="15" y="15" width="390" height="267" fill="none" stroke="#000" stroke-width="0.35"/>
+<line x1="15" y1="10" x2="15" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="15" y1="282" x2="15" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="63.75" y1="10" x2="63.75" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="63.75" y1="282" x2="63.75" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="112.5" y1="10" x2="112.5" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="112.5" y1="282" x2="112.5" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="161.25" y1="10" x2="161.25" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="161.25" y1="282" x2="161.25" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="210" y1="10" x2="210" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="210" y1="282" x2="210" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="258.75" y1="10" x2="258.75" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="258.75" y1="282" x2="258.75" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="307.5" y1="10" x2="307.5" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="307.5" y1="282" x2="307.5" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="356.25" y1="10" x2="356.25" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="356.25" y1="282" x2="356.25" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="10" x2="405" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="282" x2="405" y2="287" stroke="#000" stroke-width="0.25"/>
+<text x="39.38" y="13.6" font-size="2.59" text-anchor="middle">1</text>
+<text x="39.38" y="285.9" font-size="2.59" text-anchor="middle">1</text>
+<text x="88.12" y="13.6" font-size="2.59" text-anchor="middle">2</text>
+<text x="88.12" y="285.9" font-size="2.59" text-anchor="middle">2</text>
+<text x="136.88" y="13.6" font-size="2.59" text-anchor="middle">3</text>
+<text x="136.88" y="285.9" font-size="2.59" text-anchor="middle">3</text>
+<text x="185.62" y="13.6" font-size="2.59" text-anchor="middle">4</text>
+<text x="185.62" y="285.9" font-size="2.59" text-anchor="middle">4</text>
+<text x="234.38" y="13.6" font-size="2.59" text-anchor="middle">5</text>
+<text x="234.38" y="285.9" font-size="2.59" text-anchor="middle">5</text>
+<text x="283.12" y="13.6" font-size="2.59" text-anchor="middle">6</text>
+<text x="283.12" y="285.9" font-size="2.59" text-anchor="middle">6</text>
+<text x="331.88" y="13.6" font-size="2.59" text-anchor="middle">7</text>
+<text x="331.88" y="285.9" font-size="2.59" text-anchor="middle">7</text>
+<text x="380.62" y="13.6" font-size="2.59" text-anchor="middle">8</text>
+<text x="380.62" y="285.9" font-size="2.59" text-anchor="middle">8</text>
+<line x1="10" y1="15" x2="15" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="15" x2="410" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="59.5" x2="15" y2="59.5" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="59.5" x2="410" y2="59.5" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="104" x2="15" y2="104" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="104" x2="410" y2="104" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="148.5" x2="15" y2="148.5" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="148.5" x2="410" y2="148.5" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="193" x2="15" y2="193" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="193" x2="410" y2="193" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="237.5" x2="15" y2="237.5" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="237.5" x2="410" y2="237.5" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="282" x2="15" y2="282" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="282" x2="410" y2="282" stroke="#000" stroke-width="0.25"/>
+<text x="12.5" y="38.15" font-size="2.59" text-anchor="middle">A</text>
+<text x="407.5" y="38.15" font-size="2.59" text-anchor="middle">A</text>
+<text x="12.5" y="82.65" font-size="2.59" text-anchor="middle">B</text>
+<text x="407.5" y="82.65" font-size="2.59" text-anchor="middle">B</text>
+<text x="12.5" y="127.15" font-size="2.59" text-anchor="middle">C</text>
+<text x="407.5" y="127.15" font-size="2.59" text-anchor="middle">C</text>
+<text x="12.5" y="171.65" font-size="2.59" text-anchor="middle">D</text>
+<text x="407.5" y="171.65" font-size="2.59" text-anchor="middle">D</text>
+<text x="12.5" y="216.15" font-size="2.59" text-anchor="middle">E</text>
+<text x="407.5" y="216.15" font-size="2.59" text-anchor="middle">E</text>
+<text x="12.5" y="260.65" font-size="2.59" text-anchor="middle">F</text>
+<text x="407.5" y="260.65" font-size="2.59" text-anchor="middle">F</text>
+<rect x="15" y="252" width="390" height="30" fill="#fff" stroke="#000" stroke-width="0.5"/>
+<line x1="100" y1="252" x2="100" y2="282" stroke="#000" stroke-width="0.35"/>
+<line x1="190" y1="252" x2="190" y2="282" stroke="#000" stroke-width="0.35"/>
+<line x1="248" y1="252" x2="248" y2="282" stroke="#000" stroke-width="0.35"/>
+<line x1="340" y1="252" x2="340" y2="282" stroke="#000" stroke-width="0.35"/>
+<text x="17" y="255.6" font-size="1.84" fill="#555">Project</text>
+<text x="17" y="261.2" font-size="3.89" font-weight="bold">GH-1 Tropical Greenhouse</text>
+<text x="17" y="265.6" font-size="2.16">Irrigation, fertigation and climate control, 1 000 m² greenhouse</text>
+<text x="17" y="269" font-size="2.16">OpenPLC Runtime v4 + Modbus TCP remote I/O</text>
+<text x="17" y="272.4" font-size="2.16">Supply 3/N/PE AC 400/230 V 50 Hz</text>
+<text x="17" y="278.6" font-size="1.84" fill="#555">Symbols IEC 60617 · designations IEC 81346 · IEC 60204-1</text>
+<text x="102" y="255.6" font-size="1.84" fill="#555">Rev</text>
+<text x="110" y="255.6" font-size="1.84" fill="#555">Description</text>
+<text x="160" y="255.6" font-size="1.84" fill="#555">Date</text>
+<text x="176" y="255.6" font-size="1.84" fill="#555">By</text>
+<line x1="100" y1="257" x2="190" y2="257" stroke="#000" stroke-width="0.15"/>
+<line x1="100" y1="263.25" x2="190" y2="263.25" stroke="#000" stroke-width="0.15"/>
+<line x1="100" y1="269.5" x2="190" y2="269.5" stroke="#000" stroke-width="0.15"/>
+<line x1="100" y1="275.75" x2="190" y2="275.75" stroke="#000" stroke-width="0.15"/>
+<text x="103" y="261.6" font-size="2.38" font-weight="bold">A</text>
+<text x="110" y="261.6" font-size="2.38">First issue for review</text>
+<text x="160" y="261.6" font-size="2.16">2026-11-19</text>
+<text x="192" y="255.6" font-size="1.84" fill="#555">Name</text>
+<text x="226" y="255.6" font-size="1.84" fill="#555">Date</text>
+<text x="192" y="262.5" font-size="2.16">Drawn</text>
+<line x1="206" y1="263.1" x2="223" y2="263.1" stroke="#000" stroke-width="0.15"/>
+<line x1="226" y1="263.1" x2="246" y2="263.1" stroke="#000" stroke-width="0.15"/>
+<text x="192" y="270" font-size="2.16">Checked</text>
+<line x1="206" y1="270.6" x2="223" y2="270.6" stroke="#000" stroke-width="0.15"/>
+<line x1="226" y1="270.6" x2="246" y2="270.6" stroke="#000" stroke-width="0.15"/>
+<text x="192" y="277.5" font-size="2.16">Approved</text>
+<line x1="206" y1="278.1" x2="223" y2="278.1" stroke="#000" stroke-width="0.15"/>
+<line x1="226" y1="278.1" x2="246" y2="278.1" stroke="#000" stroke-width="0.15"/>
+<text x="250" y="255.6" font-size="1.84" fill="#555">Title</text>
+<text x="250" y="264.5" font-size="4.32" font-weight="bold">Panel layout</text>
+<text x="250" y="271.5" font-size="2.38">Electrical drawing set - control panel GH-1 (pump room)</text>
+<text x="250" y="278.6" font-size="1.94" fill="#555">Format A3 · scale 1:6</text>
+<text x="342" y="255.6" font-size="1.84" fill="#555">Drawing no.</text>
+<text x="342" y="262.5" font-size="4.54" font-weight="bold">GH1-E-12</text>
+<text x="342" y="268.5" font-size="2.59">Sheet 13 / 15</text>
+<text x="375" y="268.5" font-size="2.59" font-weight="bold">Rev. A</text>
+<text x="342" y="274" font-size="2.38">Date 2026-11-19</text>
+<text x="342" y="278.6" font-size="1.94" fill="#555">Next: GH1-E-13</text>
+</g>
+</svg>

@@ -453,7 +453,7 @@ The HMI is a Modbus TCP client of the PLC. It polls every 250 ms: `%MW40–139` 
 | HR 104 | Weather scenario: 0 clear, 1 cloudy, 2 rain, 3 storm |
 | HR 105 | Set the clock: minutes since midnight + 1 (self-clearing) |
 | HR 106 | Fast-forward speed request, 1/5/20/40 × (self-clearing, fast mode only) |
-| IR 32–45 | Plant truth: temperature, RH, vent, net, EC, pH, flow, pressure, level, CO₂, coupler watchdog, day, speed, fast-forward flag |
+| IR 32–46 | Plant truth: temperature, RH, vent, net, EC, pH, flow, pressure, level, CO₂, coupler watchdog, day, speed, fast-forward flag, field-check bits (what a technician would see on site; used by the troubleshooting trainer) |
 
 ## 10. Device blocks
 `FB_Motor` and `FB_Valve` are reused from the template unchanged in interface: auto request, manual mode and request, interlock word, and (motors) feedback with 2 s discrepancy lockout. Status word: b0 requested, b1 commanded, b2 running (feedback), b3 blocked, b4 discrepancy, b5 manual.

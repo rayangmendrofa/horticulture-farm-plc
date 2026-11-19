@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Document** | PRD-GH1, revision A |
-| **Status** | Phase 4 done: every requirement in §6 has an automated test in `tests/`, named after the IDs below; the web HMI is in place; the program runs on OpenPLC Runtime v4 with FAT part B passing ([openplc.md](openplc.md)) |
+| **Status** | All phases done. Every requirement in §6 has an automated test in `tests/`, named after the IDs below. The web HMI is in place. The program runs on OpenPLC Runtime v4 with FAT part B passing ([openplc.md](openplc.md)). Drawings, I/O checkout, commissioning, troubleshooting trainer and report are delivered ([REPORT.md](REPORT.md)) |
 | **Related** | [Scope](SCOPE.md) · [Functional Design Specification](FDS.md) |
 | **Template** | Built on the `plc-batch-station` project (T-101): same toolchain, address conventions, device blocks and verification approach |
 
@@ -251,7 +251,7 @@ v1 is accepted when:
 | P2 Plant model, ST program, soft-PLC fast-forward, automated FAT | Done: automated FAT and full-day run pass; STruC++ compile clean |
 | P3 Web HMI, README, CI (pytest + STruC++) | Done: eight pages, HMI tests HMI-01…08, CI runs the FAT on the lean and the strict VM |
 | P4 OpenPLC Runtime v4 FAT part B | Done 19 Nov 2026: OPL-01…08 pass on Runtime v4.3.2 ([openplc.md](openplc.md)) |
-| P5 Drawings, I/O checkout, commissioning, troubleshooting trainer, report | Later |
+| P5 Drawings, I/O checkout, commissioning, troubleshooting trainer, report | Done 19 Nov 2026: 15 drawing sheets and the I/O checkout generated from one data model, [COMMISSIONING.md](COMMISSIONING.md), [TROUBLESHOOTING.md](TROUBLESHOOTING.md) with 48 faults and the HMI challenge, [REPORT.md](REPORT.md) |
 
 ## 13. Future work
 Second compartment, drain-water recirculation with UV disinfection, source-water selection (rain/well), CO2 enrichment, irrigation on substrate moisture sensors, weather-forecast inputs, historian and daily report export, Siemens TIA Portal or CODESYS port.

@@ -15,9 +15,10 @@ Simulation-only registers (field-simulation panel / test bench, not part of the 
   HR 104       weather scenario (0 clear, 1 cloudy, 2 rain, 3 storm)
   HR 105       set the clock: minutes since midnight + 1 (self-clearing, 0 = no change)
   HR 106       fast-forward speed request, x real time (self-clearing; fast mode only)
-  IR 32..45    true values: greenhouse temp x10, RH x10, vent x10, net x10, EC x100,
+  IR 32..46    true values: greenhouse temp x10, RH x10, vent x10, net x10, EC x100,
                pH x100, pump flow L/h, pressure x100, tank level x10, CO2 ppm,
-               b0 coupler watchdog tripped, day number, speed (x real time), b0 fast-forward
+               b0 coupler watchdog tripped, day number, speed (x real time), b0 fast-forward,
+               field-check bits (plant.FIELD_CHECKS, bit set = looks normal)
 """
 from __future__ import annotations
 
@@ -120,7 +121,7 @@ class PlantServer:
             img.ir[:N_IR] = p.input_registers()
             truth = [p.t_in * 10, p.rh_in * 10, p.vent_pos * 10, p.net_pos * 10, p.ec_true * 100,
                      p.ph_true * 100, p.q_pump * 1000, p.press * 100, p.level_pct * 10, p.co2,
-                     self.watchdog_tripped, p.day, self.speed, self.passive]
+                     self.watchdog_tripped, p.day, self.speed, self.passive, p.field_checks()]
             img.ir[IR_TRUTH:IR_TRUTH + len(truth)] = [max(0, min(65535, round(v))) for v in truth]
 
 

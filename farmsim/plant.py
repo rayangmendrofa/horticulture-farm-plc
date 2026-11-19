@@ -36,8 +36,26 @@ FAULTS = (
     "f602_trip", "p531_trip", "fog_inlet_low",
     "pad_sump_low", "refill_fail", "stock_a_empty", "stock_b_empty", "acid_empty", "rain_wire_break",
     "f601_trip", "f603_trip", "p541_trip", "lsl201_dry",
+    # subtle faults: no alarm, found by reasoning and a field check (troubleshooting trainer)
+    "ec_reads_high", "tt501_reads_low", "ft201_reads_high", "z2_partly_clogged", "stock_a_weak",
+    "xv301_passing",
 )
 assert len(FAULTS) <= 48            # three Modbus holding registers of fault bits
+SUBTLE = {"ec_reads_high": 0.40,     # AIT-301 calibration drift, mS/cm
+          "tt501_reads_low": -3.0,   # TT-501 drift, degC
+          "ft201_reads_high": 1.20,  # FT-201 reads 20 % high
+          "z2_partly_clogged": 0.82, # Z2 dripper flow factor (alarm threshold is -25 %)
+          "stock_a_weak": 0.5,       # stock A mixed at half strength
+          "xv301_passing": 0.15}     # return valve seat leak, as a fraction of full opening
+
+# What a technician sees walking the site (trainer "field check"); bit set = observation normal
+FIELD_CHECKS = ("P-201 shaft turning when its contactor is in", "Stock tank A at normal strength (EC of the concentrate)",
+                "Zone 2 drippers all dripping evenly", "Zone 3 drippers all dripping evenly",
+                "Zone 4 laterals intact (no wet patch)", "Main line dry outside (no burst)",
+                "Vent moves when its contactor pulls in", "Shade net moves when its contactor pulls in",
+                "Fog pump inlet pressure normal", "Refill valve passes water when open",
+                "Rain sensor dry and its wiring intact", "Strainer before the zone header clean",
+                "Return line quiet with XV-301 closed (no flow through the seat)")
 BUTTONS = ("start", "stop", "reset")
 
 
@@ -257,6 +275,16 @@ class Plant:
             bits |= (w & 0xFFFF) << (16 * i)
         self.faults = {f for i, f in enumerate(FAULTS) if bits >> i & 1}
 
+    def field_checks(self) -> int:
+        """Bit n set = FIELD_CHECKS[n] looks normal."""
+        f = self.faults
+        ok = (not (self.coils[1] and not self.estop and not self.running["p201"]), "stock_a_weak" not in f, "z2_partly_clogged" not in f,
+              "z3_clogged" not in f, "z4_leak" not in f, "burst_pipe" not in f,
+              "vent_stuck" not in f, "net_stuck" not in f, "fog_inlet_low" not in f,
+              "refill_fail" not in f, "rain_wire_break" not in f, "blocked_line" not in f,
+              "xv301_passing" not in f)
+        return sum(1 << i for i, v in enumerate(ok) if v)
+
     def fault_words(self) -> list[int]:
         bits = sum(1 << i for i, f in enumerate(FAULTS) if f in self.faults)
         return [bits & 0xFFFF, bits >> 16 & 0xFFFF, bits >> 32 & 0xFFFF]
@@ -295,6 +323,9 @@ class Plant:
             return 0 if f"{name}_break" in f else encode_ma(value, lo, hi)
 
         ph_b = self.ph_s.y + (self.cfg.ph_b_drift if "ph_b_drift" in f else 0.0)
+        ec = self.ec_s.y + (SUBTLE["ec_reads_high"] if "ec_reads_high" in f else 0.0)
+        t_in = self.t_in + (SUBTLE["tt501_reads_low"] if "tt501_reads_low" in f else 0.0)
+        flow = self.ft.y * 1000.0 * (SUBTLE["ft201_reads_high"] if "ft201_reads_high" in f else 1.0)
         if "clock_frozen" in f:
             if self.frozen_clock is None:
                 self.frozen_clock = self.clock_min
@@ -304,9 +335,9 @@ class Plant:
             clock = self.clock_min
         return [
             ai("lt201", self.level_pct, 0, 100),
-            ai("ft201", self.ft.y * 1000.0, 0, 6000),
+            ai("ft201", flow, 0, 6000),
             ai("pt201", self.pt.y, 0, 6.0),
-            ai("ec", self.ec_s.y, 0, 5.0),
+            ai("ec", ec, 0, 5.0),
             ai("ph_a", self.ph_s.y, 0, 14.0),
             ai("ph_b", ph_b, 0, 14.0),
             ai("ft402", self.drain_lph, 0, 200),
@@ -314,7 +345,7 @@ class Plant:
             ai("tt101", w.t_out, 0, 50),
             0 if "tt101_break" in f else encode_ma(w.rh_out, 0, 100),
             ai("st101", w.wind, 0, 40),
-            ai("tt501", self.t_in, 0, 50),
+            ai("tt501", t_in, 0, 50),
             0 if "mt501_break" in f else encode_ma(self.rh_in, 0, 100),
             ai("at502", self.co2, 0, 2000),
             ai("zt511", self.vent_pos, 0, 100),
@@ -393,10 +424,15 @@ class Plant:
                 q = fr * c.zone_lph / 1000.0 * pc
                 if i == 2 and "z3_clogged" in f:
                     q *= 0.55
+                if i == 1 and "z2_partly_clogged" in f:
+                    q *= SUBTLE["z2_partly_clogged"]
                 if i == 3 and "z4_leak" in f:
                     q += fr * 0.6 * math.sqrt(max(p, 0.0) / 2.0)
                 qz.append(q)
-            qr = self.valve["xv301"] * c.return_k * math.sqrt(max(p, 0.0))
+            opening = self.valve["xv301"]
+            if "xv301_passing" in f:
+                opening = max(opening, SUBTLE["xv301_passing"])
+            qr = opening * c.return_k * math.sqrt(max(p, 0.0))
             qb = c.burst_k * math.sqrt(max(p, 0.0)) if "burst_pipe" in f and run else 0.0
             return qr, qz, qb
 
@@ -445,7 +481,8 @@ class Plant:
             self.q_dose[i] = qd
             self.stock[stock] = max(0.0, self.stock[stock] - qd * dt / 3600.0)
         if q > 1.0:
-            ec = self.tank_ec + 100.0 * c.stock_strength * (self.q_dose[0] + self.q_dose[1]) / q
+            a = self.q_dose[0] * (SUBTLE["stock_a_weak"] if "stock_a_weak" in f else 1.0)
+            ec = self.tank_ec + 100.0 * c.stock_strength * (a + self.q_dose[1]) / q
             acid = self.q_dose[2] * c.acid_mmol_l / q
             k = min(1.0, q * dt / 3600.0 / c.mixer_l)          # mixing chamber: perfect mixing
             m = self.mixer

@@ -7,11 +7,22 @@ A PLC project for a 1 000 m² tropical lowland greenhouse:
 - **fertigation**: inline A/B nutrient and acid dosing on EC and pH;
 - **climate control**: roof vents, shade net, fogging, and pad-and-fan cooling with weather overrides.
 
-The program is **IEC 61131-3 Structured Text** for **OpenPLC v4**, integrated over **Modbus TCP**. A virtual plant replaces the hardware, so the whole system runs and is tested on a laptop. The plant models the weather, greenhouse air, crop, hydraulics and water chemistry. An **ISA-101 style web HMI** shows it running. **102 automated tests** cover the project: 83 factory-acceptance tests check every functional, safety, diagnostic and HMI requirement, and 19 more test the Structured Text interpreter. The program also runs on **OpenPLC Runtime v4**, where FAT part B passes 7/7.
+The program is **IEC 61131-3 Structured Text** for **OpenPLC v4**, integrated over **Modbus TCP**. A virtual plant replaces the hardware, so the whole system runs and is tested on a laptop. The plant models the weather, greenhouse air, crop, hydraulics and water chemistry. An **ISA-101 style web HMI** shows it running. **114 automated tests** cover the project: 95 check every functional, safety, diagnostic and HMI requirement, the field faults and the generated documents, and 19 more test the Structured Text interpreter. The program also runs on **OpenPLC Runtime v4**, where FAT part B passes 7/7.
+
+It also comes with what a technician needs on site:
+- a **15-sheet electrical drawing set**, generated from one data model, so schematics, terminal plans, parts list and the **I/O checkout sheet** always agree;
+- a **commissioning procedure**;
+- a **troubleshooting guide**;
+- a **troubleshooting trainer** in the HMI that hides a field fault for you to diagnose, including faults that raise no alarm at all.
 
 ![Web HMI overview at 12:53 on a clear day: zone 1 watering at EC 2.50 / pH 5.80, pad-and-fan cooling at stage 2, shade net deployed](docs/img/hmi-overview.png)
 
-> **Status: phase 4 of 5 done.** In place: the PLC program, plant model, soft-PLC with fast-forward, web HMI and automated FAT. The program compiles clean with STruC++ (the OpenPLC v4 compiler) and runs on OpenPLC Runtime v4, where FAT part B passes 7/7 ([docs/openplc.md](docs/openplc.md)). Next, phase 5 adds electrical drawings, I/O checkout, a commissioning procedure, a troubleshooting trainer and a report. See [docs/SCOPE.md](docs/SCOPE.md).
+> **Status: all five phases done.** In place:
+> - PLC program, plant model, soft-PLC with fast-forward, web HMI and automated FAT;
+> - OpenPLC Runtime v4 acceptance, where FAT part B passes 7/7 ([docs/openplc.md](docs/openplc.md));
+> - drawings, I/O checkout, commissioning procedure, troubleshooting trainer and [technical report](docs/REPORT.md).
+>
+> Not yet done: running against physical wiring ([report §9](docs/REPORT.md#9-limitations-what-has-not-been-proven)).
 
 ## What it does
 - **Irrigation**: cycles start on accumulated solar radiation, or after a maximum interval, inside a day window. Each cycle first pre-mixes the nutrient solution through a return loop until EC and pH are in band. It then waters the zones one by one, metered by a flow transmitter, with open-before-close changeover.
@@ -47,7 +58,8 @@ At 20× a day takes 72 minutes. Use the **Field simulation** panel at the bottom
 - jump the clock;
 - change the speed (1–40×);
 - press the E-stop;
-- inject one of 41 field faults (wire breaks, pump trips, a jammed vent, a clogged zone, empty stock tanks…) and watch the PLC react.
+- inject one of 47 field faults (wire breaks, pump trips, a jammed vent, a clogged zone, empty stock tanks, and six that raise no alarm) and watch the PLC react;
+- press **Start challenge**: the simulator hides a random fault, and you diagnose it from the HMI with one optional field check.
 
 ## The HMI
 | Page | Shows |
@@ -113,19 +125,26 @@ In fast-forward the PLC VM and the plant advance together in virtual time (50 ms
 | `farmsim/plant.py`, `weather.py` | Process model: weather day cycle, greenhouse heat/vapour/CO₂ balance, crop transpiration, pump and dripper hydraulics, carbonate pH chemistry with mixing and dead time, actuators, fault injection |
 | `farmsim/plant_server.py` | The plant as a Modbus TCP remote-I/O device, with a 1 s output watchdog |
 | `farmsim/softplc.py` | OpenPLC-compatible runtime (50 ms task, Modbus server and remote-I/O master) and the fast-forward runner |
-| `farmsim/hmi.py`, `farmsim/web/` | Web HMI: Modbus client, JSON API, single-page operator UI |
+| `farmsim/hmi.py`, `farmsim/web/` | Web HMI: Modbus client, JSON API, single-page operator UI, troubleshooting trainer |
+| `farmsim/faults.py` | Fault knowledge base (48 faults): drives the trainer and `docs/TROUBLESHOOTING.md` |
 | `farmsim/tags.py` | The PLC ↔ HMI register map, single source of truth |
 | `farmsim/stvm.py`, `modbus.py` | IEC 61131-3 Structured Text interpreter (strict and lean modes), and Modbus TCP server and client (standard library) |
 | `farmsim/bench.py`, `tests/` | Test bench and the automated FAT |
-| `tools/` | STruC++ compile check, OpenPLC Editor project generator, upload script, FAT part B runner, day simulation, dosing-loop tuning sweep |
+| `tools/` | STruC++ compile check, OpenPLC Editor project generator, upload script, FAT part B runner, troubleshooting-guide generator, day simulation, dosing-loop tuning sweep |
+| `tools/drawings/` | Electrical drawing generator: data model (`gh1_data.py`), sheets, terminal plans, parts list, I/O checkout |
 
 ## Documentation
 | Document | For |
 |---|---|
+| [Technical report](docs/REPORT.md) | Design, verification, results, limitations and roadmap, in one read |
 | [Scope](docs/SCOPE.md) | What was agreed, and what is out of scope |
 | [PRD](docs/PRD.md) | Requirements, each traced to an automated test |
 | [FDS](docs/FDS.md) | I/O list, sequences, control loops, cause & effect, alarms, register map, HMI |
 | [OpenPLC](docs/openplc.md) | Running on OpenPLC Runtime v4: build, upload, Modbus configuration, FAT part B results |
+| [Electrical drawings](docs/drawings/README.md) | 15 sheets: power, feeders, safety circuit, I/O, terminal plans, panel layout, parts list, network ([PDF](docs/drawings/GH1-electrical.pdf)) |
+| [I/O checkout](docs/IO_CHECKOUT.md) | Loop-check sheet for every I/O point |
+| [Commissioning](docs/COMMISSIONING.md) | Dead checks → power-up → safety → I/O → devices → hydraulics → interlocks → tuning → climate → SAT |
+| [Troubleshooting](docs/TROUBLESHOOTING.md) | Fault-finding method, alarm reference, 48-fault reference, preventive maintenance |
 | [Credits](CREDITS.md) | Software, standards and references this project builds on |
 
 ## Licence

@@ -14,6 +14,7 @@ operator HMI (PRD HR-11).
 from __future__ import annotations
 
 import json
+import random
 import threading
 import time
 from collections import deque
@@ -23,7 +24,8 @@ from urllib.parse import urlsplit
 
 from . import tags
 from .modbus import ModbusClient, ModbusError
-from .plant import BUTTONS, FAULTS
+from .faults import FAULT_INFO, TRAINER_POOL
+from .plant import BUTTONS, FAULTS, FIELD_CHECKS
 from .plant_server import (HR_BUTTONS, HR_CLOCK, HR_FAULTS, HR_SCENARIO, HR_SPEED, IR_TRUTH,
                            SPEEDS)
 from .weather import SCENARIOS
@@ -59,12 +61,18 @@ FAULT_GROUPS = (
         ("lsl201_dry", "T-201 runs dry"), ("stock_a_empty", "Stock A empty"),
         ("stock_b_empty", "Stock B empty"), ("acid_empty", "Acid tank empty"),
         ("pad_sump_low", "Pad sump low"), ("fog_inlet_low", "Fog inlet starved"))),
+    ("Subtle (no alarm)", (
+        ("ec_reads_high", "AIT-301 reads high"), ("tt501_reads_low", "TT-501 reads low"),
+        ("ft201_reads_high", "FT-201 reads high"), ("z2_partly_clogged", "Zone 2 partly clogged"),
+        ("stock_a_weak", "Stock A too weak"), ("xv301_passing", "XV-301 passing"))),
 )
 _listed = [f for _, fs in FAULT_GROUPS for f, _ in fs]
 assert sorted(_listed + ["estop"]) == sorted(FAULTS), set(FAULTS) ^ set(_listed + ["estop"])
 
 TRUTH_KEYS = ("t_in", "rh_in", "vent", "net", "ec", "ph", "flow", "press", "level", "co2",
-              "watchdog", "day", "speed", "fast")
+              "watchdog", "day", "speed", "fast", "field")
+CATALOG = sorted(({"id": f, "title": FAULT_INFO[f]["title"], "level": FAULT_INFO[f]["level"]}
+                  for f in TRAINER_POOL), key=lambda c: c["title"])
 TRUTH_SCALE = {"t_in": 10, "rh_in": 10, "vent": 10, "net": 10, "ec": 100, "ph": 100,
                "press": 100, "level": 10}
 
@@ -112,6 +120,9 @@ class HMIBackend:
         self._rate = deque(maxlen=40)     # (wall, process) pairs for the achieved speed
         self._stop = threading.Event()
         self._lock = threading.Lock()
+        self.challenge = None             # troubleshooting trainer: hidden fault in progress
+        self.last_result = None
+        self.rng = random.Random()
 
     def start(self):
         threading.Thread(target=self._loop, daemon=True, name="hmi-poll").start()
@@ -184,13 +195,58 @@ class HMIBackend:
         bits = hr[0] | hr[1] << 16 | hr[2] << 32
         tr = {k: v / TRUTH_SCALE.get(k, 1) for k, v in zip(TRUTH_KEYS, truth)}
         tr["watchdog"], tr["fast"] = bool(tr["watchdog"]), bool(tr["fast"])
-        return {"available": True, "faults": [f for i, f in enumerate(FAULTS) if bits >> i & 1],
-                "scenario": SCENARIOS[hr[4]] if hr[4] < len(SCENARIOS) else "?", "truth": tr}
+        field_bits = int(tr.pop("field"))
+        field = {name: bool(field_bits >> i & 1) for i, name in enumerate(FIELD_CHECKS)}
+        sim = {"available": True, "faults": [f for i, f in enumerate(FAULTS) if bits >> i & 1],
+               "scenario": SCENARIOS[hr[4]] if hr[4] < len(SCENARIOS) else "?", "truth": tr}
+        c = self.challenge
+        if c is not None:
+            sim["challenge"] = {"active": True, "elapsed": int(time.time() - c["started"]), "hints": c["hints"]}
+            sim["faults"] = []                 # the fault is what the trainee has to find
+            if c["hints"]:
+                sim["field"] = field           # the field walk: reference instruments + observations
+            else:
+                keep = ("watchdog", "day", "speed", "fast")
+                sim["truth"] = {k: tr[k] for k in keep}
+        return sim
+
+    # -- troubleshooting trainer ---------------------------------------------------------
+    def trainer(self, action: str, fault: str | None = None) -> dict:
+        """start: inject a random hidden fault; hint: one field check; answer: score it;
+        quit: give up. The fault is cleared when the challenge ends."""
+        if self.plant is None:
+            raise ConnectionError("no plant simulator configured")
+        if action == "start":
+            f = self.rng.choice(TRAINER_POOL)
+            i = FAULTS.index(f)
+            words = [0, 0, 0]
+            words[i // 16] = 1 << (i % 16)
+            self.plant.write_registers(HR_FAULTS, words)
+            self.challenge = {"fault": f, "started": time.time(), "hints": 0}
+            self.last_result = None
+            return {"ok": True}
+        c = self.challenge
+        if c is None:
+            raise ValueError("no challenge running")
+        if action == "hint":
+            c["hints"] += 1
+            return {"ok": True}
+        if action == "answer":
+            if fault not in FAULT_INFO:
+                raise ValueError(f"unknown fault {fault!r}")
+            self.last_result = {"correct": fault == c["fault"], "answered": FAULT_INFO[fault]["title"],
+                                "fault": c["fault"], "seconds": int(time.time() - c["started"]),
+                                "hints": c["hints"], **FAULT_INFO[c["fault"]]}
+        elif action != "quit":
+            raise ValueError(f"unknown trainer action {action!r}")
+        self.plant.write_registers(HR_FAULTS, [0, 0, 0])
+        self.challenge = None
+        return {"ok": True, "result": self.last_result}
 
     def snapshot(self) -> dict:
         with self._lock:
             trends = {"fast": self.fast.dump(), "slow": self.slow.dump()}
-        return {**self.state, "trends": trends}
+        return {**self.state, "trends": trends, "trainer": {"result": self.last_result}}
 
     # -- commands to the PLC ---------------------------------------------------------------
     def command(self, cmd: str):
@@ -225,6 +281,8 @@ class HMIBackend:
             raise ConnectionError("no plant simulator configured")
         if "button" in body:
             self.plant.write_register(HR_BUTTONS, 1 << BUTTONS.index(body["button"]))
+        if ("fault" in body or body.get("clear_faults")) and self.challenge is not None:
+            raise ValueError("fault injection is locked during a troubleshooting challenge")
         if "fault" in body:
             words = self.plant.read_holding_registers(HR_FAULTS, 3)
             bits = words[0] | words[1] << 16 | words[2] << 32
@@ -300,6 +358,8 @@ def make_handler(backend: HMIBackend):
                     backend.set_manual(body.get("irr"), body.get("dose"), body.get("clim"), body.get("vent"))
                 elif self.path == "/api/sim":
                     backend.sim(body)
+                elif self.path == "/api/trainer":
+                    return self._json(backend.trainer(body["action"], body.get("fault")))
                 else:
                     return self._send(404, b"not found", "text/plain")
                 self._json({"ok": True})
@@ -318,6 +378,7 @@ def meta() -> dict:
         "di": [{"addr": tags.di_addr(i), "tag": t} for i, t in enumerate(tags.DI_TAGS)],
         "do": [{"addr": tags.do_addr(i), "tag": t} for i, t in enumerate(tags.DO_TAGS)],
         "faults": [{"group": g, "faults": [{"id": f, "title": t} for f, t in fs]} for g, fs in FAULT_GROUPS],
+        "catalog": CATALOG,
         "scenarios": list(SCENARIOS), "speeds": list(SPEEDS),
         "man_irr": list(tags.MAN_IRR_BITS), "man_clim": list(tags.MAN_CLIM_BITS),
     }

@@ -1,0 +1,527 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 420 297">
+<title>GH1-E-09 Analog inputs -A1.5 / -A1.6</title>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#000}</style>
+<rect x="0" y="0" width="420" height="297" fill="#fff"/>
+<g stroke-linecap="round" stroke-linejoin="round">
+<text x="17" y="21.4" font-size="1.84" fill="#555">Address</text>
+<text x="31" y="21.4" font-size="1.84" fill="#555">Tag</text>
+<text x="232" y="25.5" font-size="1.84" fill="#555">Range (4-20 mA)</text>
+<text x="300" y="25.5" font-size="1.84" fill="#555">On signal fault (&lt; 3.6 mA)</text>
+<rect x="54" y="27" width="14" height="104.4" fill="#fff" stroke="#000" stroke-width="0.45"/>
+<text x="52.6" y="79.2" font-size="1.94" text-anchor="middle" font-weight="bold" transform="rotate(-90 52.6 79.2)">-A1.5  AI8 4-20 mA</text>
+<rect x="54" y="132.6" width="14" height="91.2" fill="#fff" stroke="#000" stroke-width="0.45"/>
+<text x="52.6" y="178.2" font-size="1.94" text-anchor="middle" font-weight="bold" transform="rotate(-90 52.6 178.2)">-A1.6  AI8 (ch. 7 spare)</text>
+<text x="17" y="33.6" font-size="1.89" font-weight="bold">%IW100</text>
+<text x="31" y="33.6" font-size="1.84">LT201_RAW</text>
+<text x="61" y="33.6" font-size="1.67" text-anchor="middle" font-weight="bold">AI0</text>
+<circle cx="68" cy="31" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="31.55" font-size="1.4" text-anchor="end">+24V</text>
+<line x1="68.7" y1="31" x2="119.2" y2="31" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="30.5" font-size="1.57" font-style="italic">901</text>
+<circle cx="120" cy="31" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="29.6" font-size="1.57" text-anchor="middle">X3:1</text>
+<line x1="120.8" y1="31" x2="160" y2="31" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="35" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="35.55" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="35" x2="119.2" y2="35" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="34.5" font-size="1.57" font-style="italic">902</text>
+<circle cx="120" cy="35" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="33.6" font-size="1.57" text-anchor="middle">X3:2</text>
+<line x1="120.8" y1="35" x2="160" y2="35" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="38" x2="135" y2="38" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="38" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="36.6" font-size="1.57" text-anchor="middle">X3:3</text>
+<ellipse cx="145" cy="33" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="28.6" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="31.7" font-size="1.73" font-weight="bold">-B201  LT-201  T-201 level</text>
+<text x="161.5" y="34.6" font-size="1.57">hydrostatic level transmitter</text>
+<text x="161.5" y="36.7" font-size="1.51" fill="#555">2-wire, loop-powered by the module · -W61</text>
+<text x="232" y="33.6" font-size="1.89">0-100 %</text>
+<text x="300" y="33.6" font-size="1.84">A20 after 1 s · refill blocked</text>
+<text x="17" y="46.8" font-size="1.89" font-weight="bold">%IW101</text>
+<text x="31" y="46.8" font-size="1.84">FT201_RAW</text>
+<text x="61" y="46.8" font-size="1.67" text-anchor="middle" font-weight="bold">AI1</text>
+<circle cx="68" cy="44.2" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="44.75" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="44.2" x2="119.2" y2="44.2" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="43.7" font-size="1.57" font-style="italic">903</text>
+<circle cx="120" cy="44.2" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="42.8" font-size="1.57" text-anchor="middle">X3:4</text>
+<line x1="120.8" y1="44.2" x2="160" y2="44.2" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="48.2" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="48.75" font-size="1.4" text-anchor="end">M</text>
+<line x1="68.7" y1="48.2" x2="119.2" y2="48.2" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="47.7" font-size="1.57" font-style="italic">904</text>
+<circle cx="120" cy="48.2" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="46.8" font-size="1.57" text-anchor="middle">X3:5</text>
+<line x1="120.8" y1="48.2" x2="160" y2="48.2" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="51.2" x2="135" y2="51.2" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="51.2" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="49.8" font-size="1.57" text-anchor="middle">X3:6</text>
+<ellipse cx="145" cy="46.2" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="41.8" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="44.9" font-size="1.73" font-weight="bold">-B203  FT-201  Main line flow</text>
+<text x="161.5" y="47.8" font-size="1.57">magnetic flowmeter, 24 V DC powered</text>
+<text x="161.5" y="49.9" font-size="1.51" fill="#555">active output, own supply +24.4 · -W62</text>
+<text x="232" y="46.8" font-size="1.89">0-6000 L/h</text>
+<text x="300" y="46.8" font-size="1.84">A21 after 1 s · irrigation trips</text>
+<text x="17" y="60" font-size="1.89" font-weight="bold">%IW102</text>
+<text x="31" y="60" font-size="1.84">PT201_RAW</text>
+<text x="61" y="60" font-size="1.67" text-anchor="middle" font-weight="bold">AI2</text>
+<circle cx="68" cy="57.4" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="57.95" font-size="1.4" text-anchor="end">+24V</text>
+<line x1="68.7" y1="57.4" x2="119.2" y2="57.4" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="56.9" font-size="1.57" font-style="italic">905</text>
+<circle cx="120" cy="57.4" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="56" font-size="1.57" text-anchor="middle">X3:7</text>
+<line x1="120.8" y1="57.4" x2="160" y2="57.4" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="61.4" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="61.95" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="61.4" x2="119.2" y2="61.4" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="60.9" font-size="1.57" font-style="italic">906</text>
+<circle cx="120" cy="61.4" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="60" font-size="1.57" text-anchor="middle">X3:8</text>
+<line x1="120.8" y1="61.4" x2="160" y2="61.4" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="64.4" x2="135" y2="64.4" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="64.4" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="63" font-size="1.57" text-anchor="middle">X3:9</text>
+<ellipse cx="145" cy="59.4" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="55" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="58.1" font-size="1.73" font-weight="bold">-B204  PT-201  Main line pressure</text>
+<text x="161.5" y="61" font-size="1.57">pressure transmitter</text>
+<text x="161.5" y="63.1" font-size="1.51" fill="#555">2-wire, loop-powered by the module · -W63</text>
+<text x="232" y="60" font-size="1.89">0-6.0 bar</text>
+<text x="300" y="60" font-size="1.84">A22 after 1 s · irrigation trips</text>
+<text x="17" y="73.2" font-size="1.89" font-weight="bold">%IW103</text>
+<text x="31" y="73.2" font-size="1.84">AIT301_RAW</text>
+<text x="61" y="73.2" font-size="1.67" text-anchor="middle" font-weight="bold">AI3</text>
+<circle cx="68" cy="70.6" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="71.15" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="70.6" x2="119.2" y2="70.6" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="70.1" font-size="1.57" font-style="italic">907</text>
+<circle cx="120" cy="70.6" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="69.2" font-size="1.57" text-anchor="middle">X3:10</text>
+<line x1="120.8" y1="70.6" x2="160" y2="70.6" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="74.6" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="75.15" font-size="1.4" text-anchor="end">M</text>
+<line x1="68.7" y1="74.6" x2="119.2" y2="74.6" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="74.1" font-size="1.57" font-style="italic">908</text>
+<circle cx="120" cy="74.6" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="73.2" font-size="1.57" text-anchor="middle">X3:11</text>
+<line x1="120.8" y1="74.6" x2="160" y2="74.6" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="77.6" x2="135" y2="77.6" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="77.6" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="76.2" font-size="1.57" text-anchor="middle">X3:12</text>
+<ellipse cx="145" cy="72.6" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="68.2" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="71.3" font-size="1.73" font-weight="bold">-B301  AIT-301  EC</text>
+<text x="161.5" y="74.2" font-size="1.57">conductivity analyser, 230 V powered</text>
+<text x="161.5" y="76.3" font-size="1.51" fill="#555">active output, own supply 230 V (-F4) · -W64</text>
+<text x="232" y="73.2" font-size="1.89">0-5.0 mS/cm</text>
+<text x="300" y="73.2" font-size="1.84">A23 after 1 s · irrigation trips</text>
+<text x="17" y="86.4" font-size="1.89" font-weight="bold">%IW104</text>
+<text x="31" y="86.4" font-size="1.84">AIT302_RAW</text>
+<text x="61" y="86.4" font-size="1.67" text-anchor="middle" font-weight="bold">AI4</text>
+<circle cx="68" cy="83.8" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="84.35" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="83.8" x2="119.2" y2="83.8" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="83.3" font-size="1.57" font-style="italic">909</text>
+<circle cx="120" cy="83.8" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="82.4" font-size="1.57" text-anchor="middle">X3:13</text>
+<line x1="120.8" y1="83.8" x2="160" y2="83.8" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="87.8" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="88.35" font-size="1.4" text-anchor="end">M</text>
+<line x1="68.7" y1="87.8" x2="119.2" y2="87.8" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="87.3" font-size="1.57" font-style="italic">910</text>
+<circle cx="120" cy="87.8" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="86.4" font-size="1.57" text-anchor="middle">X3:14</text>
+<line x1="120.8" y1="87.8" x2="160" y2="87.8" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="90.8" x2="135" y2="90.8" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="90.8" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="89.4" font-size="1.57" text-anchor="middle">X3:15</text>
+<ellipse cx="145" cy="85.8" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="81.4" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="84.5" font-size="1.73" font-weight="bold">-B302  AIT-302  pH probe A</text>
+<text x="161.5" y="87.4" font-size="1.57">pH analyser, 230 V powered</text>
+<text x="161.5" y="89.5" font-size="1.51" fill="#555">active output, own supply 230 V (-F4) · -W65</text>
+<text x="232" y="86.4" font-size="1.89">0-14 pH</text>
+<text x="300" y="86.4" font-size="1.84">A24 after 1 s · use AIT-303</text>
+<text x="17" y="99.6" font-size="1.89" font-weight="bold">%IW105</text>
+<text x="31" y="99.6" font-size="1.84">AIT303_RAW</text>
+<text x="61" y="99.6" font-size="1.67" text-anchor="middle" font-weight="bold">AI5</text>
+<circle cx="68" cy="97" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="97.55" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="97" x2="119.2" y2="97" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="96.5" font-size="1.57" font-style="italic">911</text>
+<circle cx="120" cy="97" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="95.6" font-size="1.57" text-anchor="middle">X3:16</text>
+<line x1="120.8" y1="97" x2="160" y2="97" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="101" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="101.55" font-size="1.4" text-anchor="end">M</text>
+<line x1="68.7" y1="101" x2="119.2" y2="101" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="100.5" font-size="1.57" font-style="italic">912</text>
+<circle cx="120" cy="101" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="99.6" font-size="1.57" text-anchor="middle">X3:17</text>
+<line x1="120.8" y1="101" x2="160" y2="101" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="104" x2="135" y2="104" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="104" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="102.6" font-size="1.57" text-anchor="middle">X3:18</text>
+<ellipse cx="145" cy="99" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="94.6" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="97.7" font-size="1.73" font-weight="bold">-B303  AIT-303  pH probe B</text>
+<text x="161.5" y="100.6" font-size="1.57">pH analyser, 230 V powered</text>
+<text x="161.5" y="102.7" font-size="1.51" fill="#555">active output, own supply 230 V (-F4) · -W66</text>
+<text x="232" y="99.6" font-size="1.89">0-14 pH</text>
+<text x="300" y="99.6" font-size="1.84">A25 after 1 s · use AIT-302</text>
+<text x="17" y="112.8" font-size="1.89" font-weight="bold">%IW106</text>
+<text x="31" y="112.8" font-size="1.84">FT402_RAW</text>
+<text x="61" y="112.8" font-size="1.67" text-anchor="middle" font-weight="bold">AI6</text>
+<circle cx="68" cy="110.2" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="110.75" font-size="1.4" text-anchor="end">+24V</text>
+<line x1="68.7" y1="110.2" x2="119.2" y2="110.2" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="109.7" font-size="1.57" font-style="italic">913</text>
+<circle cx="120" cy="110.2" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="108.8" font-size="1.57" text-anchor="middle">X3:19</text>
+<line x1="120.8" y1="110.2" x2="160" y2="110.2" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="114.2" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="114.75" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="114.2" x2="119.2" y2="114.2" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="113.7" font-size="1.57" font-style="italic">914</text>
+<circle cx="120" cy="114.2" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="112.8" font-size="1.57" text-anchor="middle">X3:20</text>
+<line x1="120.8" y1="114.2" x2="160" y2="114.2" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="117.2" x2="135" y2="117.2" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="117.2" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="115.8" font-size="1.57" text-anchor="middle">X3:21</text>
+<ellipse cx="145" cy="112.2" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="107.8" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="110.9" font-size="1.73" font-weight="bold">-B402  FT-402  Z1 drain flow</text>
+<text x="161.5" y="113.8" font-size="1.57">drain gutter flow transmitter</text>
+<text x="161.5" y="115.9" font-size="1.51" fill="#555">2-wire, loop-powered by the module · -W67</text>
+<text x="232" y="112.8" font-size="1.89">0-200 L/h</text>
+<text x="300" y="112.8" font-size="1.84">A27 after 1 s · drain % frozen</text>
+<text x="17" y="126" font-size="1.89" font-weight="bold">%IW107</text>
+<text x="31" y="126" font-size="1.84">RT101_RAW</text>
+<text x="61" y="126" font-size="1.67" text-anchor="middle" font-weight="bold">AI7</text>
+<circle cx="68" cy="123.4" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="123.95" font-size="1.4" text-anchor="end">+24V</text>
+<line x1="68.7" y1="123.4" x2="119.2" y2="123.4" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="122.9" font-size="1.57" font-style="italic">915</text>
+<circle cx="120" cy="123.4" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="122" font-size="1.57" text-anchor="middle">X3:22</text>
+<line x1="120.8" y1="123.4" x2="160" y2="123.4" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="127.4" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="127.95" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="127.4" x2="119.2" y2="127.4" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="126.9" font-size="1.57" font-style="italic">916</text>
+<circle cx="120" cy="127.4" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="126" font-size="1.57" text-anchor="middle">X3:23</text>
+<line x1="120.8" y1="127.4" x2="160" y2="127.4" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="130.4" x2="135" y2="130.4" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="130.4" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="129" font-size="1.57" text-anchor="middle">X3:24</text>
+<ellipse cx="145" cy="125.4" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="121" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="124.1" font-size="1.73" font-weight="bold">-B101  RT-101  Global radiation</text>
+<text x="161.5" y="127" font-size="1.57">pyranometer with 4-20 mA converter</text>
+<text x="161.5" y="129.1" font-size="1.51" fill="#555">2-wire, loop-powered by the module · -W68</text>
+<text x="232" y="126" font-size="1.89">0-1500 W/m²</text>
+<text x="300" y="126" font-size="1.84">A29 after 1 s · radiation sum frozen</text>
+<text x="17" y="139.2" font-size="1.89" font-weight="bold">%IW108</text>
+<text x="31" y="139.2" font-size="1.84">TT101_RAW</text>
+<text x="61" y="139.2" font-size="1.67" text-anchor="middle" font-weight="bold">AI0</text>
+<circle cx="68" cy="136.6" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="137.15" font-size="1.4" text-anchor="end">+24V</text>
+<line x1="68.7" y1="136.6" x2="119.2" y2="136.6" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="136.1" font-size="1.57" font-style="italic">917</text>
+<circle cx="120" cy="136.6" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="135.2" font-size="1.57" text-anchor="middle">X3:25</text>
+<line x1="120.8" y1="136.6" x2="160" y2="136.6" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="140.6" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="141.15" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="140.6" x2="119.2" y2="140.6" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="140.1" font-size="1.57" font-style="italic">918</text>
+<circle cx="120" cy="140.6" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="139.2" font-size="1.57" text-anchor="middle">X3:26</text>
+<line x1="120.8" y1="140.6" x2="160" y2="140.6" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="143.6" x2="135" y2="143.6" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="143.6" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="142.2" font-size="1.57" text-anchor="middle">X3:27</text>
+<ellipse cx="145" cy="138.6" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="134.2" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="137.3" font-size="1.73" font-weight="bold">-B102  TT-101  Outside temperature</text>
+<text x="161.5" y="140.2" font-size="1.57">combined T/RH sensor, channel T</text>
+<text x="161.5" y="142.3" font-size="1.51" fill="#555">2-wire, loop-powered by the module · -W69</text>
+<text x="232" y="139.2" font-size="1.89">0-50 °C</text>
+<text x="300" y="139.2" font-size="1.84">A31 after 1 s · display only</text>
+<text x="17" y="152.4" font-size="1.89" font-weight="bold">%IW109</text>
+<text x="31" y="152.4" font-size="1.84">MT101_RAW</text>
+<text x="61" y="152.4" font-size="1.67" text-anchor="middle" font-weight="bold">AI1</text>
+<circle cx="68" cy="149.8" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="150.35" font-size="1.4" text-anchor="end">+24V</text>
+<line x1="68.7" y1="149.8" x2="119.2" y2="149.8" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="149.3" font-size="1.57" font-style="italic">919</text>
+<circle cx="120" cy="149.8" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="148.4" font-size="1.57" text-anchor="middle">X3:28</text>
+<line x1="120.8" y1="149.8" x2="160" y2="149.8" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="153.8" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="154.35" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="153.8" x2="119.2" y2="153.8" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="153.3" font-size="1.57" font-style="italic">920</text>
+<circle cx="120" cy="153.8" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="152.4" font-size="1.57" text-anchor="middle">X3:29</text>
+<line x1="120.8" y1="153.8" x2="160" y2="153.8" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="156.8" x2="135" y2="156.8" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="156.8" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="155.4" font-size="1.57" text-anchor="middle">X3:30</text>
+<ellipse cx="145" cy="151.8" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="147.4" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="150.5" font-size="1.73" font-weight="bold">-B102  MT-101  Outside humidity</text>
+<text x="161.5" y="153.4" font-size="1.57">combined T/RH sensor, channel RH</text>
+<text x="161.5" y="155.5" font-size="1.51" fill="#555">2-wire, loop-powered by the module · -W70</text>
+<text x="232" y="152.4" font-size="1.89">0-100 %RH</text>
+<text x="300" y="152.4" font-size="1.84">A31 after 1 s · display only</text>
+<text x="17" y="165.6" font-size="1.89" font-weight="bold">%IW110</text>
+<text x="31" y="165.6" font-size="1.84">ST101_RAW</text>
+<text x="61" y="165.6" font-size="1.67" text-anchor="middle" font-weight="bold">AI2</text>
+<circle cx="68" cy="163" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="163.55" font-size="1.4" text-anchor="end">+24V</text>
+<line x1="68.7" y1="163" x2="119.2" y2="163" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="162.5" font-size="1.57" font-style="italic">921</text>
+<circle cx="120" cy="163" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="161.6" font-size="1.57" text-anchor="middle">X3:31</text>
+<line x1="120.8" y1="163" x2="160" y2="163" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="167" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="167.55" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="167" x2="119.2" y2="167" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="166.5" font-size="1.57" font-style="italic">922</text>
+<circle cx="120" cy="167" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="165.6" font-size="1.57" text-anchor="middle">X3:32</text>
+<line x1="120.8" y1="167" x2="160" y2="167" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="170" x2="135" y2="170" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="170" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="168.6" font-size="1.57" text-anchor="middle">X3:33</text>
+<ellipse cx="145" cy="165" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="160.6" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="163.7" font-size="1.73" font-weight="bold">-B104  ST-101  Wind speed</text>
+<text x="161.5" y="166.6" font-size="1.57">cup anemometer</text>
+<text x="161.5" y="168.7" font-size="1.51" fill="#555">2-wire, loop-powered by the module · -W71</text>
+<text x="232" y="165.6" font-size="1.89">0-40 m/s</text>
+<text x="300" y="165.6" font-size="1.84">A30 after 1 s · storm assumed</text>
+<text x="17" y="178.8" font-size="1.89" font-weight="bold">%IW111</text>
+<text x="31" y="178.8" font-size="1.84">TT501_RAW</text>
+<text x="61" y="178.8" font-size="1.67" text-anchor="middle" font-weight="bold">AI3</text>
+<circle cx="68" cy="176.2" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="176.75" font-size="1.4" text-anchor="end">+24V</text>
+<line x1="68.7" y1="176.2" x2="119.2" y2="176.2" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="175.7" font-size="1.57" font-style="italic">923</text>
+<circle cx="120" cy="176.2" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="174.8" font-size="1.57" text-anchor="middle">X3:34</text>
+<line x1="120.8" y1="176.2" x2="160" y2="176.2" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="180.2" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="180.75" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="180.2" x2="119.2" y2="180.2" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="179.7" font-size="1.57" font-style="italic">924</text>
+<circle cx="120" cy="180.2" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="178.8" font-size="1.57" text-anchor="middle">X3:35</text>
+<line x1="120.8" y1="180.2" x2="160" y2="180.2" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="183.2" x2="135" y2="183.2" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="183.2" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="181.8" font-size="1.57" text-anchor="middle">X3:36</text>
+<ellipse cx="145" cy="178.2" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="173.8" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="176.9" font-size="1.73" font-weight="bold">-B501  TT-501  Greenhouse temperature</text>
+<text x="161.5" y="179.8" font-size="1.57">aspirated T/RH box, channel T</text>
+<text x="161.5" y="181.9" font-size="1.51" fill="#555">2-wire, loop-powered by the module · -W72</text>
+<text x="232" y="178.8" font-size="1.89">0-50 °C</text>
+<text x="300" y="178.8" font-size="1.84">A32 after 1 s · vent 50 %, COOL/fog blocked</text>
+<text x="17" y="192" font-size="1.89" font-weight="bold">%IW112</text>
+<text x="31" y="192" font-size="1.84">MT501_RAW</text>
+<text x="61" y="192" font-size="1.67" text-anchor="middle" font-weight="bold">AI4</text>
+<circle cx="68" cy="189.4" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="189.95" font-size="1.4" text-anchor="end">+24V</text>
+<line x1="68.7" y1="189.4" x2="119.2" y2="189.4" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="188.9" font-size="1.57" font-style="italic">925</text>
+<circle cx="120" cy="189.4" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="188" font-size="1.57" text-anchor="middle">X3:37</text>
+<line x1="120.8" y1="189.4" x2="160" y2="189.4" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="193.4" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="193.95" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="193.4" x2="119.2" y2="193.4" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="192.9" font-size="1.57" font-style="italic">926</text>
+<circle cx="120" cy="193.4" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="192" font-size="1.57" text-anchor="middle">X3:38</text>
+<line x1="120.8" y1="193.4" x2="160" y2="193.4" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="196.4" x2="135" y2="196.4" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="196.4" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="195" font-size="1.57" text-anchor="middle">X3:39</text>
+<ellipse cx="145" cy="191.4" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="187" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="190.1" font-size="1.73" font-weight="bold">-B501  MT-501  Greenhouse humidity</text>
+<text x="161.5" y="193" font-size="1.57">aspirated T/RH box, channel RH</text>
+<text x="161.5" y="195.1" font-size="1.51" fill="#555">2-wire, loop-powered by the module · -W73</text>
+<text x="232" y="192" font-size="1.89">0-100 %RH</text>
+<text x="300" y="192" font-size="1.84">A33 after 1 s · humidity venting, fog off</text>
+<text x="17" y="205.2" font-size="1.89" font-weight="bold">%IW113</text>
+<text x="31" y="205.2" font-size="1.84">AT502_RAW</text>
+<text x="61" y="205.2" font-size="1.67" text-anchor="middle" font-weight="bold">AI5</text>
+<circle cx="68" cy="202.6" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="203.15" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="202.6" x2="119.2" y2="202.6" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="202.1" font-size="1.57" font-style="italic">927</text>
+<circle cx="120" cy="202.6" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="201.2" font-size="1.57" text-anchor="middle">X3:40</text>
+<line x1="120.8" y1="202.6" x2="160" y2="202.6" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="206.6" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="207.15" font-size="1.4" text-anchor="end">M</text>
+<line x1="68.7" y1="206.6" x2="119.2" y2="206.6" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="206.1" font-size="1.57" font-style="italic">928</text>
+<circle cx="120" cy="206.6" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="205.2" font-size="1.57" text-anchor="middle">X3:41</text>
+<line x1="120.8" y1="206.6" x2="160" y2="206.6" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="209.6" x2="135" y2="209.6" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="209.6" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="208.2" font-size="1.57" text-anchor="middle">X3:42</text>
+<ellipse cx="145" cy="204.6" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="200.2" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="203.3" font-size="1.73" font-weight="bold">-B502  AT-502  Greenhouse CO2</text>
+<text x="161.5" y="206.2" font-size="1.57">NDIR CO2 transmitter, 24 V DC powered</text>
+<text x="161.5" y="208.3" font-size="1.51" fill="#555">active output, own supply +24.4 · -W74</text>
+<text x="232" y="205.2" font-size="1.89">0-2000 ppm</text>
+<text x="300" y="205.2" font-size="1.84">A34 after 1 s · display only</text>
+<text x="17" y="218.4" font-size="1.89" font-weight="bold">%IW114</text>
+<text x="31" y="218.4" font-size="1.84">ZT511_RAW</text>
+<text x="61" y="218.4" font-size="1.67" text-anchor="middle" font-weight="bold">AI6</text>
+<circle cx="68" cy="215.8" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="216.35" font-size="1.4" text-anchor="end">+24V</text>
+<line x1="68.7" y1="215.8" x2="119.2" y2="215.8" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="215.3" font-size="1.57" font-style="italic">929</text>
+<circle cx="120" cy="215.8" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="214.4" font-size="1.57" text-anchor="middle">X3:43</text>
+<line x1="120.8" y1="215.8" x2="160" y2="215.8" stroke="#000" stroke-width="0.3"/>
+<circle cx="68" cy="219.8" r="0.7" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="66.6" y="220.35" font-size="1.4" text-anchor="end">AI</text>
+<line x1="68.7" y1="219.8" x2="119.2" y2="219.8" stroke="#000" stroke-width="0.3"/>
+<text x="88" y="219.3" font-size="1.57" font-style="italic">930</text>
+<circle cx="120" cy="219.8" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="120" y="218.4" font-size="1.57" text-anchor="middle">X3:44</text>
+<line x1="120.8" y1="219.8" x2="160" y2="219.8" stroke="#000" stroke-width="0.3"/>
+<line x1="112" y1="222.8" x2="135" y2="222.8" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<circle cx="135" cy="222.8" r="0.8" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="135" y="221.4" font-size="1.57" text-anchor="middle">X3:45</text>
+<ellipse cx="145" cy="217.8" rx="3.2" ry="4.4" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<rect x="160" y="213.4" width="64" height="8.8" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="161.5" y="216.5" font-size="1.73" font-weight="bold">-B511  ZT-511  Vent position</text>
+<text x="161.5" y="219.4" font-size="1.57">position transmitter on the vent drive</text>
+<text x="161.5" y="221.5" font-size="1.51" fill="#555">2-wire, loop-powered by the module · -W75</text>
+<text x="232" y="218.4" font-size="1.89">0-100 %</text>
+<text x="300" y="218.4" font-size="1.84">A35 after 1 s · vent on limit switches</text>
+<text x="17" y="227.8" font-size="1.89">%IW115 CLOCK_MIN is not wired: it is the coupler's NTP-synchronised clock register (minutes since midnight), read in the same input-register block (FDS §5.3).</text>
+<text x="17" y="231" font-size="1.89">Raw value = mA × 65535 / 20; 4 mA = 13107. Below 3.6 mA (raw ≤ 11796) the PLC flags a signal fault (NAMUR NE 43). Shields are earthed at the panel end only (shield clamps at -X3).</text>
+<rect x="10" y="10" width="400" height="277" fill="none" stroke="#000" stroke-width="0.5"/>
+<rect x="15" y="15" width="390" height="267" fill="none" stroke="#000" stroke-width="0.35"/>
+<line x1="15" y1="10" x2="15" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="15" y1="282" x2="15" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="63.75" y1="10" x2="63.75" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="63.75" y1="282" x2="63.75" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="112.5" y1="10" x2="112.5" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="112.5" y1="282" x2="112.5" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="161.25" y1="10" x2="161.25" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="161.25" y1="282" x2="161.25" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="210" y1="10" x2="210" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="210" y1="282" x2="210" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="258.75" y1="10" x2="258.75" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="258.75" y1="282" x2="258.75" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="307.5" y1="10" x2="307.5" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="307.5" y1="282" x2="307.5" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="356.25" y1="10" x2="356.25" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="356.25" y1="282" x2="356.25" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="10" x2="405" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="282" x2="405" y2="287" stroke="#000" stroke-width="0.25"/>
+<text x="39.38" y="13.6" font-size="2.59" text-anchor="middle">1</text>
+<text x="39.38" y="285.9" font-size="2.59" text-anchor="middle">1</text>
+<text x="88.12" y="13.6" font-size="2.59" text-anchor="middle">2</text>
+<text x="88.12" y="285.9" font-size="2.59" text-anchor="middle">2</text>
+<text x="136.88" y="13.6" font-size="2.59" text-anchor="middle">3</text>
+<text x="136.88" y="285.9" font-size="2.59" text-anchor="middle">3</text>
+<text x="185.62" y="13.6" font-size="2.59" text-anchor="middle">4</text>
+<text x="185.62" y="285.9" font-size="2.59" text-anchor="middle">4</text>
+<text x="234.38" y="13.6" font-size="2.59" text-anchor="middle">5</text>
+<text x="234.38" y="285.9" font-size="2.59" text-anchor="middle">5</text>
+<text x="283.12" y="13.6" font-size="2.59" text-anchor="middle">6</text>
+<text x="283.12" y="285.9" font-size="2.59" text-anchor="middle">6</text>
+<text x="331.88" y="13.6" font-size="2.59" text-anchor="middle">7</text>
+<text x="331.88" y="285.9" font-size="2.59" text-anchor="middle">7</text>
+<text x="380.62" y="13.6" font-size="2.59" text-anchor="middle">8</text>
+<text x="380.62" y="285.9" font-size="2.59" text-anchor="middle">8</text>
+<line x1="10" y1="15" x2="15" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="15" x2="410" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="59.5" x2="15" y2="59.5" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="59.5" x2="410" y2="59.5" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="104" x2="15" y2="104" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="104" x2="410" y2="104" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="148.5" x2="15" y2="148.5" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="148.5" x2="410" y2="148.5" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="193" x2="15" y2="193" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="193" x2="410" y2="193" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="237.5" x2="15" y2="237.5" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="237.5" x2="410" y2="237.5" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="282" x2="15" y2="282" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="282" x2="410" y2="282" stroke="#000" stroke-width="0.25"/>
+<text x="12.5" y="38.15" font-size="2.59" text-anchor="middle">A</text>
+<text x="407.5" y="38.15" font-size="2.59" text-anchor="middle">A</text>
+<text x="12.5" y="82.65" font-size="2.59" text-anchor="middle">B</text>
+<text x="407.5" y="82.65" font-size="2.59" text-anchor="middle">B</text>
+<text x="12.5" y="127.15" font-size="2.59" text-anchor="middle">C</text>
+<text x="407.5" y="127.15" font-size="2.59" text-anchor="middle">C</text>
+<text x="12.5" y="171.65" font-size="2.59" text-anchor="middle">D</text>
+<text x="407.5" y="171.65" font-size="2.59" text-anchor="middle">D</text>
+<text x="12.5" y="216.15" font-size="2.59" text-anchor="middle">E</text>
+<text x="407.5" y="216.15" font-size="2.59" text-anchor="middle">E</text>
+<text x="12.5" y="260.65" font-size="2.59" text-anchor="middle">F</text>
+<text x="407.5" y="260.65" font-size="2.59" text-anchor="middle">F</text>
+<rect x="15" y="252" width="390" height="30" fill="#fff" stroke="#000" stroke-width="0.5"/>
+<line x1="100" y1="252" x2="100" y2="282" stroke="#000" stroke-width="0.35"/>
+<line x1="190" y1="252" x2="190" y2="282" stroke="#000" stroke-width="0.35"/>
+<line x1="248" y1="252" x2="248" y2="282" stroke="#000" stroke-width="0.35"/>
+<line x1="340" y1="252" x2="340" y2="282" stroke="#000" stroke-width="0.35"/>
+<text x="17" y="255.6" font-size="1.84" fill="#555">Project</text>
+<text x="17" y="261.2" font-size="3.89" font-weight="bold">GH-1 Tropical Greenhouse</text>
+<text x="17" y="265.6" font-size="2.16">Irrigation, fertigation and climate control, 1 000 m² greenhouse</text>
+<text x="17" y="269" font-size="2.16">OpenPLC Runtime v4 + Modbus TCP remote I/O</text>
+<text x="17" y="272.4" font-size="2.16">Supply 3/N/PE AC 400/230 V 50 Hz</text>
+<text x="17" y="278.6" font-size="1.84" fill="#555">Symbols IEC 60617 · designations IEC 81346 · IEC 60204-1</text>
+<text x="102" y="255.6" font-size="1.84" fill="#555">Rev</text>
+<text x="110" y="255.6" font-size="1.84" fill="#555">Description</text>
+<text x="160" y="255.6" font-size="1.84" fill="#555">Date</text>
+<text x="176" y="255.6" font-size="1.84" fill="#555">By</text>
+<line x1="100" y1="257" x2="190" y2="257" stroke="#000" stroke-width="0.15"/>
+<line x1="100" y1="263.25" x2="190" y2="263.25" stroke="#000" stroke-width="0.15"/>
+<line x1="100" y1="269.5" x2="190" y2="269.5" stroke="#000" stroke-width="0.15"/>
+<line x1="100" y1="275.75" x2="190" y2="275.75" stroke="#000" stroke-width="0.15"/>
+<text x="103" y="261.6" font-size="2.38" font-weight="bold">A</text>
+<text x="110" y="261.6" font-size="2.38">First issue for review</text>
+<text x="160" y="261.6" font-size="2.16">2026-11-19</text>
+<text x="192" y="255.6" font-size="1.84" fill="#555">Name</text>
+<text x="226" y="255.6" font-size="1.84" fill="#555">Date</text>
+<text x="192" y="262.5" font-size="2.16">Drawn</text>
+<line x1="206" y1="263.1" x2="223" y2="263.1" stroke="#000" stroke-width="0.15"/>
+<line x1="226" y1="263.1" x2="246" y2="263.1" stroke="#000" stroke-width="0.15"/>
+<text x="192" y="270" font-size="2.16">Checked</text>
+<line x1="206" y1="270.6" x2="223" y2="270.6" stroke="#000" stroke-width="0.15"/>
+<line x1="226" y1="270.6" x2="246" y2="270.6" stroke="#000" stroke-width="0.15"/>
+<text x="192" y="277.5" font-size="2.16">Approved</text>
+<line x1="206" y1="278.1" x2="223" y2="278.1" stroke="#000" stroke-width="0.15"/>
+<line x1="226" y1="278.1" x2="246" y2="278.1" stroke="#000" stroke-width="0.15"/>
+<text x="250" y="255.6" font-size="1.84" fill="#555">Title</text>
+<text x="250" y="264.5" font-size="4.32" font-weight="bold">Analog inputs -A1.5 / -A1.6</text>
+<text x="250" y="271.5" font-size="2.38">Electrical drawing set - control panel GH-1 (pump room)</text>
+<text x="250" y="278.6" font-size="1.94" fill="#555">Format A3 · scale none</text>
+<text x="342" y="255.6" font-size="1.84" fill="#555">Drawing no.</text>
+<text x="342" y="262.5" font-size="4.54" font-weight="bold">GH1-E-09</text>
+<text x="342" y="268.5" font-size="2.59">Sheet 10 / 15</text>
+<text x="375" y="268.5" font-size="2.59" font-weight="bold">Rev. A</text>
+<text x="342" y="274" font-size="2.38">Date 2026-11-19</text>
+<text x="342" y="278.6" font-size="1.94" fill="#555">Next: GH1-E-10</text>
+</g>
+</svg>

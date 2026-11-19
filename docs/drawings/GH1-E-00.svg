@@ -1,0 +1,524 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 420 297">
+<title>GH1-E-00 Cover sheet, index and legend</title>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#000}</style>
+<rect x="0" y="0" width="420" height="297" fill="#fff"/>
+<g stroke-linecap="round" stroke-linejoin="round">
+<text x="22" y="31" font-size="8.1" font-weight="bold">GH-1 Tropical Greenhouse</text>
+<text x="22" y="40" font-size="5.4">Electrical drawing set</text>
+<text x="22" y="47" font-size="2.48">Irrigation (4 drip zones), fertigation (A/B + acid on EC/pH) and climate control, 1 000 m² greenhouse</text>
+<text x="22" y="51" font-size="2.48">Supply 3/N/PE AC 400/230 V 50 Hz (TN-S) · control 24 V DC (PELV)</text>
+<text x="22" y="55" font-size="2.48">PLC: OpenPLC Runtime v4 (IEC 61131-3 ST) · remote I/O -A1 over Modbus TCP</text>
+<text x="22" y="59" font-size="2.48">Revision A · 2026-11-19 · first issue for review</text>
+<text x="22" y="63" font-size="2.48">Basis: FDS-GH1 §4 (I/O list), §11 (interlocks), §13 (comms loss)</text>
+<text x="22" y="72.4" font-size="2.81" font-weight="bold">Drawing index</text>
+<rect x="22" y="74" width="177" height="4.5" fill="#e8e8e8" stroke="#000" stroke-width="0.2"/>
+<text x="23" y="77.24" font-size="2.16" font-weight="bold">Sheet</text>
+<text x="40" y="77.24" font-size="2.16" font-weight="bold">Drawing no.</text>
+<text x="66" y="77.24" font-size="2.16" font-weight="bold">Title</text>
+<text x="188" y="77.24" font-size="2.16" font-weight="bold">Rev.</text>
+<line x1="22" y1="78.5" x2="199" y2="78.5" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="81.74" font-size="2.16">1 / 15</text>
+<text x="40" y="81.74" font-size="2.16">GH1-E-00</text>
+<text x="66" y="81.74" font-size="2.16">Cover sheet, index and legend</text>
+<text x="188" y="81.74" font-size="2.16">A</text>
+<line x1="22" y1="83" x2="199" y2="83" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="86.24" font-size="2.16">2 / 15</text>
+<text x="40" y="86.24" font-size="2.16">GH1-E-01</text>
+<text x="66" y="86.24" font-size="2.16">Power distribution and 24 V DC</text>
+<text x="188" y="86.24" font-size="2.16">A</text>
+<line x1="22" y1="87.5" x2="199" y2="87.5" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="90.74" font-size="2.16">3 / 15</text>
+<text x="40" y="90.74" font-size="2.16">GH1-E-02</text>
+<text x="66" y="90.74" font-size="2.16">Pump feeders P-201, P-531, P-541</text>
+<text x="188" y="90.74" font-size="2.16">A</text>
+<line x1="22" y1="92" x2="199" y2="92" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="95.24" font-size="2.16">4 / 15</text>
+<text x="40" y="95.24" font-size="2.16">GH1-E-03</text>
+<text x="66" y="95.24" font-size="2.16">Exhaust fan feeders F-601 ... F-603</text>
+<text x="188" y="95.24" font-size="2.16">A</text>
+<line x1="22" y1="96.5" x2="199" y2="96.5" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="99.74" font-size="2.16">5 / 15</text>
+<text x="40" y="99.74" font-size="2.16">GH1-E-04</text>
+<text x="66" y="99.74" font-size="2.16">Vent and shade net drives (reversing)</text>
+<text x="188" y="99.74" font-size="2.16">A</text>
+<line x1="22" y1="101" x2="199" y2="101" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="104.24" font-size="2.16">6 / 15</text>
+<text x="40" y="104.24" font-size="2.16">GH1-E-05</text>
+<text x="66" y="104.24" font-size="2.16">Dosing pumps P-311 ... P-313</text>
+<text x="188" y="104.24" font-size="2.16">A</text>
+<line x1="22" y1="105.5" x2="199" y2="105.5" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="108.74" font-size="2.16">7 / 15</text>
+<text x="40" y="108.74" font-size="2.16">GH1-E-06</text>
+<text x="66" y="108.74" font-size="2.16">Safety circuit</text>
+<text x="188" y="108.74" font-size="2.16">A</text>
+<line x1="22" y1="110" x2="199" y2="110" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="113.24" font-size="2.16">8 / 15</text>
+<text x="40" y="113.24" font-size="2.16">GH1-E-07</text>
+<text x="66" y="113.24" font-size="2.16">Digital inputs -A1.1 / -A1.2</text>
+<text x="188" y="113.24" font-size="2.16">A</text>
+<line x1="22" y1="114.5" x2="199" y2="114.5" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="117.74" font-size="2.16">9 / 15</text>
+<text x="40" y="117.74" font-size="2.16">GH1-E-08</text>
+<text x="66" y="117.74" font-size="2.16">Digital outputs -A1.3 / -A1.4</text>
+<text x="188" y="117.74" font-size="2.16">A</text>
+<line x1="22" y1="119" x2="199" y2="119" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="122.24" font-size="2.16">10 / 15</text>
+<text x="40" y="122.24" font-size="2.16">GH1-E-09</text>
+<text x="66" y="122.24" font-size="2.16">Analog inputs -A1.5 / -A1.6</text>
+<text x="188" y="122.24" font-size="2.16">A</text>
+<line x1="22" y1="123.5" x2="199" y2="123.5" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="126.74" font-size="2.16">11 / 15</text>
+<text x="40" y="126.74" font-size="2.16">GH1-E-10</text>
+<text x="66" y="126.74" font-size="2.16">Terminal plan -X2</text>
+<text x="188" y="126.74" font-size="2.16">A</text>
+<line x1="22" y1="128" x2="199" y2="128" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="131.24" font-size="2.16">12 / 15</text>
+<text x="40" y="131.24" font-size="2.16">GH1-E-11</text>
+<text x="66" y="131.24" font-size="2.16">Terminal plans -X1, -X3, -X4 and cables</text>
+<text x="188" y="131.24" font-size="2.16">A</text>
+<line x1="22" y1="132.5" x2="199" y2="132.5" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="135.74" font-size="2.16">13 / 15</text>
+<text x="40" y="135.74" font-size="2.16">GH1-E-12</text>
+<text x="66" y="135.74" font-size="2.16">Panel layout</text>
+<text x="188" y="135.74" font-size="2.16">A</text>
+<line x1="22" y1="137" x2="199" y2="137" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="140.24" font-size="2.16">14 / 15</text>
+<text x="40" y="140.24" font-size="2.16">GH1-E-13</text>
+<text x="66" y="140.24" font-size="2.16">Parts list</text>
+<text x="188" y="140.24" font-size="2.16">A</text>
+<line x1="22" y1="141.5" x2="199" y2="141.5" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="144.74" font-size="2.16">15 / 15</text>
+<text x="40" y="144.74" font-size="2.16">GH1-E-14</text>
+<text x="66" y="144.74" font-size="2.16">Network architecture</text>
+<text x="188" y="144.74" font-size="2.16">A</text>
+<line x1="22" y1="146" x2="199" y2="146" stroke="#000" stroke-width="0.12"/>
+<rect x="22" y="74" width="177" height="72" fill="none" stroke="#000" stroke-width="0.3"/>
+<line x1="39" y1="74" x2="39" y2="146" stroke="#000" stroke-width="0.12"/>
+<line x1="65" y1="74" x2="65" y2="146" stroke="#000" stroke-width="0.12"/>
+<line x1="187" y1="74" x2="187" y2="146" stroke="#000" stroke-width="0.12"/>
+<text x="22" y="155.4" font-size="2.81" font-weight="bold">Reference designations (product aspect, prefix '-')</text>
+<rect x="22" y="157" width="188" height="4.4" fill="#e8e8e8" stroke="#000" stroke-width="0.2"/>
+<text x="23" y="160.17" font-size="2.11" font-weight="bold">Code</text>
+<text x="35" y="160.17" font-size="2.11" font-weight="bold">Class (IEC 81346-2)</text>
+<text x="87" y="160.17" font-size="2.11" font-weight="bold">Used for</text>
+<line x1="22" y1="161.4" x2="210" y2="161.4" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="164.57" font-size="2.11">A</text>
+<text x="35" y="164.57" font-size="2.11">Assembly</text>
+<text x="87" y="164.57" font-size="2.11">-A1 coupler, -A1.1...-A1.7 I/O modules, -A10 PLC, -A11 switch, -A12 HMI</text>
+<line x1="22" y1="165.8" x2="210" y2="165.8" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="168.97" font-size="2.11">B</text>
+<text x="35" y="168.97" font-size="2.11">Converting a variable into a signal</text>
+<text x="87" y="168.97" font-size="2.11">-B1 thermostat, -B101...-B541 field instruments</text>
+<line x1="22" y1="170.2" x2="210" y2="170.2" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="173.37" font-size="2.11">E</text>
+<text x="35" y="173.37" font-size="2.11">Heating / cooling / lighting</text>
+<text x="87" y="173.37" font-size="2.11">-E1 panel filter fan</text>
+<line x1="22" y1="174.6" x2="210" y2="174.6" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="177.77" font-size="2.11">F</text>
+<text x="35" y="177.77" font-size="2.11">Protecting</text>
+<text x="87" y="177.77" font-size="2.11">-F1...-F4, -F21...-F25, -F311...-F313 circuit breakers</text>
+<line x1="22" y1="179" x2="210" y2="179" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="182.17" font-size="2.11">G</text>
+<text x="35" y="182.17" font-size="2.11">Supplying energy</text>
+<text x="87" y="182.17" font-size="2.11">-G1 power supply 24 V DC</text>
+<line x1="22" y1="183.4" x2="210" y2="183.4" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="186.57" font-size="2.11">K</text>
+<text x="35" y="186.57" font-size="2.11">Processing signals; contactors *</text>
+<text x="87" y="186.57" font-size="2.11">-K0 safety relay, -K201...-K603 contactors</text>
+<line x1="22" y1="187.8" x2="210" y2="187.8" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="190.97" font-size="2.11">M</text>
+<text x="35" y="190.97" font-size="2.11">Providing mechanical drive</text>
+<text x="87" y="190.97" font-size="2.11">-M201 ... -M603 motors and pumps</text>
+<line x1="22" y1="192.2" x2="210" y2="192.2" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="195.37" font-size="2.11">P</text>
+<text x="35" y="195.37" font-size="2.11">Presenting information</text>
+<text x="87" y="195.37" font-size="2.11">-P1 stack light (-P1.1 GN, -P1.2 YE, -P1.3 RD)</text>
+<line x1="22" y1="196.6" x2="210" y2="196.6" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="199.77" font-size="2.11">Q</text>
+<text x="35" y="199.77" font-size="2.11">Switching energy flow</text>
+<text x="87" y="199.77" font-size="2.11">-Q0 main switch, -Q201...-Q603 motor-protection breakers</text>
+<line x1="22" y1="201" x2="210" y2="201" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="204.17" font-size="2.11">S</text>
+<text x="35" y="204.17" font-size="2.11">Manual control</text>
+<text x="87" y="204.17" font-size="2.11">-S0.1/-S0.2 E-stops, -S0R reset, -S1 START, -S2 STOP, -S3 RESET</text>
+<line x1="22" y1="205.4" x2="210" y2="205.4" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="208.57" font-size="2.11">W</text>
+<text x="35" y="208.57" font-size="2.11">Guiding (cables)</text>
+<text x="87" y="208.57" font-size="2.11">-W1 ... -W93, -W501 ... -W503</text>
+<line x1="22" y1="209.8" x2="210" y2="209.8" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="212.97" font-size="2.11">X</text>
+<text x="35" y="212.97" font-size="2.11">Connecting</text>
+<text x="87" y="212.97" font-size="2.11">-X0 PE bar, -X1 ... -X4 terminal strips</text>
+<line x1="22" y1="214.2" x2="210" y2="214.2" stroke="#000" stroke-width="0.12"/>
+<text x="23" y="217.37" font-size="2.11">Y</text>
+<text x="35" y="217.37" font-size="2.11">Electrically operated valve *</text>
+<text x="87" y="217.37" font-size="2.11">-Y201, -Y301, -Y401 ... -Y404 solenoid valves</text>
+<line x1="22" y1="218.6" x2="210" y2="218.6" stroke="#000" stroke-width="0.12"/>
+<rect x="22" y="157" width="188" height="61.6" fill="none" stroke="#000" stroke-width="0.3"/>
+<line x1="34" y1="157" x2="34" y2="218.6" stroke="#000" stroke-width="0.12"/>
+<line x1="86" y1="157" x2="86" y2="218.6" stroke="#000" stroke-width="0.12"/>
+<text x="22" y="222.6" font-size="2.05">* K for contactors and Y for solenoid valves follow panel-building practice (IEC 81346-2:2019 would use QA and MB). Feeders and field devices take the P&amp;ID loop number: -K201/-M201 = P-201,</text>
+<text x="22" y="225.3" font-size="2.05">-Y401 = XV-401, -B202 = LSL-201. Sub-devices use a point: -A1.3 = module 3 of -A1, -K511.1 = vent open contactor.</text>
+<text x="214" y="22" font-size="2.81" font-weight="bold">Symbols (IEC 60617)</text>
+<rect x="214" y="26" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="237.25" y1="29" x2="237.25" y2="30.5" stroke="#000" stroke-width="0.3"/>
+<line x1="237.25" y1="30.5" x2="237.25" y2="34.02" stroke="#000" stroke-width="0.3"/>
+<line x1="237.25" y1="37.98" x2="237.25" y2="41.5" stroke="#000" stroke-width="0.3"/>
+<line x1="237.25" y1="37.98" x2="234.75" y2="34.02" stroke="#000" stroke-width="0.3"/>
+<text x="238.05" y="32.6" font-size="1.73">13</text>
+<text x="238.05" y="41" font-size="1.73">14</text>
+<text x="237.25" y="47.4" font-size="2.05" text-anchor="middle">NO contact</text>
+<rect x="260.5" y="26" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="283.75" y1="29" x2="283.75" y2="30.5" stroke="#000" stroke-width="0.3"/>
+<line x1="283.75" y1="30.5" x2="283.75" y2="34.02" stroke="#000" stroke-width="0.3"/>
+<line x1="283.75" y1="37.98" x2="283.75" y2="41.5" stroke="#000" stroke-width="0.3"/>
+<line x1="283.75" y1="34.02" x2="286.15" y2="34.02" stroke="#000" stroke-width="0.3"/>
+<line x1="283.75" y1="37.98" x2="286.5" y2="33.42" stroke="#000" stroke-width="0.3"/>
+<text x="284.55" y="32.6" font-size="1.73">11</text>
+<text x="284.55" y="41" font-size="1.73">12</text>
+<text x="283.75" y="47.4" font-size="2.05" text-anchor="middle">NC contact</text>
+<rect x="307" y="26" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="333.25" y1="30" x2="333.25" y2="33.84" stroke="#000" stroke-width="0.3"/>
+<line x1="333.25" y1="38.16" x2="333.25" y2="42" stroke="#000" stroke-width="0.3"/>
+<line x1="333.25" y1="38.16" x2="330.75" y2="33.84" stroke="#000" stroke-width="0.3"/>
+<line x1="332" y1="36" x2="326.25" y2="36" stroke="#000" stroke-width="0.2" stroke-dasharray="0.9 0.6"/>
+<polyline points="325.25,34.4 326.25,34.4 326.25,37.6 325.25,37.6" fill="none" stroke="#000" stroke-width="0.3"/>
+<text x="330.25" y="47.4" font-size="2.05" text-anchor="middle">Push-button NO</text>
+<rect x="353.5" y="26" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="379.75" y1="30" x2="379.75" y2="33.84" stroke="#000" stroke-width="0.3"/>
+<line x1="379.75" y1="38.16" x2="379.75" y2="42" stroke="#000" stroke-width="0.3"/>
+<line x1="379.75" y1="33.84" x2="382.15" y2="33.84" stroke="#000" stroke-width="0.3"/>
+<line x1="379.75" y1="38.16" x2="382.5" y2="33.24" stroke="#000" stroke-width="0.3"/>
+<line x1="381.1" y1="36" x2="372.75" y2="36" stroke="#000" stroke-width="0.2" stroke-dasharray="0.9 0.6"/>
+<polyline points="371.75,34.4 372.75,34.4 372.75,37.6 371.75,37.6" fill="none" stroke="#000" stroke-width="0.3"/>
+<text x="376.75" y="47.4" font-size="2.05" text-anchor="middle">Push-button NC</text>
+<rect x="214" y="49" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="240.25" y1="53" x2="240.25" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="240.25" y1="61.16" x2="240.25" y2="65" stroke="#000" stroke-width="0.3"/>
+<line x1="240.25" y1="56.84" x2="242.65" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="240.25" y1="61.16" x2="243" y2="56.24" stroke="#000" stroke-width="0.3"/>
+<circle cx="243.2" cy="59" r="0.9" fill="none" stroke="#000" stroke-width="0.2"/>
+<polygon points="243.2,59.55 242.79,58.65 243.6,58.65" fill="#000" stroke="#000" stroke-width="0.1"/>
+<line x1="241.6" y1="59" x2="233.25" y2="59" stroke="#000" stroke-width="0.2" stroke-dasharray="0.9 0.6"/>
+<path d="M233.25,56.8 A2.2,2.2 0 0 0 233.25,61.2 Z" fill="none" stroke="#000" stroke-width="0.3"/>
+<text x="237.25" y="70.4" font-size="2.05" text-anchor="middle">E-stop, positive opening</text>
+<rect x="260.5" y="49" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="279.75" y1="53" x2="279.75" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="279.75" y1="61.16" x2="279.75" y2="65" stroke="#000" stroke-width="0.3"/>
+<line x1="279.75" y1="61.16" x2="277.25" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<path d="M278.65,56.84 A1.1,1.1 0 0 0 280.85,56.84" fill="none" stroke="#000" stroke-width="0.2"/>
+<line x1="285.75" y1="53" x2="285.75" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="285.75" y1="61.16" x2="285.75" y2="65" stroke="#000" stroke-width="0.3"/>
+<line x1="285.75" y1="61.16" x2="283.25" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<path d="M284.65,56.84 A1.1,1.1 0 0 0 286.85,56.84" fill="none" stroke="#000" stroke-width="0.2"/>
+<line x1="291.75" y1="53" x2="291.75" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="291.75" y1="61.16" x2="291.75" y2="65" stroke="#000" stroke-width="0.3"/>
+<line x1="291.75" y1="61.16" x2="289.25" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<path d="M290.65,56.84 A1.1,1.1 0 0 0 292.85,56.84" fill="none" stroke="#000" stroke-width="0.2"/>
+<line x1="290.5" y1="59" x2="278.5" y2="59" stroke="#000" stroke-width="0.2" stroke-dasharray="0.9 0.6"/>
+<text x="283.75" y="70.4" font-size="2.05" text-anchor="middle">Contactor main contacts</text>
+<rect x="307" y="49" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="330.25" y1="53" x2="330.25" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="330.25" y1="61.16" x2="330.25" y2="65" stroke="#000" stroke-width="0.3"/>
+<line x1="330.25" y1="61.16" x2="327.75" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="329.35" y1="55.94" x2="331.15" y2="57.74" stroke="#000" stroke-width="0.2"/>
+<line x1="329.35" y1="57.74" x2="331.15" y2="55.94" stroke="#000" stroke-width="0.2"/>
+<line x1="336.25" y1="53" x2="336.25" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="336.25" y1="61.16" x2="336.25" y2="65" stroke="#000" stroke-width="0.3"/>
+<line x1="336.25" y1="61.16" x2="333.75" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="335.35" y1="55.94" x2="337.15" y2="57.74" stroke="#000" stroke-width="0.2"/>
+<line x1="335.35" y1="57.74" x2="337.15" y2="55.94" stroke="#000" stroke-width="0.2"/>
+<line x1="342.25" y1="53" x2="342.25" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="342.25" y1="61.16" x2="342.25" y2="65" stroke="#000" stroke-width="0.3"/>
+<line x1="342.25" y1="61.16" x2="339.75" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="341.35" y1="55.94" x2="343.15" y2="57.74" stroke="#000" stroke-width="0.2"/>
+<line x1="341.35" y1="57.74" x2="343.15" y2="55.94" stroke="#000" stroke-width="0.2"/>
+<line x1="322.25" y1="55.8" x2="322.25" y2="62.2" stroke="#000" stroke-width="0.2" stroke-dasharray="0.9 0.6"/>
+<rect x="317.25" y="54" width="5" height="3.6" fill="none" stroke="#000" stroke-width="0.2"/>
+<text x="319.75" y="56.6" font-size="1.94" text-anchor="middle">I&gt;</text>
+<rect x="317.25" y="60.4" width="5" height="3.6" fill="none" stroke="#000" stroke-width="0.2"/>
+<polyline points="317.95,63.3 319.05,63.3 319.05,61.1 320.45,61.1 320.45,63.3 321.55,63.3" fill="none" stroke="#000" stroke-width="0.2"/>
+<line x1="341" y1="59" x2="322.25" y2="59" stroke="#000" stroke-width="0.2" stroke-dasharray="0.9 0.6"/>
+<text x="330.25" y="70.4" font-size="2.05" text-anchor="middle">Circuit breaker I&gt; + thermal</text>
+<rect x="353.5" y="49" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="374.75" y1="53" x2="374.75" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="374.75" y1="61.16" x2="374.75" y2="65" stroke="#000" stroke-width="0.3"/>
+<line x1="374.75" y1="61.16" x2="372.25" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="373.55" y1="56.84" x2="375.95" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<circle cx="374.75" cy="57.74" r="0.8" fill="none" stroke="#000" stroke-width="0.2"/>
+<line x1="380.75" y1="53" x2="380.75" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="380.75" y1="61.16" x2="380.75" y2="65" stroke="#000" stroke-width="0.3"/>
+<line x1="380.75" y1="61.16" x2="378.25" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="379.55" y1="56.84" x2="381.95" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<circle cx="380.75" cy="57.74" r="0.8" fill="none" stroke="#000" stroke-width="0.2"/>
+<line x1="386.75" y1="53" x2="386.75" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="386.75" y1="61.16" x2="386.75" y2="65" stroke="#000" stroke-width="0.3"/>
+<line x1="386.75" y1="61.16" x2="384.25" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<line x1="385.55" y1="56.84" x2="387.95" y2="56.84" stroke="#000" stroke-width="0.3"/>
+<circle cx="386.75" cy="57.74" r="0.8" fill="none" stroke="#000" stroke-width="0.2"/>
+<line x1="385.5" y1="59" x2="373.5" y2="59" stroke="#000" stroke-width="0.2" stroke-dasharray="0.9 0.6"/>
+<line x1="373.5" y1="59" x2="367.75" y2="59" stroke="#000" stroke-width="0.2" stroke-dasharray="0.9 0.6"/>
+<line x1="367.75" y1="57.5" x2="367.75" y2="60.5" stroke="#000" stroke-width="0.3"/>
+<line x1="366.15" y1="57.5" x2="367.75" y2="57.5" stroke="#000" stroke-width="0.3"/>
+<line x1="366.15" y1="60.5" x2="367.75" y2="60.5" stroke="#000" stroke-width="0.3"/>
+<text x="376.75" y="70.4" font-size="2.05" text-anchor="middle">Switch-disconnector</text>
+<rect x="214" y="72" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="237.25" y1="76" x2="237.25" y2="79.5" stroke="#000" stroke-width="0.3"/>
+<rect x="232.75" y="79.5" width="9" height="5" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="236.45" y="78.7" font-size="1.73" text-anchor="end">A1</text>
+<text x="236.45" y="86.7" font-size="1.73" text-anchor="end">A2</text>
+<line x1="237.25" y1="84.5" x2="237.25" y2="88" stroke="#000" stroke-width="0.3"/>
+<text x="237.25" y="93.4" font-size="2.05" text-anchor="middle">Coil (relay / contactor / valve)</text>
+<rect x="260.5" y="72" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="280.75" y1="76" x2="280.75" y2="79.5" stroke="#000" stroke-width="0.3"/>
+<rect x="276.25" y="79.5" width="9" height="5" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="279.95" y="78.7" font-size="1.73" text-anchor="end">A1</text>
+<text x="279.95" y="86.7" font-size="1.73" text-anchor="end">A2</text>
+<line x1="280.75" y1="84.5" x2="280.75" y2="88" stroke="#000" stroke-width="0.3"/>
+<polyline points="280.75,77.5 288.75,77.5 288.75,86.5 280.75,86.5" fill="none" stroke="#000" stroke-width="0.2"/>
+<polygon points="287.35,83.26 290.15,83.26 288.75,80.74" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<line x1="287.35" y1="80.74" x2="290.15" y2="80.74" stroke="#000" stroke-width="0.3"/>
+<circle cx="280.75" cy="77.5" r="0.45" fill="#000"/>
+<circle cx="280.75" cy="86.5" r="0.45" fill="#000"/>
+<text x="283.75" y="93.4" font-size="2.05" text-anchor="middle">Coil + suppressor diode</text>
+<rect x="307" y="72" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="330.25" y1="76" x2="330.25" y2="79" stroke="#000" stroke-width="0.3"/>
+<circle cx="330.25" cy="82" r="3" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<line x1="328.13" y1="79.88" x2="332.37" y2="84.12" stroke="#000" stroke-width="0.2"/>
+<line x1="328.13" y1="84.12" x2="332.37" y2="79.88" stroke="#000" stroke-width="0.2"/>
+<line x1="330.25" y1="85" x2="330.25" y2="88" stroke="#000" stroke-width="0.3"/>
+<text x="330.25" y="93.4" font-size="2.05" text-anchor="middle">Signal lamp</text>
+<rect x="353.5" y="72" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<circle cx="376.75" cy="82.5" r="6.5" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="376.75" y="83.1" font-size="4.32" text-anchor="middle">M</text>
+<text x="376.75" y="87.1" font-size="2.38" text-anchor="middle">3~</text>
+<text x="376.75" y="93.4" font-size="2.05" text-anchor="middle">Motor, 3-phase</text>
+<rect x="214" y="95" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<circle cx="237.25" cy="105.5" r="6.5" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<text x="237.25" y="106.1" font-size="4.32" text-anchor="middle">M</text>
+<text x="237.25" y="110.1" font-size="2.38" text-anchor="middle">1~</text>
+<text x="237.25" y="116.4" font-size="2.05" text-anchor="middle">Motor, 1-phase</text>
+<rect x="260.5" y="95" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<rect x="275.75" y="99.5" width="16" height="11" fill="#fff" stroke="#000" stroke-width="0.3"/>
+<line x1="275.75" y1="110.5" x2="291.75" y2="99.5" stroke="#000" stroke-width="0.2"/>
+<text x="280.07" y="104.12" font-size="3.02" text-anchor="middle">~</text>
+<text x="287.43" y="109.18" font-size="3.02" text-anchor="middle">=</text>
+<text x="283.75" y="116.4" font-size="2.05" text-anchor="middle">Power supply AC/DC</text>
+<rect x="307" y="95" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="324.25" y1="105" x2="336.25" y2="105" stroke="#000" stroke-width="0.3"/>
+<circle cx="330.25" cy="105" r="0.85" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="330.25" y="107.9" font-size="1.84" text-anchor="middle">X2:11</text>
+<text x="330.25" y="116.4" font-size="2.05" text-anchor="middle">Terminal -X2:11</text>
+<rect x="353.5" y="95" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="369.75" y1="102" x2="383.75" y2="102" stroke="#000" stroke-width="0.3"/>
+<line x1="373.75" y1="102" x2="373.75" y2="110" stroke="#000" stroke-width="0.3"/>
+<circle cx="373.75" cy="102" r="0.6" fill="#000"/>
+<line x1="369.75" y1="107" x2="383.75" y2="107" stroke="#000" stroke-width="0.3"/>
+<line x1="380.75" y1="99" x2="380.75" y2="110" stroke="#000" stroke-width="0.3"/>
+<text x="376.75" y="116.4" font-size="2.05" text-anchor="middle">Junction / crossing</text>
+<rect x="214" y="118" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="237.25" y1="124" x2="237.25" y2="126.2" stroke="#000" stroke-width="0.3"/>
+<line x1="235.25" y1="126.2" x2="239.25" y2="126.2" stroke="#000" stroke-width="0.3"/>
+<line x1="235.95" y1="127" x2="238.55" y2="127" stroke="#000" stroke-width="0.3"/>
+<line x1="236.65" y1="127.8" x2="237.85" y2="127.8" stroke="#000" stroke-width="0.3"/>
+<circle cx="237.25" cy="127" r="2.7" fill="none" stroke="#000" stroke-width="0.2"/>
+<text x="237.25" y="139.4" font-size="2.05" text-anchor="middle">Protective earth PE</text>
+<rect x="260.5" y="118" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="280.75" y1="126" x2="280.75" y2="128.5" stroke="#000" stroke-width="0.3"/>
+<line x1="278.95" y1="128.5" x2="282.55" y2="128.5" stroke="#000" stroke-width="0.5"/>
+<text x="283.15" y="129.2" font-size="2.05" font-weight="bold">0V</text>
+<text x="286.89" y="129.2" font-size="1.84">/E-01.3</text>
+<text x="283.75" y="139.4" font-size="2.05" text-anchor="middle">0 V reference</text>
+<rect x="307" y="118" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="333.25" y1="122" x2="333.25" y2="125.84" stroke="#000" stroke-width="0.3"/>
+<line x1="333.25" y1="130.16" x2="333.25" y2="134" stroke="#000" stroke-width="0.3"/>
+<line x1="333.25" y1="125.84" x2="335.65" y2="125.84" stroke="#000" stroke-width="0.3"/>
+<line x1="333.25" y1="130.16" x2="336" y2="125.24" stroke="#000" stroke-width="0.3"/>
+<line x1="334.6" y1="128" x2="326.25" y2="128" stroke="#000" stroke-width="0.2" stroke-dasharray="0.9 0.6"/>
+<line x1="326.25" y1="128" x2="326.25" y2="130" stroke="#000" stroke-width="0.2"/>
+<circle cx="326.25" cy="131.2" r="1.2" fill="none" stroke="#000" stroke-width="0.2"/>
+<line x1="324.05" y1="131.2" x2="328.45" y2="131.2" stroke="#000" stroke-width="0.2" stroke-dasharray="0.6 0.4"/>
+<text x="330.25" y="139.4" font-size="2.05" text-anchor="middle">Float switch (level)</text>
+<rect x="353.5" y="118" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="379.75" y1="122" x2="379.75" y2="125.84" stroke="#000" stroke-width="0.3"/>
+<line x1="379.75" y1="130.16" x2="379.75" y2="134" stroke="#000" stroke-width="0.3"/>
+<line x1="379.75" y1="125.84" x2="382.15" y2="125.84" stroke="#000" stroke-width="0.3"/>
+<line x1="379.75" y1="130.16" x2="382.5" y2="125.24" stroke="#000" stroke-width="0.3"/>
+<line x1="378.35" y1="128" x2="372.75" y2="128" stroke="#000" stroke-width="0.2" stroke-dasharray="0.9 0.6"/>
+<circle cx="371.55" cy="128" r="1.2" fill="none" stroke="#000" stroke-width="0.2"/>
+<text x="376.75" y="139.4" font-size="2.05" text-anchor="middle">Limit switch</text>
+<rect x="214" y="141" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="240.25" y1="145" x2="240.25" y2="148.84" stroke="#000" stroke-width="0.3"/>
+<line x1="240.25" y1="153.16" x2="240.25" y2="157" stroke="#000" stroke-width="0.3"/>
+<line x1="240.25" y1="153.16" x2="237.75" y2="148.84" stroke="#000" stroke-width="0.3"/>
+<line x1="239" y1="151" x2="234.25" y2="151" stroke="#000" stroke-width="0.2" stroke-dasharray="0.9 0.6"/>
+<rect x="230.85" y="149.2" width="3.4" height="3.6" fill="none" stroke="#000" stroke-width="0.2"/>
+<text x="232.55" y="151.9" font-size="2.16" text-anchor="middle">p</text>
+<text x="237.25" y="162.4" font-size="2.05" text-anchor="middle">Pressure switch</text>
+<rect x="260.5" y="141" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<rect x="276.75" y="145.5" width="14" height="7" fill="none" stroke="#000" stroke-width="0.3"/>
+<text x="283.75" y="150" font-size="1.73" text-anchor="middle">4-20 mA</text>
+<line x1="279.75" y1="152.5" x2="279.75" y2="157" stroke="#000" stroke-width="0.3"/>
+<line x1="287.75" y1="152.5" x2="287.75" y2="157" stroke="#000" stroke-width="0.3"/>
+<text x="278.75" y="155.5" font-size="1.94" text-anchor="end">+</text>
+<text x="288.75" y="155.5" font-size="1.94">-</text>
+<text x="283.75" y="162.4" font-size="2.05" text-anchor="middle">2-wire transmitter</text>
+<rect x="307" y="141" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="327.25" y1="145" x2="327.25" y2="157" stroke="#000" stroke-width="0.3"/>
+<line x1="333.25" y1="145" x2="333.25" y2="157" stroke="#000" stroke-width="0.3"/>
+<ellipse cx="330.25" cy="151" rx="6" ry="1.6" fill="none" stroke="#000" stroke-width="0.2" stroke-dasharray="0.8 0.5"/>
+<line x1="336.25" y1="151" x2="339.25" y2="151" stroke="#000" stroke-width="0.2"/>
+<line x1="339.25" y1="151" x2="339.25" y2="153" stroke="#000" stroke-width="0.2"/>
+<text x="330.25" y="162.4" font-size="2.05" text-anchor="middle">Shielded cable</text>
+<rect x="353.5" y="141" width="46.5" height="23" fill="none" stroke="#000" stroke-width="0.12"/>
+<line x1="379.75" y1="145" x2="379.75" y2="148.84" stroke="#000" stroke-width="0.3"/>
+<line x1="379.75" y1="153.16" x2="379.75" y2="157" stroke="#000" stroke-width="0.3"/>
+<line x1="379.75" y1="148.84" x2="382.15" y2="148.84" stroke="#000" stroke-width="0.3"/>
+<line x1="379.75" y1="153.16" x2="382.5" y2="148.24" stroke="#000" stroke-width="0.3"/>
+<line x1="381.1" y1="151" x2="372.75" y2="151" stroke="#000" stroke-width="0.2" stroke-dasharray="0.9 0.6"/>
+<rect x="369.55" y="149.4" width="3.2" height="3.2" fill="none" stroke="#000" stroke-width="0.2"/>
+<text x="371.15" y="151.75" font-size="2.38" text-anchor="middle">θ</text>
+<text x="376.75" y="162.4" font-size="2.05" text-anchor="middle">Thermostat</text>
+<text x="214" y="170" font-size="2.81" font-weight="bold">Conventions</text>
+<text x="214" y="174.2" font-size="2.16">Cross-reference /E-08.4 = drawing GH1-E-08, column 4. Contacts point to their coil; on the output sheet each coil lists where its contacts are drawn.</text>
+<text x="214" y="177.64" font-size="2.16">Wire numbers: potentials keep their name (L1, L2, L3, N, PE, +24.1 ... +24.5, 24V-S, 0V). Other wires are &lt;sheet&gt;&lt;nn&gt;, e.g. 705 = drawn on E-07. A wire keeps its number through a</text>
+<text x="214" y="180.48" font-size="2.16">terminal.</text>
+<text x="214" y="183.92" font-size="2.16">Terminals: -X1 230/400 V AC, -X2 24 V DC digital + safety, -X3 analog, -X4 outgoing power, -X0 PE bar. Terminal plans on E-10 and E-11.</text>
+<text x="214" y="190.76" font-size="2.81" font-weight="bold">Wire colours (IEC 60204-1 §13.2.4, IEC 60445)</text>
+<rect x="214" y="192.36" width="186" height="4.6" fill="#e8e8e8" stroke="#000" stroke-width="0.2"/>
+<text x="215" y="195.67" font-size="2.11" font-weight="bold">Circuit</text>
+<text x="255" y="195.67" font-size="2.11" font-weight="bold">Wire colour</text>
+<text x="304" y="195.67" font-size="2.11" font-weight="bold">Circuit</text>
+<text x="344" y="195.67" font-size="2.11" font-weight="bold">Wire colour</text>
+<line x1="214" y1="196.96" x2="400" y2="196.96" stroke="#000" stroke-width="0.12"/>
+<text x="215" y="200.27" font-size="2.11">AC power L1/L2/L3</text>
+<text x="255" y="200.27" font-size="2.11">black (cores BN/BK/GY)</text>
+<text x="304" y="200.27" font-size="2.11">+24 V DC (all branches)</text>
+<text x="344" y="200.27" font-size="2.11">dark blue</text>
+<line x1="214" y1="201.56" x2="400" y2="201.56" stroke="#000" stroke-width="0.12"/>
+<text x="215" y="204.87" font-size="2.11">Neutral N</text>
+<text x="255" y="204.87" font-size="2.11">light blue</text>
+<text x="304" y="204.87" font-size="2.11">24V-S safety rail</text>
+<text x="344" y="204.87" font-size="2.11">dark blue + marker 24V-S</text>
+<line x1="214" y1="206.16" x2="400" y2="206.16" stroke="#000" stroke-width="0.12"/>
+<text x="215" y="209.47" font-size="2.11">Protective earth PE</text>
+<text x="255" y="209.47" font-size="2.11">green-yellow</text>
+<text x="304" y="209.47" font-size="2.11">0 V DC</text>
+<text x="344" y="209.47" font-size="2.11">white-blue</text>
+<line x1="214" y1="210.76" x2="400" y2="210.76" stroke="#000" stroke-width="0.12"/>
+<text x="215" y="214.07" font-size="2.11">230 V AC control</text>
+<text x="255" y="214.07" font-size="2.11">red</text>
+<text x="304" y="214.07" font-size="2.11">Analog loops</text>
+<text x="344" y="214.07" font-size="2.11">shielded twisted pair</text>
+<line x1="214" y1="215.36" x2="400" y2="215.36" stroke="#000" stroke-width="0.12"/>
+<rect x="214" y="192.36" width="186" height="23" fill="none" stroke="#000" stroke-width="0.3"/>
+<line x1="254" y1="192.36" x2="254" y2="215.36" stroke="#000" stroke-width="0.12"/>
+<line x1="303" y1="192.36" x2="303" y2="215.36" stroke="#000" stroke-width="0.12"/>
+<line x1="343" y1="192.36" x2="343" y2="215.36" stroke="#000" stroke-width="0.12"/>
+<rect x="10" y="10" width="400" height="277" fill="none" stroke="#000" stroke-width="0.5"/>
+<rect x="15" y="15" width="390" height="267" fill="none" stroke="#000" stroke-width="0.35"/>
+<line x1="15" y1="10" x2="15" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="15" y1="282" x2="15" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="63.75" y1="10" x2="63.75" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="63.75" y1="282" x2="63.75" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="112.5" y1="10" x2="112.5" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="112.5" y1="282" x2="112.5" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="161.25" y1="10" x2="161.25" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="161.25" y1="282" x2="161.25" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="210" y1="10" x2="210" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="210" y1="282" x2="210" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="258.75" y1="10" x2="258.75" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="258.75" y1="282" x2="258.75" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="307.5" y1="10" x2="307.5" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="307.5" y1="282" x2="307.5" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="356.25" y1="10" x2="356.25" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="356.25" y1="282" x2="356.25" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="10" x2="405" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="282" x2="405" y2="287" stroke="#000" stroke-width="0.25"/>
+<text x="39.38" y="13.6" font-size="2.59" text-anchor="middle">1</text>
+<text x="39.38" y="285.9" font-size="2.59" text-anchor="middle">1</text>
+<text x="88.12" y="13.6" font-size="2.59" text-anchor="middle">2</text>
+<text x="88.12" y="285.9" font-size="2.59" text-anchor="middle">2</text>
+<text x="136.88" y="13.6" font-size="2.59" text-anchor="middle">3</text>
+<text x="136.88" y="285.9" font-size="2.59" text-anchor="middle">3</text>
+<text x="185.62" y="13.6" font-size="2.59" text-anchor="middle">4</text>
+<text x="185.62" y="285.9" font-size="2.59" text-anchor="middle">4</text>
+<text x="234.38" y="13.6" font-size="2.59" text-anchor="middle">5</text>
+<text x="234.38" y="285.9" font-size="2.59" text-anchor="middle">5</text>
+<text x="283.12" y="13.6" font-size="2.59" text-anchor="middle">6</text>
+<text x="283.12" y="285.9" font-size="2.59" text-anchor="middle">6</text>
+<text x="331.88" y="13.6" font-size="2.59" text-anchor="middle">7</text>
+<text x="331.88" y="285.9" font-size="2.59" text-anchor="middle">7</text>
+<text x="380.62" y="13.6" font-size="2.59" text-anchor="middle">8</text>
+<text x="380.62" y="285.9" font-size="2.59" text-anchor="middle">8</text>
+<line x1="10" y1="15" x2="15" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="15" x2="410" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="59.5" x2="15" y2="59.5" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="59.5" x2="410" y2="59.5" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="104" x2="15" y2="104" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="104" x2="410" y2="104" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="148.5" x2="15" y2="148.5" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="148.5" x2="410" y2="148.5" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="193" x2="15" y2="193" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="193" x2="410" y2="193" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="237.5" x2="15" y2="237.5" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="237.5" x2="410" y2="237.5" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="282" x2="15" y2="282" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="282" x2="410" y2="282" stroke="#000" stroke-width="0.25"/>
+<text x="12.5" y="38.15" font-size="2.59" text-anchor="middle">A</text>
+<text x="407.5" y="38.15" font-size="2.59" text-anchor="middle">A</text>
+<text x="12.5" y="82.65" font-size="2.59" text-anchor="middle">B</text>
+<text x="407.5" y="82.65" font-size="2.59" text-anchor="middle">B</text>
+<text x="12.5" y="127.15" font-size="2.59" text-anchor="middle">C</text>
+<text x="407.5" y="127.15" font-size="2.59" text-anchor="middle">C</text>
+<text x="12.5" y="171.65" font-size="2.59" text-anchor="middle">D</text>
+<text x="407.5" y="171.65" font-size="2.59" text-anchor="middle">D</text>
+<text x="12.5" y="216.15" font-size="2.59" text-anchor="middle">E</text>
+<text x="407.5" y="216.15" font-size="2.59" text-anchor="middle">E</text>
+<text x="12.5" y="260.65" font-size="2.59" text-anchor="middle">F</text>
+<text x="407.5" y="260.65" font-size="2.59" text-anchor="middle">F</text>
+<rect x="15" y="252" width="390" height="30" fill="#fff" stroke="#000" stroke-width="0.5"/>
+<line x1="100" y1="252" x2="100" y2="282" stroke="#000" stroke-width="0.35"/>
+<line x1="190" y1="252" x2="190" y2="282" stroke="#000" stroke-width="0.35"/>
+<line x1="248" y1="252" x2="248" y2="282" stroke="#000" stroke-width="0.35"/>
+<line x1="340" y1="252" x2="340" y2="282" stroke="#000" stroke-width="0.35"/>
+<text x="17" y="255.6" font-size="1.84" fill="#555">Project</text>
+<text x="17" y="261.2" font-size="3.89" font-weight="bold">GH-1 Tropical Greenhouse</text>
+<text x="17" y="265.6" font-size="2.16">Irrigation, fertigation and climate control, 1 000 m² greenhouse</text>
+<text x="17" y="269" font-size="2.16">OpenPLC Runtime v4 + Modbus TCP remote I/O</text>
+<text x="17" y="272.4" font-size="2.16">Supply 3/N/PE AC 400/230 V 50 Hz</text>
+<text x="17" y="278.6" font-size="1.84" fill="#555">Symbols IEC 60617 · designations IEC 81346 · IEC 60204-1</text>
+<text x="102" y="255.6" font-size="1.84" fill="#555">Rev</text>
+<text x="110" y="255.6" font-size="1.84" fill="#555">Description</text>
+<text x="160" y="255.6" font-size="1.84" fill="#555">Date</text>
+<text x="176" y="255.6" font-size="1.84" fill="#555">By</text>
+<line x1="100" y1="257" x2="190" y2="257" stroke="#000" stroke-width="0.15"/>
+<line x1="100" y1="263.25" x2="190" y2="263.25" stroke="#000" stroke-width="0.15"/>
+<line x1="100" y1="269.5" x2="190" y2="269.5" stroke="#000" stroke-width="0.15"/>
+<line x1="100" y1="275.75" x2="190" y2="275.75" stroke="#000" stroke-width="0.15"/>
+<text x="103" y="261.6" font-size="2.38" font-weight="bold">A</text>
+<text x="110" y="261.6" font-size="2.38">First issue for review</text>
+<text x="160" y="261.6" font-size="2.16">2026-11-19</text>
+<text x="192" y="255.6" font-size="1.84" fill="#555">Name</text>
+<text x="226" y="255.6" font-size="1.84" fill="#555">Date</text>
+<text x="192" y="262.5" font-size="2.16">Drawn</text>
+<line x1="206" y1="263.1" x2="223" y2="263.1" stroke="#000" stroke-width="0.15"/>
+<line x1="226" y1="263.1" x2="246" y2="263.1" stroke="#000" stroke-width="0.15"/>
+<text x="192" y="270" font-size="2.16">Checked</text>
+<line x1="206" y1="270.6" x2="223" y2="270.6" stroke="#000" stroke-width="0.15"/>
+<line x1="226" y1="270.6" x2="246" y2="270.6" stroke="#000" stroke-width="0.15"/>
+<text x="192" y="277.5" font-size="2.16">Approved</text>
+<line x1="206" y1="278.1" x2="223" y2="278.1" stroke="#000" stroke-width="0.15"/>
+<line x1="226" y1="278.1" x2="246" y2="278.1" stroke="#000" stroke-width="0.15"/>
+<text x="250" y="255.6" font-size="1.84" fill="#555">Title</text>
+<text x="250" y="264.5" font-size="4.32" font-weight="bold">Cover sheet, index and legend</text>
+<text x="250" y="271.5" font-size="2.38">Electrical drawing set - control panel GH-1 (pump room)</text>
+<text x="250" y="278.6" font-size="1.94" fill="#555">Format A3 · scale none</text>
+<text x="342" y="255.6" font-size="1.84" fill="#555">Drawing no.</text>
+<text x="342" y="262.5" font-size="4.54" font-weight="bold">GH1-E-00</text>
+<text x="342" y="268.5" font-size="2.59">Sheet 1 / 15</text>
+<text x="375" y="268.5" font-size="2.59" font-weight="bold">Rev. A</text>
+<text x="342" y="274" font-size="2.38">Date 2026-11-19</text>
+<text x="342" y="278.6" font-size="1.94" fill="#555">Next: GH1-E-01</text>
+</g>
+</svg>

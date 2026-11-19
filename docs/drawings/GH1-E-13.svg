@@ -1,0 +1,658 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 420 297">
+<title>GH1-E-13 Parts list</title>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#000}</style>
+<rect x="0" y="0" width="420" height="297" fill="#fff"/>
+<g stroke-linecap="round" stroke-linejoin="round">
+<text x="18" y="23.4" font-size="2.81" font-weight="bold">Parts list</text>
+<rect x="18" y="25" width="126" height="5" fill="#e8e8e8" stroke="#000" stroke-width="0.2"/>
+<text x="19" y="28.6" font-size="1.57" font-weight="bold">Ref.</text>
+<text x="34" y="28.6" font-size="1.57" font-weight="bold">Description</text>
+<text x="120" y="28.6" font-size="1.57" font-weight="bold">Loc.</text>
+<text x="132" y="28.6" font-size="1.57" font-weight="bold">Sheet</text>
+<line x1="18" y1="30" x2="144" y2="30" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="33.6" font-size="1.57">-Q0</text>
+<text x="34" y="33.6" font-size="1.57">Main switch-disconnector 4P 40 A AC-23A, lockable red/yellow handle</text>
+<text x="120" y="33.6" font-size="1.57">Door</text>
+<text x="132" y="33.6" font-size="1.57">/E-01.1</text>
+<line x1="18" y1="35" x2="144" y2="35" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="38.6" font-size="1.57">-X0</text>
+<text x="34" y="38.6" font-size="1.57">PE bar, copper, with removable 0V-PE link</text>
+<text x="120" y="38.6" font-size="1.57">Panel</text>
+<text x="132" y="38.6" font-size="1.57">/E-01.1</text>
+<line x1="18" y1="40" x2="144" y2="40" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="43.6" font-size="1.57">-X1</text>
+<text x="34" y="43.6" font-size="1.57">Terminals 230/400 V AC incoming + panel fan</text>
+<text x="120" y="43.6" font-size="1.57">Panel</text>
+<text x="132" y="43.6" font-size="1.57">/E-11.1</text>
+<line x1="18" y1="45" x2="144" y2="45" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="48.6" font-size="1.57">-F1</text>
+<text x="34" y="48.6" font-size="1.57">MCB 1P+N C6 A - 24 V DC power supply</text>
+<text x="120" y="48.6" font-size="1.57">Panel</text>
+<text x="132" y="48.6" font-size="1.57">/E-01.3</text>
+<line x1="18" y1="50" x2="144" y2="50" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="53.6" font-size="1.57">-F2</text>
+<text x="34" y="53.6" font-size="1.57">MCB 1P+N C2 A - panel fan</text>
+<text x="120" y="53.6" font-size="1.57">Panel</text>
+<text x="132" y="53.6" font-size="1.57">/E-01.4</text>
+<line x1="18" y1="55" x2="144" y2="55" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="58.6" font-size="1.57">-F3</text>
+<text x="34" y="58.6" font-size="1.57">MCB 1P+N C10 A - dosing pumps 230 V, RCD 30 mA type A</text>
+<text x="120" y="58.6" font-size="1.57">Panel</text>
+<text x="132" y="58.6" font-size="1.57">/E-01.6</text>
+<line x1="18" y1="60" x2="144" y2="60" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="63.6" font-size="1.57">-F4</text>
+<text x="34" y="63.6" font-size="1.57">MCB 1P+N C6 A - analysers 230 V (AIT-301...303)</text>
+<text x="120" y="63.6" font-size="1.57">Panel</text>
+<text x="132" y="63.6" font-size="1.57">/E-01.7</text>
+<line x1="18" y1="65" x2="144" y2="65" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="68.6" font-size="1.57">-B1</text>
+<text x="34" y="68.6" font-size="1.57">Panel thermostat NO, set 35 °C</text>
+<text x="120" y="68.6" font-size="1.57">Panel</text>
+<text x="132" y="68.6" font-size="1.57">/E-01.4</text>
+<line x1="18" y1="70" x2="144" y2="70" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="73.6" font-size="1.57">-E1</text>
+<text x="34" y="73.6" font-size="1.57">Filter fan 230 V AC + outlet filter</text>
+<text x="120" y="73.6" font-size="1.57">Door</text>
+<text x="132" y="73.6" font-size="1.57">/E-01.4</text>
+<line x1="18" y1="75" x2="144" y2="75" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="78.6" font-size="1.57">-G1</text>
+<text x="34" y="78.6" font-size="1.57">Power supply 230 V AC / 24 V DC 10 A</text>
+<text x="120" y="78.6" font-size="1.57">Panel</text>
+<text x="132" y="78.6" font-size="1.57">/E-01.3</text>
+<line x1="18" y1="80" x2="144" y2="80" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="83.6" font-size="1.57">-F21</text>
+<text x="34" y="83.6" font-size="1.57">DC MCB 1P 4 A - +24.1 coupler, PLC, switch</text>
+<text x="120" y="83.6" font-size="1.57">Panel</text>
+<text x="132" y="83.6" font-size="1.57">/E-01.3</text>
+<line x1="18" y1="85" x2="144" y2="85" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="88.6" font-size="1.57">-F22</text>
+<text x="34" y="88.6" font-size="1.57">DC MCB 1P 2 A - +24.2 digital inputs</text>
+<text x="120" y="88.6" font-size="1.57">Panel</text>
+<text x="132" y="88.6" font-size="1.57">/E-01.4</text>
+<line x1="18" y1="90" x2="144" y2="90" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="93.6" font-size="1.57">-F23</text>
+<text x="34" y="93.6" font-size="1.57">DC MCB 1P 2 A - +24.3 stack light amber/red</text>
+<text x="120" y="93.6" font-size="1.57">Panel</text>
+<text x="132" y="93.6" font-size="1.57">/E-01.4</text>
+<line x1="18" y1="95" x2="144" y2="95" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="98.6" font-size="1.57">-F24</text>
+<text x="34" y="98.6" font-size="1.57">DC MCB 1P 4 A - +24.4 analog loops, 24 V instruments</text>
+<text x="120" y="98.6" font-size="1.57">Panel</text>
+<text x="132" y="98.6" font-size="1.57">/E-01.5</text>
+<line x1="18" y1="100" x2="144" y2="100" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="103.6" font-size="1.57">-F25</text>
+<text x="34" y="103.6" font-size="1.57">DC MCB 1P 6 A - +24.5 safety relay, source of 24V-S</text>
+<text x="120" y="103.6" font-size="1.57">Panel</text>
+<text x="132" y="103.6" font-size="1.57">/E-01.5</text>
+<line x1="18" y1="105" x2="144" y2="105" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="108.6" font-size="1.57">-K0</text>
+<text x="34" y="108.6" font-size="1.57">Safety relay, 2-ch. E-stop, monitored reset, 3 NO + 1 NC, 24 V DC</text>
+<text x="120" y="108.6" font-size="1.57">Panel</text>
+<text x="132" y="108.6" font-size="1.57">/E-06.3</text>
+<line x1="18" y1="110" x2="144" y2="110" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="113.6" font-size="1.57">-Q201</text>
+<text x="34" y="113.6" font-size="1.57">Motor-protection circuit breaker 1.6-2.5 A, aux 1 NO - P-201</text>
+<text x="120" y="113.6" font-size="1.57">Panel</text>
+<text x="132" y="113.6" font-size="1.57">/E-02.2</text>
+<line x1="18" y1="115" x2="144" y2="115" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="118.6" font-size="1.57">-K201</text>
+<text x="34" y="118.6" font-size="1.57">Contactor 3P AC-3 9 A, coil 24 V DC, aux 1 NO + 1 NC - P-201</text>
+<text x="120" y="118.6" font-size="1.57">Panel</text>
+<text x="132" y="118.6" font-size="1.57">/E-08.3</text>
+<line x1="18" y1="120" x2="144" y2="120" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="123.6" font-size="1.57">-Q531</text>
+<text x="34" y="123.6" font-size="1.57">Motor-protection circuit breaker 1.0-1.6 A, aux 1 NO - P-531</text>
+<text x="120" y="123.6" font-size="1.57">Panel</text>
+<text x="132" y="123.6" font-size="1.57">/E-02.4</text>
+<line x1="18" y1="125" x2="144" y2="125" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="128.6" font-size="1.57">-K531</text>
+<text x="34" y="128.6" font-size="1.57">Contactor 3P AC-3 9 A, coil 24 V DC, aux 1 NO + 1 NC - P-531</text>
+<text x="120" y="128.6" font-size="1.57">Panel</text>
+<text x="132" y="128.6" font-size="1.57">/E-08.3</text>
+<line x1="18" y1="130" x2="144" y2="130" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="133.6" font-size="1.57">-Q541</text>
+<text x="34" y="133.6" font-size="1.57">Motor-protection circuit breaker 4.0-6.3 A, aux 1 NO - P-541</text>
+<text x="120" y="133.6" font-size="1.57">Panel</text>
+<text x="132" y="133.6" font-size="1.57">/E-02.6</text>
+<line x1="18" y1="135" x2="144" y2="135" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="138.6" font-size="1.57">-K541</text>
+<text x="34" y="138.6" font-size="1.57">Contactor 3P AC-3 9 A, coil 24 V DC, aux 1 NO + 1 NC - P-541</text>
+<text x="120" y="138.6" font-size="1.57">Panel</text>
+<text x="132" y="138.6" font-size="1.57">/E-08.3</text>
+<line x1="18" y1="140" x2="144" y2="140" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="143.6" font-size="1.57">-Q601</text>
+<text x="34" y="143.6" font-size="1.57">Motor-protection circuit breaker 2.5-4.0 A, aux 1 NO - F-601</text>
+<text x="120" y="143.6" font-size="1.57">Panel</text>
+<text x="132" y="143.6" font-size="1.57">/E-03.2</text>
+<line x1="18" y1="145" x2="144" y2="145" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="148.6" font-size="1.57">-K601</text>
+<text x="34" y="148.6" font-size="1.57">Contactor 3P AC-3 9 A, coil 24 V DC, aux 1 NO + 1 NC - F-601</text>
+<text x="120" y="148.6" font-size="1.57">Panel</text>
+<text x="132" y="148.6" font-size="1.57">/E-08.3</text>
+<line x1="18" y1="150" x2="144" y2="150" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="153.6" font-size="1.57">-Q602</text>
+<text x="34" y="153.6" font-size="1.57">Motor-protection circuit breaker 2.5-4.0 A, aux 1 NO - F-602</text>
+<text x="120" y="153.6" font-size="1.57">Panel</text>
+<text x="132" y="153.6" font-size="1.57">/E-03.4</text>
+<line x1="18" y1="155" x2="144" y2="155" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="158.6" font-size="1.57">-K602</text>
+<text x="34" y="158.6" font-size="1.57">Contactor 3P AC-3 9 A, coil 24 V DC, aux 1 NO + 1 NC - F-602</text>
+<text x="120" y="158.6" font-size="1.57">Panel</text>
+<text x="132" y="158.6" font-size="1.57">/E-08.3</text>
+<line x1="18" y1="160" x2="144" y2="160" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="163.6" font-size="1.57">-Q603</text>
+<text x="34" y="163.6" font-size="1.57">Motor-protection circuit breaker 2.5-4.0 A, aux 1 NO - F-603</text>
+<text x="120" y="163.6" font-size="1.57">Panel</text>
+<text x="132" y="163.6" font-size="1.57">/E-03.6</text>
+<line x1="18" y1="165" x2="144" y2="165" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="168.6" font-size="1.57">-K603</text>
+<text x="34" y="168.6" font-size="1.57">Contactor 3P AC-3 9 A, coil 24 V DC, aux 1 NO + 1 NC - F-603</text>
+<text x="120" y="168.6" font-size="1.57">Panel</text>
+<text x="132" y="168.6" font-size="1.57">/E-08.3</text>
+<line x1="18" y1="170" x2="144" y2="170" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="173.6" font-size="1.57">-Q511</text>
+<text x="34" y="173.6" font-size="1.57">Motor-protection circuit breaker 1.0-1.6 A, aux 1 NO - M-511</text>
+<text x="120" y="173.6" font-size="1.57">Panel</text>
+<text x="132" y="173.6" font-size="1.57">/E-04.2</text>
+<line x1="18" y1="175" x2="144" y2="175" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="178.6" font-size="1.57">-K511.1</text>
+<text x="34" y="178.6" font-size="1.57">Contactor 3P 9 A, coil 24 V DC, mech. interlock - M-511 open</text>
+<text x="120" y="178.6" font-size="1.57">Panel</text>
+<text x="132" y="178.6" font-size="1.57">/E-08.3</text>
+<line x1="18" y1="180" x2="144" y2="180" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="183.6" font-size="1.57">-K511.2</text>
+<text x="34" y="183.6" font-size="1.57">Contactor 3P 9 A, coil 24 V DC, mech. interlock - M-511 close</text>
+<text x="120" y="183.6" font-size="1.57">Panel</text>
+<text x="132" y="183.6" font-size="1.57">/E-08.3</text>
+<line x1="18" y1="185" x2="144" y2="185" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="188.6" font-size="1.57">-Q521</text>
+<text x="34" y="188.6" font-size="1.57">Motor-protection circuit breaker 1.0-1.6 A, aux 1 NO - M-521</text>
+<text x="120" y="188.6" font-size="1.57">Panel</text>
+<text x="132" y="188.6" font-size="1.57">/E-04.4</text>
+<line x1="18" y1="190" x2="144" y2="190" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="193.6" font-size="1.57">-K521.1</text>
+<text x="34" y="193.6" font-size="1.57">Contactor 3P 9 A, coil 24 V DC, mech. interlock - M-521 open</text>
+<text x="120" y="193.6" font-size="1.57">Panel</text>
+<text x="132" y="193.6" font-size="1.57">/E-08.3</text>
+<line x1="18" y1="195" x2="144" y2="195" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="198.6" font-size="1.57">-K521.2</text>
+<text x="34" y="198.6" font-size="1.57">Contactor 3P 9 A, coil 24 V DC, mech. interlock - M-521 close</text>
+<text x="120" y="198.6" font-size="1.57">Panel</text>
+<text x="132" y="198.6" font-size="1.57">/E-08.3</text>
+<line x1="18" y1="200" x2="144" y2="200" stroke="#000" stroke-width="0.12"/>
+<text x="19" y="203.6" font-size="1.57">-F311</text>
+<text x="34" y="203.6" font-size="1.57">MCB 1P+N C2 A, aux 1 NO - P-311</text>
+<text x="120" y="203.6" font-size="1.57">Panel</text>
+<text x="132" y="203.6" font-size="1.57">/E-05.1</text>
+<line x1="18" y1="205" x2="144" y2="205" stroke="#000" stroke-width="0.12"/>
+<rect x="18" y="25" width="126" height="180" fill="none" stroke="#000" stroke-width="0.3"/>
+<line x1="33" y1="25" x2="33" y2="205" stroke="#000" stroke-width="0.12"/>
+<line x1="119" y1="25" x2="119" y2="205" stroke="#000" stroke-width="0.12"/>
+<line x1="131" y1="25" x2="131" y2="205" stroke="#000" stroke-width="0.12"/>
+<rect x="148" y="25" width="126" height="5" fill="#e8e8e8" stroke="#000" stroke-width="0.2"/>
+<text x="149" y="28.6" font-size="1.57" font-weight="bold">Ref.</text>
+<text x="164" y="28.6" font-size="1.57" font-weight="bold">Description</text>
+<text x="250" y="28.6" font-size="1.57" font-weight="bold">Loc.</text>
+<text x="262" y="28.6" font-size="1.57" font-weight="bold">Sheet</text>
+<line x1="148" y1="30" x2="274" y2="30" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="33.6" font-size="1.57">-K311</text>
+<text x="164" y="33.6" font-size="1.57">Contactor 2P 230 V AC-3 9 A, coil 24 V DC - P-311</text>
+<text x="250" y="33.6" font-size="1.57">Panel</text>
+<text x="262" y="33.6" font-size="1.57">/E-08.3</text>
+<line x1="148" y1="35" x2="274" y2="35" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="38.6" font-size="1.57">-F312</text>
+<text x="164" y="38.6" font-size="1.57">MCB 1P+N C2 A, aux 1 NO - P-312</text>
+<text x="250" y="38.6" font-size="1.57">Panel</text>
+<text x="262" y="38.6" font-size="1.57">/E-05.3</text>
+<line x1="148" y1="40" x2="274" y2="40" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="43.6" font-size="1.57">-K312</text>
+<text x="164" y="43.6" font-size="1.57">Contactor 2P 230 V AC-3 9 A, coil 24 V DC - P-312</text>
+<text x="250" y="43.6" font-size="1.57">Panel</text>
+<text x="262" y="43.6" font-size="1.57">/E-08.3</text>
+<line x1="148" y1="45" x2="274" y2="45" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="48.6" font-size="1.57">-F313</text>
+<text x="164" y="48.6" font-size="1.57">MCB 1P+N C2 A, aux 1 NO - P-313</text>
+<text x="250" y="48.6" font-size="1.57">Panel</text>
+<text x="262" y="48.6" font-size="1.57">/E-05.5</text>
+<line x1="148" y1="50" x2="274" y2="50" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="53.6" font-size="1.57">-K313</text>
+<text x="164" y="53.6" font-size="1.57">Contactor 2P 230 V AC-3 9 A, coil 24 V DC - P-313</text>
+<text x="250" y="53.6" font-size="1.57">Panel</text>
+<text x="262" y="53.6" font-size="1.57">/E-08.3</text>
+<line x1="148" y1="55" x2="274" y2="55" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="58.6" font-size="1.57">-A10</text>
+<text x="164" y="58.6" font-size="1.57">PLC: industrial PC, OpenPLC Runtime v4 (Linux, Docker)</text>
+<text x="250" y="58.6" font-size="1.57">Panel</text>
+<text x="262" y="58.6" font-size="1.57">/E-14.1</text>
+<line x1="148" y1="60" x2="274" y2="60" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="63.6" font-size="1.57">-A11</text>
+<text x="164" y="63.6" font-size="1.57">Ethernet switch, managed, 8 ports, 24 V DC</text>
+<text x="250" y="63.6" font-size="1.57">Panel</text>
+<text x="262" y="63.6" font-size="1.57">/E-14.3</text>
+<line x1="148" y1="65" x2="274" y2="65" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="68.6" font-size="1.57">-A1</text>
+<text x="164" y="68.6" font-size="1.57">Remote I/O coupler, Modbus TCP, NTP clock, 24 V DC</text>
+<text x="250" y="68.6" font-size="1.57">Panel</text>
+<text x="262" y="68.6" font-size="1.57">/E-12.1</text>
+<line x1="148" y1="70" x2="274" y2="70" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="73.6" font-size="1.57">-A1.1</text>
+<text x="164" y="73.6" font-size="1.57">Digital input module DI16, 24 V DC, sinking</text>
+<text x="250" y="73.6" font-size="1.57">Panel</text>
+<text x="262" y="73.6" font-size="1.57">/E-07.1</text>
+<line x1="148" y1="75" x2="274" y2="75" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="78.6" font-size="1.57">-A1.2</text>
+<text x="164" y="78.6" font-size="1.57">Digital input module DI16, 24 V DC, sinking</text>
+<text x="250" y="78.6" font-size="1.57">Panel</text>
+<text x="262" y="78.6" font-size="1.57">/E-07.1</text>
+<line x1="148" y1="80" x2="274" y2="80" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="83.6" font-size="1.57">-A1.3</text>
+<text x="164" y="83.6" font-size="1.57">Digital output module DO16, 24 V DC 0.5 A, 2 supply groups</text>
+<text x="250" y="83.6" font-size="1.57">Panel</text>
+<text x="262" y="83.6" font-size="1.57">/E-08.1</text>
+<line x1="148" y1="85" x2="274" y2="85" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="88.6" font-size="1.57">-A1.4</text>
+<text x="164" y="88.6" font-size="1.57">Digital output module DO8, 24 V DC 0.5 A, 2 supply groups</text>
+<text x="250" y="88.6" font-size="1.57">Panel</text>
+<text x="262" y="88.6" font-size="1.57">/E-08.1</text>
+<line x1="148" y1="90" x2="274" y2="90" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="93.6" font-size="1.57">-A1.5</text>
+<text x="164" y="93.6" font-size="1.57">Analog input module AI8, 4-20 mA, loop supply</text>
+<text x="250" y="93.6" font-size="1.57">Panel</text>
+<text x="262" y="93.6" font-size="1.57">/E-09.1</text>
+<line x1="148" y1="95" x2="274" y2="95" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="98.6" font-size="1.57">-A1.6</text>
+<text x="164" y="98.6" font-size="1.57">Analog input module AI8, 4-20 mA, loop supply</text>
+<text x="250" y="98.6" font-size="1.57">Panel</text>
+<text x="262" y="98.6" font-size="1.57">/E-09.1</text>
+<line x1="148" y1="100" x2="274" y2="100" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="103.6" font-size="1.57">-A1.7</text>
+<text x="164" y="103.6" font-size="1.57">Analog output module AO4, 4-20 mA</text>
+<text x="250" y="103.6" font-size="1.57">Panel</text>
+<text x="262" y="103.6" font-size="1.57">/E-05.1</text>
+<line x1="148" y1="105" x2="274" y2="105" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="108.6" font-size="1.57">-X2</text>
+<text x="164" y="108.6" font-size="1.57">Terminals 24 V DC digital and safety, spring clamp 2.5 mm²</text>
+<text x="250" y="108.6" font-size="1.57">Panel</text>
+<text x="262" y="108.6" font-size="1.57">/E-10.1</text>
+<line x1="148" y1="110" x2="274" y2="110" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="113.6" font-size="1.57">-X3</text>
+<text x="164" y="113.6" font-size="1.57">Terminals analog, with shield clamps</text>
+<text x="250" y="113.6" font-size="1.57">Panel</text>
+<text x="262" y="113.6" font-size="1.57">/E-11.1</text>
+<line x1="148" y1="115" x2="274" y2="115" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="118.6" font-size="1.57">-X4</text>
+<text x="164" y="118.6" font-size="1.57">Terminals motor and pump outgoing, 4 mm²</text>
+<text x="250" y="118.6" font-size="1.57">Panel</text>
+<text x="262" y="118.6" font-size="1.57">/E-11.1</text>
+<line x1="148" y1="120" x2="274" y2="120" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="123.6" font-size="1.57">-S0.1</text>
+<text x="164" y="123.6" font-size="1.57">E-stop, red mushroom, 2 NC positive opening - panel door</text>
+<text x="250" y="123.6" font-size="1.57">Door</text>
+<text x="262" y="123.6" font-size="1.57">/E-06.2</text>
+<line x1="148" y1="125" x2="274" y2="125" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="128.6" font-size="1.57">-S0.2</text>
+<text x="164" y="128.6" font-size="1.57">E-stop, red mushroom, 2 NC positive opening, IP65 box - fertigation skid</text>
+<text x="250" y="128.6" font-size="1.57">Field</text>
+<text x="262" y="128.6" font-size="1.57">/E-06.2</text>
+<line x1="148" y1="130" x2="274" y2="130" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="133.6" font-size="1.57">-S0R</text>
+<text x="164" y="133.6" font-size="1.57">Push-button blue NO - safety reset</text>
+<text x="250" y="133.6" font-size="1.57">Door</text>
+<text x="262" y="133.6" font-size="1.57">/E-06.4</text>
+<line x1="148" y1="135" x2="274" y2="135" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="138.6" font-size="1.57">-S1</text>
+<text x="164" y="138.6" font-size="1.57">Push-button green NO - START</text>
+<text x="250" y="138.6" font-size="1.57">Door</text>
+<text x="262" y="138.6" font-size="1.57">/E-07.3</text>
+<line x1="148" y1="140" x2="274" y2="140" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="143.6" font-size="1.57">-S2</text>
+<text x="164" y="143.6" font-size="1.57">Push-button red NC - STOP</text>
+<text x="250" y="143.6" font-size="1.57">Door</text>
+<text x="262" y="143.6" font-size="1.57">/E-07.3</text>
+<line x1="148" y1="145" x2="274" y2="145" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="148.6" font-size="1.57">-S3</text>
+<text x="164" y="148.6" font-size="1.57">Push-button blue NO - RESET</text>
+<text x="250" y="148.6" font-size="1.57">Door</text>
+<text x="262" y="148.6" font-size="1.57">/E-07.3</text>
+<line x1="148" y1="150" x2="274" y2="150" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="153.6" font-size="1.57">-P1</text>
+<text x="164" y="153.6" font-size="1.57">Stack light GN/YE/RD, 24 V DC LED</text>
+<text x="250" y="153.6" font-size="1.57">Roof</text>
+<text x="262" y="153.6" font-size="1.57">/E-12.6</text>
+<line x1="148" y1="155" x2="274" y2="155" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="158.6" font-size="1.57">-A12</text>
+<text x="164" y="158.6" font-size="1.57">HMI PC (web browser), office</text>
+<text x="250" y="158.6" font-size="1.57">Office</text>
+<text x="262" y="158.6" font-size="1.57">/E-14.6</text>
+<line x1="148" y1="160" x2="274" y2="160" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="163.6" font-size="1.57">-A13</text>
+<text x="164" y="163.6" font-size="1.57">Router / firewall, farm network and remote access (VPN)</text>
+<text x="250" y="163.6" font-size="1.57">Office</text>
+<text x="262" y="163.6" font-size="1.57">/E-14.6</text>
+<line x1="148" y1="165" x2="274" y2="165" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="168.6" font-size="1.57">-M201</text>
+<text x="164" y="168.6" font-size="1.57">P-201 irrigation pump, 0.75 kW 400 V 1.9 A</text>
+<text x="250" y="168.6" font-size="1.57">Field</text>
+<text x="262" y="168.6" font-size="1.57">/E-02.2</text>
+<line x1="148" y1="170" x2="274" y2="170" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="173.6" font-size="1.57">-M531</text>
+<text x="164" y="173.6" font-size="1.57">P-531 pad pump, 0.37 kW 400 V 1.0 A</text>
+<text x="250" y="173.6" font-size="1.57">Field</text>
+<text x="262" y="173.6" font-size="1.57">/E-02.4</text>
+<line x1="148" y1="175" x2="274" y2="175" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="178.6" font-size="1.57">-M541</text>
+<text x="164" y="178.6" font-size="1.57">P-541 fog pump 70 bar, 2.2 kW 400 V 4.8 A</text>
+<text x="250" y="178.6" font-size="1.57">Field</text>
+<text x="262" y="178.6" font-size="1.57">/E-02.6</text>
+<line x1="148" y1="180" x2="274" y2="180" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="183.6" font-size="1.57">-M601</text>
+<text x="164" y="183.6" font-size="1.57">F-601 exhaust fan 1, 1.1 kW 400 V 2.6 A</text>
+<text x="250" y="183.6" font-size="1.57">Field</text>
+<text x="262" y="183.6" font-size="1.57">/E-03.2</text>
+<line x1="148" y1="185" x2="274" y2="185" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="188.6" font-size="1.57">-M602</text>
+<text x="164" y="188.6" font-size="1.57">F-602 exhaust fan 2, 1.1 kW 400 V 2.6 A</text>
+<text x="250" y="188.6" font-size="1.57">Field</text>
+<text x="262" y="188.6" font-size="1.57">/E-03.4</text>
+<line x1="148" y1="190" x2="274" y2="190" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="193.6" font-size="1.57">-M603</text>
+<text x="164" y="193.6" font-size="1.57">F-603 exhaust fan 3, 1.1 kW 400 V 2.6 A</text>
+<text x="250" y="193.6" font-size="1.57">Field</text>
+<text x="262" y="193.6" font-size="1.57">/E-03.6</text>
+<line x1="148" y1="195" x2="274" y2="195" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="198.6" font-size="1.57">-M511</text>
+<text x="164" y="198.6" font-size="1.57">M-511 roof vent drive, 0.37 kW 400 V, gear motor</text>
+<text x="250" y="198.6" font-size="1.57">Field</text>
+<text x="262" y="198.6" font-size="1.57">/E-04.2</text>
+<line x1="148" y1="200" x2="274" y2="200" stroke="#000" stroke-width="0.12"/>
+<text x="149" y="203.6" font-size="1.57">-M521</text>
+<text x="164" y="203.6" font-size="1.57">M-521 shade net drive, 0.37 kW 400 V, gear motor</text>
+<text x="250" y="203.6" font-size="1.57">Field</text>
+<text x="262" y="203.6" font-size="1.57">/E-04.4</text>
+<line x1="148" y1="205" x2="274" y2="205" stroke="#000" stroke-width="0.12"/>
+<rect x="148" y="25" width="126" height="180" fill="none" stroke="#000" stroke-width="0.3"/>
+<line x1="163" y1="25" x2="163" y2="205" stroke="#000" stroke-width="0.12"/>
+<line x1="249" y1="25" x2="249" y2="205" stroke="#000" stroke-width="0.12"/>
+<line x1="261" y1="25" x2="261" y2="205" stroke="#000" stroke-width="0.12"/>
+<rect x="278" y="25" width="126" height="5" fill="#e8e8e8" stroke="#000" stroke-width="0.2"/>
+<text x="279" y="28.6" font-size="1.57" font-weight="bold">Ref.</text>
+<text x="294" y="28.6" font-size="1.57" font-weight="bold">Description</text>
+<text x="380" y="28.6" font-size="1.57" font-weight="bold">Loc.</text>
+<text x="392" y="28.6" font-size="1.57" font-weight="bold">Sheet</text>
+<line x1="278" y1="30" x2="404" y2="30" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="33.6" font-size="1.57">-M311</text>
+<text x="294" y="33.6" font-size="1.57">P-311 Dosing pump A, 230 V, 4-20 mA speed in, run relay out</text>
+<text x="380" y="33.6" font-size="1.57">Field</text>
+<text x="392" y="33.6" font-size="1.57">/E-05.1</text>
+<line x1="278" y1="35" x2="404" y2="35" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="38.6" font-size="1.57">-M312</text>
+<text x="294" y="38.6" font-size="1.57">P-312 Dosing pump B, 230 V, 4-20 mA speed in, run relay out</text>
+<text x="380" y="38.6" font-size="1.57">Field</text>
+<text x="392" y="38.6" font-size="1.57">/E-05.3</text>
+<line x1="278" y1="40" x2="404" y2="40" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="43.6" font-size="1.57">-M313</text>
+<text x="294" y="43.6" font-size="1.57">P-313 Acid pump, 230 V, 4-20 mA speed in, run relay out</text>
+<text x="380" y="43.6" font-size="1.57">Field</text>
+<text x="392" y="43.6" font-size="1.57">/E-05.5</text>
+<line x1="278" y1="45" x2="404" y2="45" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="48.6" font-size="1.57">-Y201</text>
+<text x="294" y="48.6" font-size="1.57">XV-201 refill solenoid valve 24 V DC, NC</text>
+<text x="380" y="48.6" font-size="1.57">Field</text>
+<text x="392" y="48.6" font-size="1.57">/E-08.3</text>
+<line x1="278" y1="50" x2="404" y2="50" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="53.6" font-size="1.57">-Y301</text>
+<text x="294" y="53.6" font-size="1.57">XV-301 return solenoid valve 24 V DC, NC</text>
+<text x="380" y="53.6" font-size="1.57">Field</text>
+<text x="392" y="53.6" font-size="1.57">/E-08.3</text>
+<line x1="278" y1="55" x2="404" y2="55" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="58.6" font-size="1.57">-Y401</text>
+<text x="294" y="58.6" font-size="1.57">XV-401 zone 1 solenoid valve 24 V DC, NC</text>
+<text x="380" y="58.6" font-size="1.57">Field</text>
+<text x="392" y="58.6" font-size="1.57">/E-08.3</text>
+<line x1="278" y1="60" x2="404" y2="60" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="63.6" font-size="1.57">-Y402</text>
+<text x="294" y="63.6" font-size="1.57">XV-402 zone 2 solenoid valve 24 V DC, NC</text>
+<text x="380" y="63.6" font-size="1.57">Field</text>
+<text x="392" y="63.6" font-size="1.57">/E-08.3</text>
+<line x1="278" y1="65" x2="404" y2="65" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="68.6" font-size="1.57">-Y403</text>
+<text x="294" y="68.6" font-size="1.57">XV-403 zone 3 solenoid valve 24 V DC, NC</text>
+<text x="380" y="68.6" font-size="1.57">Field</text>
+<text x="392" y="68.6" font-size="1.57">/E-08.3</text>
+<line x1="278" y1="70" x2="404" y2="70" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="73.6" font-size="1.57">-Y404</text>
+<text x="294" y="73.6" font-size="1.57">XV-404 zone 4 solenoid valve 24 V DC, NC</text>
+<text x="380" y="73.6" font-size="1.57">Field</text>
+<text x="392" y="73.6" font-size="1.57">/E-08.3</text>
+<line x1="278" y1="75" x2="404" y2="75" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="78.6" font-size="1.57">-B105</text>
+<text x="294" y="78.6" font-size="1.57">XS-105 rain detector, relay output NC (opens on rain)</text>
+<text x="380" y="78.6" font-size="1.57">Field</text>
+<text x="392" y="78.6" font-size="1.57">/E-07.3</text>
+<line x1="278" y1="80" x2="404" y2="80" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="83.6" font-size="1.57">-B202</text>
+<text x="294" y="83.6" font-size="1.57">LSL-201 T-201 low-level float switch</text>
+<text x="380" y="83.6" font-size="1.57">Field</text>
+<text x="392" y="83.6" font-size="1.57">/E-07.3</text>
+<line x1="278" y1="85" x2="404" y2="85" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="88.6" font-size="1.57">-B311</text>
+<text x="294" y="88.6" font-size="1.57">LSL-311 stock A low-level float switch</text>
+<text x="380" y="88.6" font-size="1.57">Field</text>
+<text x="392" y="88.6" font-size="1.57">/E-07.3</text>
+<line x1="278" y1="90" x2="404" y2="90" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="93.6" font-size="1.57">-B312</text>
+<text x="294" y="93.6" font-size="1.57">LSL-312 stock B low-level float switch</text>
+<text x="380" y="93.6" font-size="1.57">Field</text>
+<text x="392" y="93.6" font-size="1.57">/E-07.3</text>
+<line x1="278" y1="95" x2="404" y2="95" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="98.6" font-size="1.57">-B313</text>
+<text x="294" y="98.6" font-size="1.57">LSL-313 acid low-level float switch (PVDF)</text>
+<text x="380" y="98.6" font-size="1.57">Field</text>
+<text x="392" y="98.6" font-size="1.57">/E-07.3</text>
+<line x1="278" y1="100" x2="404" y2="100" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="103.6" font-size="1.57">-B512</text>
+<text x="294" y="103.6" font-size="1.57">ZSO-511 vent open limit switch, 1 NO + 1 NC</text>
+<text x="380" y="103.6" font-size="1.57">Field</text>
+<text x="392" y="103.6" font-size="1.57">/E-07.3</text>
+<line x1="278" y1="105" x2="404" y2="105" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="108.6" font-size="1.57">-B513</text>
+<text x="294" y="108.6" font-size="1.57">ZSC-511 vent closed limit switch, 1 NO + 1 NC</text>
+<text x="380" y="108.6" font-size="1.57">Field</text>
+<text x="392" y="108.6" font-size="1.57">/E-07.3</text>
+<line x1="278" y1="110" x2="404" y2="110" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="113.6" font-size="1.57">-B522</text>
+<text x="294" y="113.6" font-size="1.57">ZSO-521 net retracted limit switch, 1 NO + 1 NC</text>
+<text x="380" y="113.6" font-size="1.57">Field</text>
+<text x="392" y="113.6" font-size="1.57">/E-07.3</text>
+<line x1="278" y1="115" x2="404" y2="115" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="118.6" font-size="1.57">-B523</text>
+<text x="294" y="118.6" font-size="1.57">ZSC-521 net deployed limit switch, 1 NO + 1 NC</text>
+<text x="380" y="118.6" font-size="1.57">Field</text>
+<text x="392" y="118.6" font-size="1.57">/E-07.3</text>
+<line x1="278" y1="120" x2="404" y2="120" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="123.6" font-size="1.57">-B531</text>
+<text x="294" y="123.6" font-size="1.57">LSL-531 pad sump low-level float switch</text>
+<text x="380" y="123.6" font-size="1.57">Field</text>
+<text x="392" y="123.6" font-size="1.57">/E-07.3</text>
+<line x1="278" y1="125" x2="404" y2="125" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="128.6" font-size="1.57">-B541</text>
+<text x="294" y="128.6" font-size="1.57">PSL-541 fog pump inlet pressure switch, NO (closed = pressure OK)</text>
+<text x="380" y="128.6" font-size="1.57">Field</text>
+<text x="392" y="128.6" font-size="1.57">/E-08.2</text>
+<line x1="278" y1="130" x2="404" y2="130" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="133.6" font-size="1.57">-B201</text>
+<text x="294" y="133.6" font-size="1.57">LT-201 hydrostatic level transmitter</text>
+<text x="380" y="133.6" font-size="1.57">Field</text>
+<text x="392" y="133.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="135" x2="404" y2="135" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="138.6" font-size="1.57">-B203</text>
+<text x="294" y="138.6" font-size="1.57">FT-201 magnetic flowmeter, 24 V DC powered</text>
+<text x="380" y="138.6" font-size="1.57">Field</text>
+<text x="392" y="138.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="140" x2="404" y2="140" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="143.6" font-size="1.57">-B204</text>
+<text x="294" y="143.6" font-size="1.57">PT-201 pressure transmitter</text>
+<text x="380" y="143.6" font-size="1.57">Field</text>
+<text x="392" y="143.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="145" x2="404" y2="145" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="148.6" font-size="1.57">-B301</text>
+<text x="294" y="148.6" font-size="1.57">AIT-301 conductivity analyser, 230 V powered</text>
+<text x="380" y="148.6" font-size="1.57">Field</text>
+<text x="392" y="148.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="150" x2="404" y2="150" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="153.6" font-size="1.57">-B302</text>
+<text x="294" y="153.6" font-size="1.57">AIT-302 pH analyser, 230 V powered</text>
+<text x="380" y="153.6" font-size="1.57">Field</text>
+<text x="392" y="153.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="155" x2="404" y2="155" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="158.6" font-size="1.57">-B303</text>
+<text x="294" y="158.6" font-size="1.57">AIT-303 pH analyser, 230 V powered</text>
+<text x="380" y="158.6" font-size="1.57">Field</text>
+<text x="392" y="158.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="160" x2="404" y2="160" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="163.6" font-size="1.57">-B402</text>
+<text x="294" y="163.6" font-size="1.57">FT-402 drain gutter flow transmitter</text>
+<text x="380" y="163.6" font-size="1.57">Field</text>
+<text x="392" y="163.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="165" x2="404" y2="165" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="168.6" font-size="1.57">-B101</text>
+<text x="294" y="168.6" font-size="1.57">RT-101 pyranometer with 4-20 mA converter</text>
+<text x="380" y="168.6" font-size="1.57">Field</text>
+<text x="392" y="168.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="170" x2="404" y2="170" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="173.6" font-size="1.57">-B102</text>
+<text x="294" y="173.6" font-size="1.57">TT-101 combined T/RH sensor, channel T</text>
+<text x="380" y="173.6" font-size="1.57">Field</text>
+<text x="392" y="173.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="175" x2="404" y2="175" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="178.6" font-size="1.57">-B104</text>
+<text x="294" y="178.6" font-size="1.57">ST-101 cup anemometer</text>
+<text x="380" y="178.6" font-size="1.57">Field</text>
+<text x="392" y="178.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="180" x2="404" y2="180" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="183.6" font-size="1.57">-B501</text>
+<text x="294" y="183.6" font-size="1.57">TT-501 aspirated T/RH box, channel T</text>
+<text x="380" y="183.6" font-size="1.57">Field</text>
+<text x="392" y="183.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="185" x2="404" y2="185" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="188.6" font-size="1.57">-B502</text>
+<text x="294" y="188.6" font-size="1.57">AT-502 NDIR CO2 transmitter, 24 V DC powered</text>
+<text x="380" y="188.6" font-size="1.57">Field</text>
+<text x="392" y="188.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="190" x2="404" y2="190" stroke="#000" stroke-width="0.12"/>
+<text x="279" y="193.6" font-size="1.57">-B511</text>
+<text x="294" y="193.6" font-size="1.57">ZT-511 position transmitter on the vent drive</text>
+<text x="380" y="193.6" font-size="1.57">Field</text>
+<text x="392" y="193.6" font-size="1.57">/E-09.3</text>
+<line x1="278" y1="195" x2="404" y2="195" stroke="#000" stroke-width="0.12"/>
+<rect x="278" y="25" width="126" height="170" fill="none" stroke="#000" stroke-width="0.3"/>
+<line x1="293" y1="25" x2="293" y2="195" stroke="#000" stroke-width="0.12"/>
+<line x1="379" y1="25" x2="379" y2="195" stroke="#000" stroke-width="0.12"/>
+<line x1="391" y1="25" x2="391" y2="195" stroke="#000" stroke-width="0.12"/>
+<rect x="10" y="10" width="400" height="277" fill="none" stroke="#000" stroke-width="0.5"/>
+<rect x="15" y="15" width="390" height="267" fill="none" stroke="#000" stroke-width="0.35"/>
+<line x1="15" y1="10" x2="15" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="15" y1="282" x2="15" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="63.75" y1="10" x2="63.75" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="63.75" y1="282" x2="63.75" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="112.5" y1="10" x2="112.5" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="112.5" y1="282" x2="112.5" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="161.25" y1="10" x2="161.25" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="161.25" y1="282" x2="161.25" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="210" y1="10" x2="210" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="210" y1="282" x2="210" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="258.75" y1="10" x2="258.75" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="258.75" y1="282" x2="258.75" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="307.5" y1="10" x2="307.5" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="307.5" y1="282" x2="307.5" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="356.25" y1="10" x2="356.25" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="356.25" y1="282" x2="356.25" y2="287" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="10" x2="405" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="282" x2="405" y2="287" stroke="#000" stroke-width="0.25"/>
+<text x="39.38" y="13.6" font-size="2.59" text-anchor="middle">1</text>
+<text x="39.38" y="285.9" font-size="2.59" text-anchor="middle">1</text>
+<text x="88.12" y="13.6" font-size="2.59" text-anchor="middle">2</text>
+<text x="88.12" y="285.9" font-size="2.59" text-anchor="middle">2</text>
+<text x="136.88" y="13.6" font-size="2.59" text-anchor="middle">3</text>
+<text x="136.88" y="285.9" font-size="2.59" text-anchor="middle">3</text>
+<text x="185.62" y="13.6" font-size="2.59" text-anchor="middle">4</text>
+<text x="185.62" y="285.9" font-size="2.59" text-anchor="middle">4</text>
+<text x="234.38" y="13.6" font-size="2.59" text-anchor="middle">5</text>
+<text x="234.38" y="285.9" font-size="2.59" text-anchor="middle">5</text>
+<text x="283.12" y="13.6" font-size="2.59" text-anchor="middle">6</text>
+<text x="283.12" y="285.9" font-size="2.59" text-anchor="middle">6</text>
+<text x="331.88" y="13.6" font-size="2.59" text-anchor="middle">7</text>
+<text x="331.88" y="285.9" font-size="2.59" text-anchor="middle">7</text>
+<text x="380.62" y="13.6" font-size="2.59" text-anchor="middle">8</text>
+<text x="380.62" y="285.9" font-size="2.59" text-anchor="middle">8</text>
+<line x1="10" y1="15" x2="15" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="15" x2="410" y2="15" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="59.5" x2="15" y2="59.5" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="59.5" x2="410" y2="59.5" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="104" x2="15" y2="104" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="104" x2="410" y2="104" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="148.5" x2="15" y2="148.5" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="148.5" x2="410" y2="148.5" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="193" x2="15" y2="193" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="193" x2="410" y2="193" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="237.5" x2="15" y2="237.5" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="237.5" x2="410" y2="237.5" stroke="#000" stroke-width="0.25"/>
+<line x1="10" y1="282" x2="15" y2="282" stroke="#000" stroke-width="0.25"/>
+<line x1="405" y1="282" x2="410" y2="282" stroke="#000" stroke-width="0.25"/>
+<text x="12.5" y="38.15" font-size="2.59" text-anchor="middle">A</text>
+<text x="407.5" y="38.15" font-size="2.59" text-anchor="middle">A</text>
+<text x="12.5" y="82.65" font-size="2.59" text-anchor="middle">B</text>
+<text x="407.5" y="82.65" font-size="2.59" text-anchor="middle">B</text>
+<text x="12.5" y="127.15" font-size="2.59" text-anchor="middle">C</text>
+<text x="407.5" y="127.15" font-size="2.59" text-anchor="middle">C</text>
+<text x="12.5" y="171.65" font-size="2.59" text-anchor="middle">D</text>
+<text x="407.5" y="171.65" font-size="2.59" text-anchor="middle">D</text>
+<text x="12.5" y="216.15" font-size="2.59" text-anchor="middle">E</text>
+<text x="407.5" y="216.15" font-size="2.59" text-anchor="middle">E</text>
+<text x="12.5" y="260.65" font-size="2.59" text-anchor="middle">F</text>
+<text x="407.5" y="260.65" font-size="2.59" text-anchor="middle">F</text>
+<rect x="15" y="252" width="390" height="30" fill="#fff" stroke="#000" stroke-width="0.5"/>
+<line x1="100" y1="252" x2="100" y2="282" stroke="#000" stroke-width="0.35"/>
+<line x1="190" y1="252" x2="190" y2="282" stroke="#000" stroke-width="0.35"/>
+<line x1="248" y1="252" x2="248" y2="282" stroke="#000" stroke-width="0.35"/>
+<line x1="340" y1="252" x2="340" y2="282" stroke="#000" stroke-width="0.35"/>
+<text x="17" y="255.6" font-size="1.84" fill="#555">Project</text>
+<text x="17" y="261.2" font-size="3.89" font-weight="bold">GH-1 Tropical Greenhouse</text>
+<text x="17" y="265.6" font-size="2.16">Irrigation, fertigation and climate control, 1 000 m² greenhouse</text>
+<text x="17" y="269" font-size="2.16">OpenPLC Runtime v4 + Modbus TCP remote I/O</text>
+<text x="17" y="272.4" font-size="2.16">Supply 3/N/PE AC 400/230 V 50 Hz</text>
+<text x="17" y="278.6" font-size="1.84" fill="#555">Symbols IEC 60617 · designations IEC 81346 · IEC 60204-1</text>
+<text x="102" y="255.6" font-size="1.84" fill="#555">Rev</text>
+<text x="110" y="255.6" font-size="1.84" fill="#555">Description</text>
+<text x="160" y="255.6" font-size="1.84" fill="#555">Date</text>
+<text x="176" y="255.6" font-size="1.84" fill="#555">By</text>
+<line x1="100" y1="257" x2="190" y2="257" stroke="#000" stroke-width="0.15"/>
+<line x1="100" y1="263.25" x2="190" y2="263.25" stroke="#000" stroke-width="0.15"/>
+<line x1="100" y1="269.5" x2="190" y2="269.5" stroke="#000" stroke-width="0.15"/>
+<line x1="100" y1="275.75" x2="190" y2="275.75" stroke="#000" stroke-width="0.15"/>
+<text x="103" y="261.6" font-size="2.38" font-weight="bold">A</text>
+<text x="110" y="261.6" font-size="2.38">First issue for review</text>
+<text x="160" y="261.6" font-size="2.16">2026-11-19</text>
+<text x="192" y="255.6" font-size="1.84" fill="#555">Name</text>
+<text x="226" y="255.6" font-size="1.84" fill="#555">Date</text>
+<text x="192" y="262.5" font-size="2.16">Drawn</text>
+<line x1="206" y1="263.1" x2="223" y2="263.1" stroke="#000" stroke-width="0.15"/>
+<line x1="226" y1="263.1" x2="246" y2="263.1" stroke="#000" stroke-width="0.15"/>
+<text x="192" y="270" font-size="2.16">Checked</text>
+<line x1="206" y1="270.6" x2="223" y2="270.6" stroke="#000" stroke-width="0.15"/>
+<line x1="226" y1="270.6" x2="246" y2="270.6" stroke="#000" stroke-width="0.15"/>
+<text x="192" y="277.5" font-size="2.16">Approved</text>
+<line x1="206" y1="278.1" x2="223" y2="278.1" stroke="#000" stroke-width="0.15"/>
+<line x1="226" y1="278.1" x2="246" y2="278.1" stroke="#000" stroke-width="0.15"/>
+<text x="250" y="255.6" font-size="1.84" fill="#555">Title</text>
+<text x="250" y="264.5" font-size="4.32" font-weight="bold">Parts list</text>
+<text x="250" y="271.5" font-size="2.38">Electrical drawing set - control panel GH-1 (pump room)</text>
+<text x="250" y="278.6" font-size="1.94" fill="#555">Format A3 · scale none</text>
+<text x="342" y="255.6" font-size="1.84" fill="#555">Drawing no.</text>
+<text x="342" y="262.5" font-size="4.54" font-weight="bold">GH1-E-13</text>
+<text x="342" y="268.5" font-size="2.59">Sheet 14 / 15</text>
+<text x="375" y="268.5" font-size="2.59" font-weight="bold">Rev. A</text>
+<text x="342" y="274" font-size="2.38">Date 2026-11-19</text>
+<text x="342" y="278.6" font-size="1.94" fill="#555">Next: GH1-E-14</text>
+</g>
+</svg>
