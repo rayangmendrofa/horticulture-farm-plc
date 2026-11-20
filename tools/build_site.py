@@ -7,7 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 FILES = ["farmsim/__init__.py", "farmsim/stvm.py", "farmsim/tags.py", "farmsim/weather.py", "farmsim/plant.py",
-         "farmsim/bench.py", "farmsim/faults.py", "farmsim/crops.py", "farmsim/webdemo.py", "plc/greenhouse.st"]
+         "farmsim/bench.py", "farmsim/faults.py", "farmsim/crops.py", "farmsim/webdemo.py", "farmsim/progress.py",
+         "plc/greenhouse.st"]
 
 if __name__ == "__main__":
     out = ROOT / "site" / "py"

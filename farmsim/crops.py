@@ -37,6 +37,7 @@ CROPS = {
 }
 ZONE_M2 = 250.0
 STAGES = ("seedling", "growing", "flowering", "ripe")
+PEST_DAMAGE = 0.4            # health per simulated minute
 
 
 def _ramp(x, lo0, lo1, hi1, hi0):
@@ -59,6 +60,7 @@ class Bed:
     stress: dict = field(default_factory=dict)
     last_ec: float | None = None  # EC of the last water this zone received
     last_ph: float | None = None
+    pest: bool = False           # an outbreak eats health until it is sprayed
 
     @property
     def spec(self):
@@ -94,17 +96,19 @@ class Bed:
         self.__init__()
         return kg
 
-    def step_minute(self, t_in, rad_in, deficit_l):
+    def step_minute(self, t_in, rad_in, deficit_l, light_floor=0.0):
         """Advance one simulated minute with the conditions the crop actually saw."""
         if not self.crop or self.health <= 0 or self.stage == "ripe":
             return
+        if self.pest:
+            self.health = max(0.0, self.health - PEST_DAMAGE)
         t_min, t_lo, t_hi, t_max, ec_lo, ec_hi = self.spec["comfort"]
         heat_tol = self.spec["variants"][self.variant][3]
         f_t = _ramp(t_in, t_min, t_lo, t_hi + heat_tol, t_max + heat_tol)
         f_ec = 1.0 if self.last_ec is None else _ramp(self.last_ec, ec_lo - 1.0, ec_lo, ec_hi, ec_hi + 1.0)
         f_ph = 1.0 if self.last_ph is None else _ramp(self.last_ph, 4.6, 5.4, 6.6, 7.4)
         f_w = _ramp(deficit_l, -1.0, 0.0, 60.0, 220.0)
-        f_light = min(1.0, rad_in / 300.0)
+        f_light = max(light_floor, min(1.0, rad_in / 300.0))
         worst = min(f_t, f_ec, f_ph, f_w)
         self.stress = {k: round(v, 2) for k, v in (("heat" if t_in > t_hi else "cold", f_t), ("ec", f_ec),
                                                      ("ph", f_ph), ("water", f_w)) if v < 0.8}

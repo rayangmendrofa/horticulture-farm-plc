@@ -27,16 +27,18 @@ TICKS_PER_MIN = 1200          # 50 ms scans
 
 
 class Demo:
-    def __init__(self, clock="07:00", scenario="clear", seed=None):
+    def __init__(self, clock="07:00", scenario="clear", seed=None, beds=DEFAULT_BEDS):
         self.b = Bench(vm=STMachine(ST_FILE.read_text(encoding="utf-8"), strict=False), clock=clock,
                        scenario=scenario)
         self.beds = [Bed() for _ in range(4)]
-        for bed, (crop, var) in zip(self.beds, DEFAULT_BEDS):
+        for bed, (crop, var) in zip(self.beds, beds):
             bed.plant(crop, var)
         self.harvested_kg, self.harvests, self.lost = 0.0, 0, 0
         self.ticks = 0
         self.rng = random.Random(seed)
         self.challenge, self.result = None, None
+        self.park = {}                  # set point -> value held while its hardware is not installed
+        self.light_floor = 0.0          # grow lamps: light the crops get even in the dark
         self.apply_recipe()
         self.b.run(2.0)                 # analog filters settle, then clear the power-up alarms
         self.b.hmi("reset")
@@ -56,16 +58,14 @@ class Demo:
                 rad_in = p.wx.rad * p.cfg.transmissivity * (1 - p.cfg.net_shading * p.net_pos / 100.0)
                 for i, bed in enumerate(self.beds):
                     alive = bed.health > 0
-                    bed.step_minute(p.t_in, rad_in, p.deficit[i])
+                    bed.step_minute(p.t_in, rad_in, p.deficit[i], light_floor=self.light_floor)
                     if alive and bed.crop and bed.health <= 0:
                         self.lost += 1
                         self.apply_recipe()
 
     def apply_recipe(self):
-        sp = house_recipe(self.beds)
-        if sp is None:
-            self.b.setpoint("SP_ZONE_EN", 0)
-            return
+        sp = house_recipe(self.beds) or {"SP_ZONE_EN": 0}
+        sp.update(self.park)
         for name, v in sp.items():
             self.b.setpoint(name, v)
 
@@ -98,6 +98,8 @@ class Demo:
             b.hmi(m["name"])
         elif c == "setpoint":
             tags.SP[m["name"]]                       # KeyError for an unknown name
+            if m["name"] in self.park:
+                raise ValueError("that hardware is not installed yet")
             b.setpoint(m["name"], float(m["value"]))
         elif c == "recipe":
             self.apply_recipe()
@@ -120,7 +122,8 @@ class Demo:
             if not self.challenge:
                 b.plant.faults.clear()
         elif c == "challenge":
-            return self._challenge(m["action"], m.get("fault"))
+            # a visitor's challenge is always random; a forced fault comes only from the progress layer
+            return self._challenge(m["action"], None if m["action"] == "start" else m.get("fault"))
         else:
             raise ValueError(f"unknown command {c!r}")
 
@@ -136,8 +139,10 @@ class Demo:
     def _challenge(self, action, fault):
         b = self.b
         if action == "start":
+            if fault is not None and fault not in WEB_FAULTS:
+                raise ValueError(fault)
             b.plant.faults.clear()
-            self.challenge = {"fault": self.rng.choice(WEB_FAULTS), "start": self.ticks, "hints": 0}
+            self.challenge = {"fault": fault or self.rng.choice(WEB_FAULTS), "start": self.ticks, "hints": 0}
             b.fault(self.challenge["fault"])
             self.result = None
         elif action == "hint" and self.challenge:
@@ -147,6 +152,7 @@ class Demo:
             if action == "answer" and fault not in FAULT_INFO:
                 raise ValueError(fault)
             answered = FAULT_INFO[fault]["title"] if action == "answer" else "(gave up)"
+            self.challenge_fault = f                     # the progress layer keeps a found fault until repaired
             self.result = {"correct": fault == f, "answered": answered, **FAULT_INFO[f],
                            "sim_min": (self.ticks - self.challenge["start"]) // TICKS_PER_MIN,
                            "hints": self.challenge["hints"]}
@@ -189,7 +195,7 @@ class Demo:
                        "variant": bed.spec["variants"][bed.variant][0] if bed.crop else None,
                        "maturity": round(bed.maturity, 1), "health": round(bed.health, 1), "stage": bed.stage,
                        "stress": bed.stress, "last_ec": bed.last_ec, "last_ph": bed.last_ph,
-                       "watering": p.q_zone[i] > 0.05, "deficit": round(p.deficit[i], 1)}
+                       "watering": p.q_zone[i] > 0.05, "deficit": round(p.deficit[i], 1), "pest": bed.pest}
                       for i, bed in enumerate(self.beds)],
             "score": {"kg": round(self.harvested_kg), "harvests": self.harvests, "lost": self.lost},
             "faults": [] if ch else sorted(p.faults),
@@ -198,8 +204,32 @@ class Demo:
                           "truth": truth if ch and ch["hints"] else None,
                           "field": field if ch and ch["hints"] else None},
             "result": self.result,
+            "field": self.field(),
         }
         return json.dumps(s, default=str)
+
+
+    def field(self) -> dict:
+        """What you would see walking the site (the physical plant, not the PLC's sensors)."""
+        p, f, c = self.b.plant, self.b.plant.faults, self.b.plant.cfg
+        run = p.running
+        return {
+            "pump": run["p201"], "pump_trip": "p201_trip" in f,
+            "burst": "burst_pipe" in f, "spray": "burst_pipe" in f and run["p201"],
+            "blocked": "blocked_line" in f and run["p201"],
+            "passing": "xv301_passing" in f and run["p201"],
+            "drip": [round(q * 1000.0) for q in p.q_zone],
+            "leak": [i == 3 and "z4_leak" in f for i in range(4)],                  # a broken dripper
+            "leaking": [i == 3 and "z4_leak" in f and p.valve["xv404"] > 0.5 for i in range(4)],
+            "jugs": [0.0 if "stock_a_empty" in f else p.stock["a"] / c.stock_l, p.stock["b"] / c.stock_l,
+                     0.0 if "acid_empty" in f else p.stock["acid"] / c.acid_l],
+            "vent": round(p.vent_pos, 1), "vent_stuck": "vent_stuck" in f and p.vent_dir != 0,
+            "fans": [run["f601"], run["f602"], run["f603"]], "fan_trip": [False, "f602_trip" in f, False],
+            "pad_wet": round(p.pad_wet, 2), "pad_dry": "pad_sump_low" in f,
+            "fog": run["p541"], "net": round(p.net_pos, 1),
+            "wires": [w for w, flt in (("wind", "st101_break"), ("temp", "tt501_break"), ("rain", "rain_wire_break"))
+                      if flt in f],
+        }
 
 
 def meta() -> str:

@@ -7,7 +7,7 @@ A PLC project for a 1 000 m² tropical lowland greenhouse:
 - **fertigation**: inline A/B nutrient and acid dosing on EC and pH;
 - **climate control**: roof vents, shade net, fogging, and pad-and-fan cooling with weather overrides.
 
-The program is **IEC 61131-3 Structured Text** for **OpenPLC v4**, integrated over **Modbus TCP**. A virtual plant replaces the hardware, so the whole system runs and is tested on a laptop. The plant models the weather, greenhouse air, crop, hydraulics and water chemistry. An **ISA-101 style web HMI** shows it running. **119 automated tests** cover the project: 100 check every functional, safety, diagnostic and HMI requirement, the field faults, the generated documents and the browser demo, and 19 more test the Structured Text interpreter. The program also runs on **OpenPLC Runtime v4**, where FAT part B passes 7/7.
+The program is **IEC 61131-3 Structured Text** for **OpenPLC v4**, integrated over **Modbus TCP**. A virtual plant replaces the hardware, so the whole system runs and is tested on a laptop. The plant models the weather, greenhouse air, crop, hydraulics and water chemistry. An **ISA-101 style web HMI** shows it running. **130 automated tests** cover the project: 111 check every functional, safety, diagnostic and HMI requirement, the field faults, the generated documents and the browser demo, and 19 more test the Structured Text interpreter. The program also runs on **OpenPLC Runtime v4**, where FAT part B passes 7/7.
 
 It also comes with what a technician needs on site:
 - a **15-sheet electrical drawing set**, generated from one data model, so schematics, terminal plans, parts list and the **I/O checkout sheet** always agree;
@@ -82,6 +82,23 @@ A command button is enabled only when the PLC would accept it. Normal states are
 - **Real:** the unmodified `greenhouse.st` runs in the ST interpreter in a web worker (Pyodide), scan by scan, against the plant model, at up to about 25× real time.
 - **Recipes:** planting sets the PLC set points from the crops' recipes.
 - **Game layer:** crop growth, health and harvest are added for the page, with an accelerated crop clock (one simulated minute of daylight = one growing day).
+- **One farm:** the greenhouses sit side by side in one scrolling world. Empty lots are for sale, and building plays in place: a new bed is tilled, a new greenhouse goes up post by post.
+- **Settings in the scene:** click the feed tank, the pump, the roof or the PLC cabinet to open that equipment's panel: live readings, set points, and the diagnosis when something is wrong.
+- **Progress (`farmsim/progress.py`):**
+  - Harvests sell for coins and count as xp.
+  - Crop tree: kangkung is the root; chili → tomato, cucumber → melon (needs light-sum watering), lettuce → strawberry (need cooling and fogging). A crop opens when its parent has been harvested and the level and any upgrade it needs are there.
+  - Upgrade tree: tools are the roots. Multimeter → light-sum watering → harvest robot; ladder → shade net → clear film and pad-and-fan cooling (also needs the wrench) → fogging and the cold room. The tree button shows both trees.
+  - You start with a bare greenhouse and two beds, and build up to four beds per greenhouse and three greenhouses.
+  - Each new greenhouse runs its own copy of the same `greenhouse.st`: scaling out with no change to the program.
+  - Upgrades: light-sum watering, shade net, pad-and-fan cooling and fogging are PLC functions that are always in the program. Until the hardware is bought, their set points are parked where they never act. Clear cover film, a harvest robot and a cold room are game boosts.
+  - Items: compost tea, grow lamps, a bee hive and market day give short boosts.
+  - Problems: now and then a fault appears in one greenhouse, visible in the field (a tripped pump, a puddle, a dry pad, a cut sensor cable) or, later, only in the numbers. Diagnose it on the equipment's panel. Big builds hit a roadblock first: a planted fault you must diagnose before the build goes through.
+  - Repairs: a correct diagnosis finds the fault, but it stays broken until it is repaired with the right tools (bought once: pipe wrench, multimeter, ladder) and parts (used up: pipe kit, dripper kit, fertilizer, acid, calibration kit, sensor cable), or until you hire the technician. Builds and upgrades need tools and parts too.
+  - Market: boosts, tools and parts, and cosmetics (the guide's outfit, greenhouse paint, the path, and decorations such as a scarecrow, flags, flowers and night lanterns).
+  - Dynamic days: each morning brings random weather from the model's own scenarios (afternoon showers, storms, sometimes a heatwave that raises the outside temperature), market news (one crop sells high, one is cheap), and sometimes a buyer's truck in the yard with an order to fill for a bonus. During the day, pests can strike a bed (spray neem oil) and birds peck ripe fruit unless the scarecrow is out.
+  - There are 20 achievements. Progress is saved in the visitor's browser.
+- **Look:** a dithered sky with sunrise and sunset, parallax hills and palms, clouds lit from above, night lighting with lanterns, grow lamps and fireflies, lightning, rain splashes, swaying grass and crops, dripping lines, glass glints, shadows that follow the sun, and harvest bursts.
+- **Guide:** the farmer from the GelasTinta character pack walks a new visitor through the first harvest and reacts to alarms, roadblocks and achievements.
 
 ```bash
 python tools/build_site.py                 # copies farmsim/*.py and plc/greenhouse.st into site/py/

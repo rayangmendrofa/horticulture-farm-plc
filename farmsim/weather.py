@@ -30,6 +30,7 @@ def _wave(t: float, *terms) -> float:
 class Weather:
     scenario: str = "clear"
     override: dict = field(default_factory=dict)   # e.g. {"wind": 12.0, "rain": True}
+    heat: float = 0.0                                  # degC added to the outside air (a heatwave)
 
     def at(self, clock_s: float) -> WeatherState:
         h = (clock_s / 3600.0) % 24.0
@@ -60,6 +61,7 @@ class Weather:
                 s.t_out = min(s.t_out, 27.0)
             if self.scenario == "storm" and 13.75 <= h < 15.0:
                 s.wind = 17.0 + 3.0 * abs(_wave(clock_s, (1.0, 11, 0.0)))
+        s.t_out += self.heat
         # --- RH falls as temperature rises (roughly constant absolute humidity)
         s.rh_out = min(98.0, 95.0 - (s.t_out - 24.0) * 4.4)
         if s.rain:
