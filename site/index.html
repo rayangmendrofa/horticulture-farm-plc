@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GH-1 Greenhouse — a real PLC program you can farm with</title>
+<meta name="description" content="Plant crops in a simulated tropical greenhouse run by a real IEC 61131-3 PLC program: irrigation, fertigation and climate control, live in your browser.">
+<style>
+  :root { --bg: #14181d; --panel: #1d232a; --panel2: #252c34; --ink: #e8ecef; --muted: #98a3ad; --line: #34404a;
+          --accent: #6cc37a; --warn: #e8b440; --bad: #e0574b; --water: #5aa9e6; }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  header { padding: 18px 16px 6px; max-width: 1280px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  header p { margin: 0; color: var(--muted); max-width: 900px; }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 14px; padding: 12px 16px 20px; max-width: 1280px; margin: 0 auto; }
+  .col { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  section, .stage { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  h2 { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px;
+       display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  canvas { display: block; width: 100%; height: auto; image-rendering: pixelated; border-radius: 4px; cursor: pointer; background: #0d1014; }
+  .bar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
+  button, select, input { font: inherit; color: var(--ink); background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; }
+  button { padding: 5px 10px; cursor: pointer; min-height: 32px; }
+  button:hover:not(:disabled) { border-color: var(--muted); }
+  button:disabled { opacity: .4; cursor: not-allowed; }
+  button.on { background: var(--accent); color: #0d1a10; border-color: var(--accent); font-weight: 600; }
+  button.primary { background: #2f6b3a; border-color: #3f8a4c; }
+  button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--water); outline-offset: 1px; }
+  select { padding: 5px 6px; min-height: 32px; }
+  .clock { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 16px; margin-right: 6px; }
+  .muted { color: var(--muted); }
+  .kv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .kv div { background: var(--panel2); border-radius: 6px; padding: 5px 8px; min-width: 0; }
+  .kv span { display: block; font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .kv b { font-variant-numeric: tabular-nums; }
+  .meter { height: 8px; background: var(--panel2); border-radius: 4px; overflow: hidden; margin: 3px 0 8px; }
+  .meter i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .3s; }
+  .tag { display: inline-block; font-size: 11.5px; padding: 1px 7px; border-radius: 9px; background: var(--panel2); margin: 2px 4px 2px 0; }
+  .tag.warn { background: #4a3a14; color: #ffd97a; } .tag.bad { background: #4d1b18; color: #ffb3ab; } .tag.ok { background: #1f3d25; color: #a6e3b0; }
+  .alarms { font-size: 12.5px; max-height: 120px; overflow: auto; }
+  .alarms div { padding: 2px 0; border-bottom: 1px solid var(--line); }
+  .sp label { display: grid; grid-template-columns: 1fr 70px; gap: 6px; align-items: center; font-size: 12.5px; margin-bottom: 4px; }
+  .sp input[type=range] { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chips button { font-size: 12px; min-height: 28px; padding: 3px 8px; }
+  .chips button.on { background: var(--warn); border-color: var(--warn); color: #241a00; }
+  .result { background: var(--panel2); border-radius: 6px; padding: 8px 10px; margin-top: 8px; font-size: 13px; }
+  .result.good { border-left: 3px solid var(--accent); } .result.badr { border-left: 3px solid var(--bad); }
+  .result dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; margin: 6px 0 0; } .result dt { color: var(--muted); } .result dd { margin: 0; }
+  #loading { position: absolute; inset: 0; display: grid; place-items: center; background: #0d1014e6; border-radius: 4px; text-align: center; padding: 20px; }
+  .stage { position: relative; }
+  .explain { max-width: 1280px; margin: 0 auto; padding: 0 16px 28px; color: var(--muted); font-size: 13.5px; }
+  .explain h2 { margin-top: 6px; }
+  .explain ul { margin: 6px 0 0; padding-left: 18px; }
+  a { color: var(--water); }
+  @media (max-width: 960px) { main { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .kv { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (prefers-reduced-motion: reduce) { .meter i { transition: none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>GH-1 Greenhouse — farm with a real PLC program</h1>
+  <p>A 1 000 m² tropical greenhouse run by <b>greenhouse.st</b>, an IEC 61131-3 PLC program for irrigation, fertigation and climate control — the same file that passes its acceptance tests and runs on OpenPLC. Plant crops, change the weather, break things, and watch the controller cope.</p>
+</header>
+
+<main>
+  <div class="col">
+    <div class="stage">
+      <canvas id="farm" width="320" height="200" aria-label="Greenhouse view: click a bed to select a zone"></canvas>
+      <div id="loading"><div><b>Starting the PLC…</b><div class="muted" id="loadmsg">Loading Python (Pyodide)…</div><div class="muted" style="font-size:12px;margin-top:6px">First visit downloads about 10 MB; later visits are cached.</div></div></div>
+      <div class="bar">
+        <span class="clock" id="clock">--:--</span><span class="muted" id="day">day 1</span>
+        <span class="muted" id="speedtxt"></span>
+        <span style="flex:1"></span>
+        <span class="muted">Speed</span>
+        <span id="speeds"></span>
+        <button id="skip" title="Jump to the next morning">Skip night</button>
+      </div>
+      <div class="bar"><span class="muted">Weather</span><span id="weather"></span><span style="flex:1"></span>
+        <span class="muted" id="wxtxt"></span></div>
+    </div>
+    <section>
+      <h2><span>Controller (PLC)</span><span id="plcsub" class="muted"></span></h2>
+      <div class="kv" id="plckv"></div>
+      <div class="bar">
+        <button data-hmi="irrigate_now" class="primary">Irrigate now</button>
+        <button data-hmi="stop">Stop</button><button data-hmi="start">Start</button>
+        <button data-hmi="reset">Reset alarms</button>
+      </div>
+      <div class="alarms" id="alarms"></div>
+    </section>
+  </div>
+
+  <div class="col">
+    <section id="zonepanel">
+      <h2><span id="zonetitle">Zone</span><span class="muted" id="zonesub"></span></h2>
+      <div id="zonebody" class="muted">Click a bed in the greenhouse.</div>
+    </section>
+    <section class="sp">
+      <h2><span>Set points</span><button id="recipe" title="Set the house to the mean recipe of the planted crops">Use crop recipe</button></h2>
+      <div id="sps"></div>
+      <div class="muted" style="font-size:12px">One dosing line and one air volume serve all four zones, so EC, pH and climate are shared: planting sets them to the mean of the crops' needs. Shot size is per zone.</div>
+    </section>
+    <section>
+      <h2><span>Faults</span><button id="clearf">Clear</button></h2>
+      <div class="chips" id="faults"></div>
+      <h2 style="margin-top:12px"><span>Troubleshooting challenge</span></h2>
+      <div id="chal"></div>
+    </section>
+    <section>
+      <h2><span>Harvest</span></h2>
+      <div class="kv" id="score"></div>
+    </section>
+  </div>
+</main>
+
+<div class="explain">
+  <h2>What is real and what is game</h2>
+  <ul>
+    <li><b>Real:</b> the PLC program <code>greenhouse.st</code> runs unmodified in an IEC 61131-3 interpreter, scan by scan (50 ms), in your browser. It is the same file that passes 114 automated tests and runs on OpenPLC Runtime v4.</li>
+    <li><b>Model:</b> the greenhouse — weather, air temperature and humidity, crop water use, pump and dripper hydraulics, nutrient and pH chemistry — is a physics model. The PLC only sees it through its sensors, like a real plant.</li>
+    <li><b>Game layer:</b> crops, varieties, health and harvest are added for this page, and their clock is accelerated: one simulated minute of good daylight counts as one growing day.</li>
+  </ul>
+  <p>Project, documentation and tests: <a href="https://github.com/rayangmendrofa/horticulture-farm-plc">github.com/rayangmendrofa/horticulture-farm-plc</a>.</p>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

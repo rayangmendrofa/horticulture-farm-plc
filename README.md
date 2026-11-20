@@ -7,7 +7,7 @@ A PLC project for a 1 000 m² tropical lowland greenhouse:
 - **fertigation**: inline A/B nutrient and acid dosing on EC and pH;
 - **climate control**: roof vents, shade net, fogging, and pad-and-fan cooling with weather overrides.
 
-The program is **IEC 61131-3 Structured Text** for **OpenPLC v4**, integrated over **Modbus TCP**. A virtual plant replaces the hardware, so the whole system runs and is tested on a laptop. The plant models the weather, greenhouse air, crop, hydraulics and water chemistry. An **ISA-101 style web HMI** shows it running. **114 automated tests** cover the project: 95 check every functional, safety, diagnostic and HMI requirement, the field faults and the generated documents, and 19 more test the Structured Text interpreter. The program also runs on **OpenPLC Runtime v4**, where FAT part B passes 7/7.
+The program is **IEC 61131-3 Structured Text** for **OpenPLC v4**, integrated over **Modbus TCP**. A virtual plant replaces the hardware, so the whole system runs and is tested on a laptop. The plant models the weather, greenhouse air, crop, hydraulics and water chemistry. An **ISA-101 style web HMI** shows it running. **119 automated tests** cover the project: 100 check every functional, safety, diagnostic and HMI requirement, the field faults, the generated documents and the browser demo, and 19 more test the Structured Text interpreter. The program also runs on **OpenPLC Runtime v4**, where FAT part B passes 7/7.
 
 It also comes with what a technician needs on site:
 - a **15-sheet electrical drawing set**, generated from one data model, so schematics, terminal plans, parts list and the **I/O checkout sheet** always agree;
@@ -76,6 +76,18 @@ At 20× a day takes 72 minutes. Use the **Field simulation** panel at the bottom
 A command button is enabled only when the PLC would accept it. Normal states are grey; colour means something is wrong. If the PLC heartbeat stops, the page dims. Trends run on PLC scan time, so they stay correct in fast-forward.
 
 ![Trends from 05:30 to 13:00: humidity venting at dawn, vents fully open by 08:40, then closed for pad-and-fan cooling from 11:07; EC and pH holding their setpoints through each irrigation cycle](docs/img/hmi-trends.png)
+
+## Farm with it in the browser
+`site/` is a static web page: an original pixel-art greenhouse where you plant crops (7 crops, 12 varieties, each with its own growth speed and needs), harvest them, change the weather, inject faults or take the troubleshooting challenge.
+- **Real:** the unmodified `greenhouse.st` runs in the ST interpreter in a web worker (Pyodide), scan by scan, against the plant model, at up to about 25× real time.
+- **Recipes:** planting sets the PLC set points from the crops' recipes.
+- **Game layer:** crop growth, health and harvest are added for the page, with an accelerated crop clock (one simulated minute of daylight = one growing day).
+
+```bash
+python tools/build_site.py                 # copies farmsim/*.py and plc/greenhouse.st into site/py/
+python -m http.server 8000 --directory site    # then open http://localhost:8000
+```
+To publish, upload the whole `site/` folder (with `site/py/`) to any static host.
 
 ## Run the tests
 ```bash
